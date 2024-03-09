@@ -1,1 +1,4 @@
 idea/
+/env/postgres.env
+/env/grafana.env
+/env/rabbitmq.env
