@@ -3,4 +3,6 @@
 /env/rabbitmq.env
 /env/redis.env
 
+/redis
+
 .idea
