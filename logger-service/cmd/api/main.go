@@ -54,6 +54,8 @@ func main() {
 		}
 	}()
 
+	go app.gRPCListen()
+
 	log.Println("Starting service on port", webPort)
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%s", webPort),
