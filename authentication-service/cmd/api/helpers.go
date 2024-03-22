@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"log"
 	"net/http"
 )
 
@@ -21,6 +22,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) er
 	dec := json.NewDecoder(r.Body)
 	err := dec.Decode(data)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -35,6 +37,7 @@ func (app *Config) readJSON(w http.ResponseWriter, r *http.Request, data any) er
 func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, headers ...http.Header) error {
 	out, err := json.Marshal(data)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -48,6 +51,7 @@ func (app *Config) writeJSON(w http.ResponseWriter, status int, data any, header
 	w.WriteHeader(status)
 	_, err = w.Write(out)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 

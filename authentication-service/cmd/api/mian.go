@@ -50,11 +50,13 @@ func main() {
 func openDB(dsn string) (*sql.DB, error) {
 	db, err := sql.Open("pgx", dsn)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
 	err = db.Ping()
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 

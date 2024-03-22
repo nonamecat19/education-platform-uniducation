@@ -21,6 +21,7 @@ down:
 	rm -rf ../broker-service/bin
 	rm -rf ../authentication-service/bin
 	rm -rf ../logger-service/bin
+	rm -rf ../mailer-service/bin
 	@echo "Done!"
 
 build_broker:

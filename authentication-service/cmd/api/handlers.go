@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -16,6 +17,7 @@ func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
 
 	err := app.readJSON(w, r, &requestPayload)
 	if err != nil {
+		log.Println(err)
 		err := app.errorJSON(w, err, http.StatusBadRequest)
 		if err != nil {
 			return
@@ -27,6 +29,7 @@ func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		err := app.errorJSON(w, errors.New("invalid email"), http.StatusBadRequest)
 		if err != nil {
+			log.Println(err)
 			return
 		}
 		return
@@ -36,12 +39,14 @@ func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
 	if err != nil || !valid {
 		err := app.errorJSON(w, errors.New("invalid password"), http.StatusBadRequest)
 		if err != nil {
+			log.Println(err)
 			return
 		}
 	}
 
 	err = app.logRequest("authentication", fmt.Sprintf("%s logged in", user.Email))
 	if err != nil {
+		log.Println(err)
 		_ = app.errorJSON(w, err)
 		return
 	}
@@ -69,12 +74,14 @@ func (app *Config) logRequest(name, data string) error {
 
 	request, err := http.NewRequest("POST", logServiceURL, bytes.NewBuffer(jsonData))
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
 	client := &http.Client{}
 	_, err = client.Do(request)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 

@@ -53,9 +53,12 @@ func (u *User) GetAll() ([]*User, error) {
 
 	rows, err := db.QueryContext(ctx, query)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
-	defer rows.Close()
+	defer func(rows *sql.Rows) {
+		_ = rows.Close()
+	}(rows)
 
 	var users []*User
 
@@ -104,6 +107,7 @@ func (u *User) GetByEmail(email string) (*User, error) {
 	)
 
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
@@ -132,6 +136,7 @@ func (u *User) GetOne(id int) (*User, error) {
 	)
 
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
@@ -163,6 +168,7 @@ func (u *User) Update() error {
 	)
 
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -178,6 +184,7 @@ func (u *User) Delete() error {
 
 	_, err := db.ExecContext(ctx, stmt, u.ID)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -193,6 +200,7 @@ func (u *User) DeleteByID(id int) error {
 
 	_, err := db.ExecContext(ctx, stmt, id)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -206,6 +214,7 @@ func (u *User) Insert(user User) (int, error) {
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 12)
 	if err != nil {
+		log.Println(err)
 		return 0, err
 	}
 
@@ -224,6 +233,7 @@ func (u *User) Insert(user User) (int, error) {
 	).Scan(&newID)
 
 	if err != nil {
+		log.Println(err)
 		return 0, err
 	}
 
@@ -237,12 +247,14 @@ func (u *User) ResetPassword(password string) error {
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 12)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
 	stmt := `update users set password = $1 where id = $2`
 	_, err = db.ExecContext(ctx, stmt, hashedPassword, u.ID)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 

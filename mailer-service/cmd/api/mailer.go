@@ -5,6 +5,7 @@ import (
 	"github.com/vanng822/go-premailer/premailer"
 	mail "github.com/xhit/go-simple-mail/v2"
 	"html/template"
+	"log"
 	"time"
 )
 
@@ -46,11 +47,13 @@ func (m *Mail) SendSMPTMessage(msg Message) error {
 
 	formattedMessage, err := m.buildHTMLMessage(msg)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
 	plainMessage, err := m.buildPlainTextMessage(msg)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -66,6 +69,7 @@ func (m *Mail) SendSMPTMessage(msg Message) error {
 
 	smtpClient, err := server.Connect()
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -85,6 +89,7 @@ func (m *Mail) SendSMPTMessage(msg Message) error {
 
 	err = email.Send(smtpClient)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -92,7 +97,7 @@ func (m *Mail) SendSMPTMessage(msg Message) error {
 }
 
 func (m *Mail) buildHTMLMessage(msg Message) (string, error) {
-	templateToRender := "./templates/mail.html.gohtml"
+	templateToRender := "./../templates/mail.html.gohtml"
 
 	t, err := template.New("email-html").ParseFiles(templateToRender)
 	if err != nil {
@@ -114,7 +119,7 @@ func (m *Mail) buildHTMLMessage(msg Message) (string, error) {
 }
 
 func (m *Mail) buildPlainTextMessage(msg Message) (string, error) {
-	templateToRender := "./templates/mail.plain.gohtml"
+	templateToRender := "./../templates/mail.plain.gohtml"
 
 	t, err := template.New("email-plain").ParseFiles(templateToRender)
 	if err != nil {
@@ -145,6 +150,7 @@ func (m *Mail) inlineCSS(s string) (string, error) {
 
 	html, err := prem.Transform()
 	if err != nil {
+		log.Println(err)
 		return "", err
 	}
 
