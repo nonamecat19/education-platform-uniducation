@@ -6,9 +6,11 @@
 ---
 
 - [x] Basic crud
+- [ ] Migrate to clean architecture (1/4)
 - [ ] Swagger docs
 - [ ] Pagination
 - [ ] DTO validation
+- [ ] Error handling
 - [ ] Unit testing
 
 ### Schedule - 2
@@ -19,6 +21,7 @@
 - [ ] Swagger docs
 - [ ] Pagination
 - [ ] DTO validation
+- [ ] Error handling
 - [ ] Unit testing
 
 
@@ -30,6 +33,7 @@
 - [ ] Swagger docs
 - [ ] Pagination
 - [ ] DTO validation
+- [ ] Error handling
 - [ ] Unit testing
 
 ### Assessment - 4
@@ -40,6 +44,7 @@
 - [ ] Swagger docs
 - [ ] Pagination
 - [ ] DTO validation
+- [ ] Error handling
 - [ ] Unit testing
 
 ### Storage - 5 
@@ -50,6 +55,7 @@
 - [ ] Swagger docs
 - [ ] Pagination
 - [ ] DTO validation
+- [ ] Error handling
 - [ ] Unit testing
 
 ### Auth - 6
@@ -58,6 +64,7 @@
 
 - [ ] JWT Auth
 - [ ] OAuth
+- [ ] Error handling
 
 ### Tests platform - 7
 
@@ -74,3 +81,5 @@
 - [ ] Improve code share
 - [ ] Master DB
 - [ ] Build from make to Dockerfile
+- [ ] Air integration to docker
+- [ ] License, Policy and EULA

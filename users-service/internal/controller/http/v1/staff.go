@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"net/http"
+	"strconv"
 	"users/internal/domain/entity"
 )
 
@@ -41,7 +42,22 @@ func (h *staffsHandler) AddStaff(c *gin.Context) {
 
 func (h *staffsHandler) GetStaffs(c *gin.Context) {
 	var staff []entity.Staff
-	if err := h.DB.Find(&staff).Error; err != nil {
+
+	page, err := strconv.Atoi(c.DefaultQuery("Page", "1"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid page number"})
+		return
+	}
+
+	perPage, err := strconv.Atoi(c.DefaultQuery("PerPage", "10"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid per page count"})
+		return
+	}
+
+	offset := (page - 1) * perPage
+
+	if err := h.DB.Offset(offset).Limit(perPage).Find(&staff).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
