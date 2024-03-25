@@ -5,7 +5,7 @@
 
 ---
 
-- [ ] Basic crud
+- [x] Basic crud
 - [ ] Swagger docs
 - [ ] Pagination
 - [ ] DTO validation
