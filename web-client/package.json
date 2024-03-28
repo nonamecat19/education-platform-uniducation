@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "license": {
+    "type": "Apache-2.0",
+    "url": "https://opensource.org/licenses/apache2.0.php"
+  },
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
