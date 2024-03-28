@@ -77,9 +77,26 @@
 ### Tests platform - 7
 
 ---
+
+TBD
+
 ### Videochat platform - 8
 
 ---
+
+TBD
+
+### Web client
+
+---
+
+- [ ] Privacy Policy
+- [ ] Crud functionality
+- [ ] Auth
+- [ ] PWA
+- [ ] Storybook
+- [ ] E2E tests
+
 
 ### Global
 
