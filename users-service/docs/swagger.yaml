@@ -1,0 +1,9 @@
+basePath: /
+host: localhost:3001
+info:
+  contact: {}
+  description: Microservice for students, groups, teachers and staff
+  title: Users Service API
+  version: "1.0"
+paths: {}
+swagger: "2.0"

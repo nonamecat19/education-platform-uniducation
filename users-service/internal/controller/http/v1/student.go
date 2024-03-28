@@ -3,15 +3,15 @@ package v1
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	http_dto "users/internal/controller/http/dto"
-	student_usecase "users/internal/domain/usecase/student"
+	httpdto "users/internal/controller/http/dto"
+	studentusecase "users/internal/domain/usecase/student"
 )
 
 type StudentsHandler struct {
-	studentsUsecase student_usecase.StudentUsecase
+	studentsUsecase studentusecase.StudentUsecase
 }
 
-func NewStudentsHandler(r *gin.Engine, studentUsecase student_usecase.StudentUsecase) {
+func NewStudentsHandler(r *gin.Engine, studentUsecase studentusecase.StudentUsecase) {
 	h := &StudentsHandler{studentsUsecase: studentUsecase}
 
 	routes := r.Group("/students")
@@ -22,14 +22,22 @@ func NewStudentsHandler(r *gin.Engine, studentUsecase student_usecase.StudentUse
 	routes.DELETE("/:id", h.DeleteStudent)
 }
 
+// AddStudent   godoc
+// @Summary     Create student
+// @Description Add student to db
+// @Param       TBD
+// @Produce     application/json
+// @Tags        students
+// @Success     200 {object} response.Response{}
+// @Router      / [posts]
 func (h StudentsHandler) AddStudent(c *gin.Context) {
-	var student http_dto.AddStudentDTO
+	var student httpdto.AddStudentDTO
 	if err := c.BindJSON(&student); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	mappedStudent := student_usecase.AddStudentDTO{
+	mappedStudent := studentusecase.AddStudentDTO{
 		Name:       student.Name,
 		Surname:    student.Surname,
 		Patronymic: student.Patronymic,
@@ -47,6 +55,14 @@ func (h StudentsHandler) AddStudent(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Student added successfully"})
 }
 
+// GetStudents  godoc
+// @Summary     Create student
+// @Description Add student to db
+// @Param       TBD
+// @Produce     application/json
+// @Tags        students
+// @Success     200 {object} response.Response{}
+// @Router      / [posts]
 func (h StudentsHandler) GetStudents(c *gin.Context) {
 	students, err := h.studentsUsecase.GetStudentsList(c)
 	if err != nil {
@@ -69,6 +85,14 @@ func (h StudentsHandler) GetStudentById(c *gin.Context) {
 func (h StudentsHandler) UpdateStudent(c *gin.Context) {
 }
 
+// DeleteStudent godoc
+// @Summary      Create student
+// @Description  Add student to db
+// @Param        TBD
+// @Produce      application/json
+// @Tags         students
+// @Success      200 {object} response.Response{}
+// @Router       / [posts]
 func (h StudentsHandler) DeleteStudent(c *gin.Context) {
 	var requestBody struct {
 		ID string `json:"id"`
