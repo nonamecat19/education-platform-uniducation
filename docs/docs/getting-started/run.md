@@ -7,23 +7,23 @@ sidebar_position: 3
 ### Start application:
 
 ```bash
-    make up
+make up
 ```
 
 ### Shut down application:
 
 ```bash
-    make down
+make down
 ```
 
 ### Restart application:
 
 ```bash
-    make restart
+make restart
 ```
 
 ### Also, you can build any microservice by "make build_(name of service)"
 
 ```bash
-    make build_users
+make build_users
 ```

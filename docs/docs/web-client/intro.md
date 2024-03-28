@@ -9,16 +9,16 @@ sidebar_position: 1
 ## Installation
 You can use any JavaScript package manager 
 ```bash
-    npm i
+npm i
 ```
 ```bash
-    pnpm i
+pnpm i
 ```
 ```bash
-    yarn i
+yarn i
 ```
 ```bash
-    bun i
+bun i
 ```
 
 ## Prepare environment
@@ -26,10 +26,10 @@ You can use any JavaScript package manager
 
 ## Run dev server
 ```bash
-    npm run dev
+npm run dev
 ```
 
 ## Production build
 ```bash
-    npm run build
+npm run build
 ```

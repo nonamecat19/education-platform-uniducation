@@ -1,6 +1,6 @@
 {
   "label": "Web client",
-  "position": 20,
+  "position": 0.5,
   "link": {
     "type": "generated-index"
   }

@@ -5,8 +5,6 @@ sidebar_position: 1
 # How to run application
 
 
-Here is a Markdown table with the versions you provided:
-
 ### Requirements:
 | Tool           | Version |
 |----------------|---------|
