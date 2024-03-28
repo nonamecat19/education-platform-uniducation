@@ -5,9 +5,8 @@ import (
 	"net/http"
 	httpdto "users/internal/controller/http/dto"
 	studentusecase "users/internal/domain/usecase/student"
+	"users/internal/utils"
 )
-
-type H map[string]any
 
 type StudentsHandler struct {
 	studentsUsecase studentusecase.StudentUsecase
@@ -17,10 +16,10 @@ func NewStudentsHandler(r *gin.Engine, studentUsecase studentusecase.StudentUsec
 	h := &StudentsHandler{studentsUsecase: studentUsecase}
 
 	routes := r.Group("/students")
-	routes.POST("/", h.AddStudent)
 	routes.GET("/", h.GetStudents)
 	routes.GET("/:id", h.GetStudentById)
-	routes.PUT("/:id", h.UpdateStudent)
+	routes.POST("/", h.AddStudent)
+	routes.PATCH("/:id", h.UpdateStudent)
 	routes.DELETE("/:id", h.DeleteStudent)
 }
 
@@ -34,7 +33,7 @@ func (h StudentsHandler) AddStudent(c *gin.Context) {
 	var student httpdto.AddStudentDTO
 	if err := c.BindJSON(&student); err != nil {
 		// @Failure 404 {object} gin.H{"error": "Student not found"} "Invalid request body"
-		c.JSON(http.StatusBadRequest, H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -66,14 +65,16 @@ func (h StudentsHandler) AddStudent(c *gin.Context) {
 // @Tags        Students
 // @Router      /students/ [get]
 func (h StudentsHandler) GetStudents(c *gin.Context) {
-	students, err := h.studentsUsecase.GetStudentsList(c)
+	meta := utils.CollectListMetadata(c)
+	response, err := h.studentsUsecase.GetStudentsList(c, meta)
 	if err != nil {
 		// @Failure 500 {object} gin.H{"error": "Internal Server Error"} "Failed to add student"
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
 	// @Success 200 {array} Student "Successfully retrieved students"
-	c.JSON(http.StatusOK, students)
+	c.JSON(http.StatusOK, &response)
 }
 
 // GetStudentById  godoc
@@ -103,18 +104,10 @@ func (h StudentsHandler) UpdateStudent(c *gin.Context) {
 // @Description  Delete student by id
 // @Produce      application/json
 // @Tags         Students
-// @Router       /students/ [delete]
+// @Router       /students/{id} [delete]
 func (h StudentsHandler) DeleteStudent(c *gin.Context) {
-	var requestBody struct {
-		ID string `json:"id"`
-	}
-	if err := c.BindJSON(&requestBody); err != nil {
-		// @Failure 400 {object} gin.H{"error": "Bad request exception"} "Bad request exception"
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	err := h.studentsUsecase.DeleteStudent(c, requestBody.ID)
+	id := c.Param("id")
+	err := h.studentsUsecase.DeleteStudent(c, id)
 	if err != nil {
 		// @Failure 500 {object} gin.H{"error": "Internal Server Error"} "Internal Server Error"
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

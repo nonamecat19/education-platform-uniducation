@@ -4,6 +4,7 @@ import (
 	"context"
 	"users/internal/domain/entity"
 	"users/internal/domain/service"
+	"users/internal/utils"
 )
 
 type StudentUsecase struct {
@@ -14,8 +15,17 @@ func NewStudentUsecase(studentService service.StudentsService) StudentUsecase {
 	return StudentUsecase{studentService: studentService}
 }
 
-func (u StudentUsecase) GetStudentsList(ctx context.Context) ([]entity.Student, error) {
-	return u.studentService.GetAll(ctx)
+func (u StudentUsecase) GetStudentsList(ctx context.Context, meta utils.ListMetadata) (*utils.ListResponse[entity.Student], error) {
+	students, err := u.studentService.GetAll(ctx, meta)
+	if err != nil {
+		return nil, err
+	}
+	count, err := u.studentService.GetCount(ctx)
+	return &utils.ListResponse[entity.Student]{
+		Data:    students,
+		MaxPage: utils.CalculateMaxPage(count, meta.PageSize),
+		Count:   count,
+	}, nil
 }
 
 func (u StudentUsecase) GetStudentById(ctx context.Context, id string) (entity.Student, error) {

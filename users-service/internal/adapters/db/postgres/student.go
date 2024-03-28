@@ -5,6 +5,7 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"users/internal/domain/entity"
+	"users/internal/utils"
 )
 
 type StudentsStorage struct {
@@ -24,13 +25,21 @@ func (ss StudentsStorage) GetOne(id string) (entity.Student, error) {
 	return student, nil
 }
 
-func (ss StudentsStorage) GetAll() ([]entity.Student, error) {
+func (ss StudentsStorage) GetAll(meta utils.ListMetadata) ([]entity.Student, error) {
 	var student []entity.Student
-	if err := ss.db.Find(&student).Error; err != nil {
+	if err := ss.db.Scopes(utils.Paginate(meta)).Find(&student).Error; err != nil {
 		log.Print(err)
 		return nil, fmt.Errorf("error while getting students list")
 	}
 	return student, nil
+}
+
+func (ss StudentsStorage) GetCount() (int, error) {
+	var count int64
+	if err := ss.db.Model(&entity.Student{}).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return int(count), nil
 }
 
 func (ss StudentsStorage) InsertOne(student entity.Student) error {
