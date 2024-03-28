@@ -25,7 +25,6 @@ define copy_env
 	cd ${1}-service/env && \
 	find . -type f -name ".[^.]*.env" ! -name "*.example.env" -exec rm {} + && \
 	find . -type f -name "*.example.env" -exec sh -c 'cp "$$0" $$(echo "$$0" | sed "s/.example//")' {} \;
-
 endef
 
 up: build_users
@@ -65,3 +64,6 @@ restart: down up
 
 prepare_env:
 	$(foreach SERVICE,$(SERVICES),$(call copy_env,$(SERVICE)))
+
+generate_swagger:
+	cd users-service && swag init -g cmd/api/main.go
