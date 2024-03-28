@@ -24,6 +24,12 @@ func RegisterTeachersRoutes(r *gin.Engine, db *gorm.DB) {
 	routes.DELETE("/:id", h.DeleteTeacher)
 }
 
+// AddTeacher   godoc
+// @Summary     Create teacher
+// @Description Add teacher to db
+// @Produce     application/json
+// @Tags        Teachers
+// @Router      /teachers/ [post]
 func (h *teachersHandler) AddTeacher(c *gin.Context) {
 	var group entity.Teacher
 	if err := c.BindJSON(&group); err != nil {
@@ -39,6 +45,12 @@ func (h *teachersHandler) AddTeacher(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Teacher added successfully"})
 }
 
+// GetTeachers  godoc
+// @Summary     Get teachers
+// @Description Get teachers array
+// @Produce     application/json
+// @Tags        Teachers
+// @Router      /teachers/ [get]
 func (h *teachersHandler) GetTeachers(c *gin.Context) {
 	var group []entity.Teacher
 	if err := h.DB.Find(&group).Error; err != nil {
@@ -49,6 +61,13 @@ func (h *teachersHandler) GetTeachers(c *gin.Context) {
 	c.JSON(http.StatusOK, group)
 }
 
+// GetTeacherById godoc
+// @Summary       Get teacher
+// @Description   Get teacher by ID
+// @Produce       application/json
+// @Param		  id path string true "teacher id"
+// @Tags          Teachers
+// @Router        /teachers/{id} [get]
 func (h *teachersHandler) GetTeacherById(c *gin.Context) {
 	var group entity.Teacher
 	id := c.Param("id")
@@ -63,6 +82,12 @@ func (h *teachersHandler) GetTeacherById(c *gin.Context) {
 func (h *teachersHandler) UpdateTeacher(c *gin.Context) {
 }
 
+// DeleteTeacher godoc
+// @Summary      Delete teacher
+// @Description  Delete teacher by id
+// @Produce      application/json
+// @Tags         Teachers
+// @Router       /teacher/ [delete]
 func (h *teachersHandler) DeleteTeacher(c *gin.Context) {
 	var requestBody struct {
 		ID string `json:"id"`

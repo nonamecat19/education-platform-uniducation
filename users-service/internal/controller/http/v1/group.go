@@ -24,6 +24,12 @@ func RegisterGroupsRoutes(r *gin.Engine, db *gorm.DB) {
 	routes.DELETE("/:id", h.DeleteGroup)
 }
 
+// AddGroup     godoc
+// @Summary     Add group
+// @Description Add group
+// @Produce     application/json
+// @Tags        Groups
+// @Router      /groups/ [post]
 func (h *groupsHandler) AddGroup(c *gin.Context) {
 	var group entity.Group
 	if err := c.BindJSON(&group); err != nil {
@@ -39,6 +45,12 @@ func (h *groupsHandler) AddGroup(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Group added successfully"})
 }
 
+// GetGroups    godoc
+// @Summary     Get groups
+// @Description Get groups array
+// @Produce     application/json
+// @Tags        Groups
+// @Router      /groups/ [get]
 func (h *groupsHandler) GetGroups(c *gin.Context) {
 	var group []entity.Group
 	if err := h.DB.Find(&group).Error; err != nil {
@@ -49,6 +61,13 @@ func (h *groupsHandler) GetGroups(c *gin.Context) {
 	c.JSON(http.StatusOK, group)
 }
 
+// GetGroupById godoc
+// @Summary     Get group
+// @Description Get group by ID
+// @Produce     application/json
+// @Param		id path string true "group id"
+// @Tags        Groups
+// @Router      /groups/{id} [get]
 func (h *groupsHandler) GetGroupById(c *gin.Context) {
 	var group entity.Group
 	id := c.Param("id")
@@ -63,6 +82,12 @@ func (h *groupsHandler) GetGroupById(c *gin.Context) {
 func (h *groupsHandler) UpdateGroup(c *gin.Context) {
 }
 
+// DeleteGroup  godoc
+// @Summary     Delete group
+// @Description Delete group by id
+// @Produce     application/json
+// @Tags        Groups
+// @Router      /groups/ [delete]
 func (h *groupsHandler) DeleteGroup(c *gin.Context) {
 	var requestBody struct {
 		ID string `json:"id"`

@@ -5,5 +5,126 @@ info:
   description: Microservice for students, groups, teachers and staff
   title: Users Service API
   version: "1.0"
-paths: {}
+paths:
+  /groups/:
+    delete:
+      description: Delete group by id
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete group
+      tags:
+      - Groups
+    get:
+      description: Get groups array
+      produces:
+      - application/json
+      responses: {}
+      summary: Get groups
+      tags:
+      - Groups
+    post:
+      description: Add group
+      produces:
+      - application/json
+      responses: {}
+      summary: Add group
+      tags:
+      - Groups
+  /groups/{id}:
+    get:
+      description: Get group by ID
+      parameters:
+      - description: group id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get group
+      tags:
+      - Groups
+  /students/:
+    delete:
+      description: Delete student by id
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete student
+      tags:
+      - Students
+    get:
+      description: Get students array
+      produces:
+      - application/json
+      responses: {}
+      summary: Get students
+      tags:
+      - Students
+    post:
+      description: Add student to db
+      produces:
+      - application/json
+      responses: {}
+      summary: Create student
+      tags:
+      - Students
+  /students/{id}:
+    get:
+      description: Get student by ID
+      parameters:
+      - description: student id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get student
+      tags:
+      - Students
+  /teacher/:
+    delete:
+      description: Delete teacher by id
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete teacher
+      tags:
+      - Teachers
+  /teachers/:
+    get:
+      description: Get teachers array
+      produces:
+      - application/json
+      responses: {}
+      summary: Get teachers
+      tags:
+      - Teachers
+    post:
+      description: Add teacher to db
+      produces:
+      - application/json
+      responses: {}
+      summary: Create teacher
+      tags:
+      - Teachers
+  /teachers/{id}:
+    get:
+      description: Get teacher by ID
+      parameters:
+      - description: teacher id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get teacher
+      tags:
+      - Teachers
 swagger: "2.0"
