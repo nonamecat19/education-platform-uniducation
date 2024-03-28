@@ -12,6 +12,8 @@
 - [ ] DTO validation
 - [ ] Error handling
 - [ ] Unit testing
+- [ ] Seed generator
+- [ ] Redis cache
 
 ### Schedule - 2
 
@@ -23,7 +25,8 @@
 - [ ] DTO validation
 - [ ] Error handling
 - [ ] Unit testing
-
+- [ ] Seed generator
+- [ ] Redis cache
 
 ### Learning portal - 3
 
@@ -35,6 +38,8 @@
 - [ ] DTO validation
 - [ ] Error handling
 - [ ] Unit testing
+- [ ] Seed generator
+- [ ] Redis cache
 
 ### Assessment - 4
 
@@ -46,6 +51,8 @@
 - [ ] DTO validation
 - [ ] Error handling
 - [ ] Unit testing
+- [ ] Seed generator
+- [ ] Redis cache
 
 ### Storage - 5 
 
@@ -57,6 +64,7 @@
 - [ ] DTO validation
 - [ ] Error handling
 - [ ] Unit testing
+- [ ] Seed generator
 
 ### Auth - 6
 
@@ -77,6 +85,7 @@
 
 ---
 
+- [ ] Docusarus
 - [ ] Makefile to modules by each microservice
 - [ ] Improve code share
 - [ ] Master DB
