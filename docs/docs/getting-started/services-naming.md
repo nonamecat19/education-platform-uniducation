@@ -36,6 +36,7 @@ auth
 
 For solving problem of same ports we use port depends on current service
 - API - 30XX
+- Web - 31XX
 - Postgres - 50XX
 - Redis - 60XX
 - MongoDB - 270XX
