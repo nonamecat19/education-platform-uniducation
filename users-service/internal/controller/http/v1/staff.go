@@ -80,16 +80,9 @@ func (h *staffsHandler) UpdateStaff(c *gin.Context) {
 }
 
 func (h *staffsHandler) DeleteStaff(c *gin.Context) {
-	var requestBody struct {
-		ID string `json:"id"`
-	}
-	if err := c.BindJSON(&requestBody); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
+	id := c.Param("id")
 	var staff entity.Staff
-	if err := h.DB.First(&staff, requestBody.ID).Error; err != nil {
+	if err := h.DB.First(&staff, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Staff not found"})
 		return
 	}
