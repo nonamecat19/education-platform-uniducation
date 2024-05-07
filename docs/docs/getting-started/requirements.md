@@ -8,7 +8,7 @@ sidebar_position: 1
 ### Requirements:
 | Tool           | Version |
 |----------------|---------|
-| Go             | 1.21.4  |
+| Go             | 1.22.1  |
 | Node           | 20.11.1 |
 | Docker         | 24.0.7  |
 | Docker Compose | 2.24.6  |
