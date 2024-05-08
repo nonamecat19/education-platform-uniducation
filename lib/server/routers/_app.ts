@@ -6,6 +6,8 @@ import { groupsRouter } from "./groups";
 import { studentsRouter } from "./students";
 import { subjectsRouter } from "./subjects";
 import { groupSubjectsRouter } from "./groupSubjects";
+import { coursesRouter } from "./courses";
+import { unitsRouter } from "./units";
 
 export const appRouter = router({
   computers: computersRouter,
@@ -15,6 +17,8 @@ export const appRouter = router({
   students: studentsRouter,
   subjects: subjectsRouter,
   groupSubjects: groupSubjectsRouter,
+  courses: coursesRouter,
+  units: unitsRouter,
 });
 
 export type AppRouter = typeof appRouter;
