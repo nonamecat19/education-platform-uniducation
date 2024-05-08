@@ -9,6 +9,7 @@ import { groupSubjectsRouter } from "./groupSubjects";
 import { coursesRouter } from "./courses";
 import { unitsRouter } from "./units";
 import { textSectionRouter } from "./textSection";
+import { laboratoryWorksRouter } from "./laboratoryWorks";
 
 export const appRouter = router({
   computers: computersRouter,
@@ -21,6 +22,7 @@ export const appRouter = router({
   courses: coursesRouter,
   units: unitsRouter,
   textSection: textSectionRouter,
+  laboratoryWorks: laboratoryWorksRouter,
 });
 
 export type AppRouter = typeof appRouter;
