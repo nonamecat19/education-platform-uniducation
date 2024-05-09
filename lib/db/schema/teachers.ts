@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { varchar, timestamp, pgTable } from "drizzle-orm/pg-core";
+import {varchar, timestamp, pgTable, uniqueIndex} from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -16,7 +16,7 @@ export const teachers = pgTable('teachers', {
   email: varchar("email", { length: 256 }).notNull(),
   profession: varchar("profession", { length: 256 }).notNull(),
   password: varchar("password", { length: 256 }),
-  
+
   createdAt: timestamp("created_at")
     .notNull()
     .default(sql`now()`),
@@ -24,10 +24,6 @@ export const teachers = pgTable('teachers', {
     .notNull()
     .default(sql`now()`),
 
-}, (teachers) => {
-  return {
-    emailIndex: uniqueIndex('email_idx').on(teachers.email),
-  }
 });
 
 
@@ -35,7 +31,7 @@ export const teachers = pgTable('teachers', {
 const baseSchema = createSelectSchema(teachers).omit(timestamps)
 
 export const insertTeacherSchema = createInsertSchema(teachers).omit(timestamps);
-export const insertTeacherParams = baseSchema.extend({}).omit({ 
+export const insertTeacherParams = baseSchema.extend({}).omit({
   id: true
 });
 
@@ -49,7 +45,7 @@ export type NewTeacher = z.infer<typeof insertTeacherSchema>;
 export type NewTeacherParams = z.infer<typeof insertTeacherParams>;
 export type UpdateTeacherParams = z.infer<typeof updateTeacherParams>;
 export type TeacherId = z.infer<typeof teacherIdSchema>["id"];
-    
+
 // this type infers the return from getTeachers() - meaning it will include any joins
 export type CompleteTeacher = Awaited<ReturnType<typeof getTeachers>>["teachers"][number];
 

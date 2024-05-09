@@ -1,6 +1,5 @@
 import { computersRouter } from "./computers";
 import { router } from "@/lib/server/trpc";
-import { teacherRouter } from "./teacher";
 import { teachersRouter } from "./teachers";
 import { groupsRouter } from "./groups";
 import { studentsRouter } from "./students";
@@ -13,7 +12,6 @@ import { laboratoryWorksRouter } from "./laboratoryWorks";
 
 export const appRouter = router({
   computers: computersRouter,
-  teacher: teacherRouter,
   teachers: teachersRouter,
   groups: groupsRouter,
   students: studentsRouter,

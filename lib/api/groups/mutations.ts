@@ -1,13 +1,13 @@
-import { db } from "@/lib/db/index";
+import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { 
-  GroupId, 
+import {
+  GroupId,
   NewGroupParams,
-  UpdateGroupParams, 
+  UpdateGroupParams,
   updateGroupSchema,
-  insertGroupSchema, 
+  insertGroupSchema,
   groups,
-  groupIdSchema 
+  groupIdSchema
 } from "@/lib/db/schema/groups";
 
 export const createGroup = async (group: NewGroupParams) => {

@@ -4,3 +4,6 @@ pnpm-lock.yaml
 .next
 .env.dev
 .env.prod
+
+portal-service
+users-service

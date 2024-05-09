@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { varchar, timestamp, pgTable } from "drizzle-orm/pg-core";
+import {varchar, timestamp, pgTable, uniqueIndex} from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 import { groups } from "./groups"
@@ -19,7 +19,7 @@ export const students = pgTable('students', {
   stuentId: varchar("stuent_id", { length: 256 }).notNull(),
   password: varchar("password", { length: 256 }),
   userId: varchar("user_id", { length: 256 }).references(() => users.id, { onDelete: "cascade" }).notNull(),
-  
+
   createdAt: timestamp("created_at")
     .notNull()
     .default(sql`now()`),
@@ -40,7 +40,7 @@ const baseSchema = createSelectSchema(students).omit(timestamps)
 export const insertStudentSchema = createInsertSchema(students).omit(timestamps);
 export const insertStudentParams = baseSchema.extend({
   groupId: z.coerce.string().min(1)
-}).omit({ 
+}).omit({
   id: true,
   userId: true
 });
@@ -48,7 +48,7 @@ export const insertStudentParams = baseSchema.extend({
 export const updateStudentSchema = baseSchema;
 export const updateStudentParams = baseSchema.extend({
   groupId: z.coerce.string().min(1)
-}).omit({ 
+}).omit({
   userId: true
 });
 export const studentIdSchema = baseSchema.pick({ id: true });
@@ -59,7 +59,7 @@ export type NewStudent = z.infer<typeof insertStudentSchema>;
 export type NewStudentParams = z.infer<typeof insertStudentParams>;
 export type UpdateStudentParams = z.infer<typeof updateStudentParams>;
 export type StudentId = z.infer<typeof studentIdSchema>["id"];
-    
+
 // this type infers the return from getStudents() - meaning it will include any joins
 export type CompleteStudent = Awaited<ReturnType<typeof getStudents>>["students"][number];
 
