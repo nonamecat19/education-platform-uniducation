@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { varchar, timestamp, pgTable } from "drizzle-orm/pg-core";
+import {varchar, timestamp, pgTable, uniqueIndex} from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 import { courses } from "./courses"
@@ -13,7 +13,7 @@ export const units = pgTable('units', {
   courseId: varchar("course_id", { length: 256 }).references(() => courses.id).notNull(),
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 256 }),
-  
+
   createdAt: timestamp("created_at")
     .notNull()
     .default(sql`now()`),
@@ -21,10 +21,6 @@ export const units = pgTable('units', {
     .notNull()
     .default(sql`now()`),
 
-}, (units) => {
-  return {
-    nameIndex: uniqueIndex('name_idx').on(units.name),
-  }
 });
 
 
@@ -34,7 +30,7 @@ const baseSchema = createSelectSchema(units).omit(timestamps)
 export const insertUnitSchema = createInsertSchema(units).omit(timestamps);
 export const insertUnitParams = baseSchema.extend({
   courseId: z.coerce.string().min(1)
-}).omit({ 
+}).omit({
   id: true
 });
 
@@ -50,7 +46,7 @@ export type NewUnit = z.infer<typeof insertUnitSchema>;
 export type NewUnitParams = z.infer<typeof insertUnitParams>;
 export type UpdateUnitParams = z.infer<typeof updateUnitParams>;
 export type UnitId = z.infer<typeof unitIdSchema>["id"];
-    
+
 // this type infers the return from getUnits() - meaning it will include any joins
 export type CompleteUnit = Awaited<ReturnType<typeof getUnits>>["units"][number];
 

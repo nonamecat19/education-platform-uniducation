@@ -5,7 +5,7 @@ import { units } from "@/lib/db/schema/units";
 
 export const getTextSections = async () => {
   const rows = await db.select({ textSection: textSection, unit: units }).from(textSection).leftJoin(units, eq(textSection.unitId, units.id));
-  const t = rows .map((r) => ({ ...r.textSection, unit: r.unit})); 
+  const t = rows .map((r) => ({ ...r.textSection, unit: r.unit}));
   return { textSection: t };
 };
 

@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { varchar, timestamp, pgTable } from "drizzle-orm/pg-core";
+import {varchar, timestamp, pgTable, uniqueIndex} from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 import { teachers } from "./teachers"
@@ -13,7 +13,7 @@ export const groups = pgTable('groups', {
   name: varchar("name", { length: 256 }).notNull(),
   course: varchar("course", { length: 256 }).notNull(),
   teacherId: varchar("teacher_id", { length: 256 }).references(() => teachers.id).notNull(),
-  
+
   createdAt: timestamp("created_at")
     .notNull()
     .default(sql`now()`),
@@ -34,7 +34,7 @@ const baseSchema = createSelectSchema(groups).omit(timestamps)
 export const insertGroupSchema = createInsertSchema(groups).omit(timestamps);
 export const insertGroupParams = baseSchema.extend({
   teacherId: z.coerce.string().min(1)
-}).omit({ 
+}).omit({
   id: true
 });
 
@@ -50,7 +50,7 @@ export type NewGroup = z.infer<typeof insertGroupSchema>;
 export type NewGroupParams = z.infer<typeof insertGroupParams>;
 export type UpdateGroupParams = z.infer<typeof updateGroupParams>;
 export type GroupId = z.infer<typeof groupIdSchema>["id"];
-    
+
 // this type infers the return from getGroups() - meaning it will include any joins
 export type CompleteGroup = Awaited<ReturnType<typeof getGroups>>["groups"][number];
 

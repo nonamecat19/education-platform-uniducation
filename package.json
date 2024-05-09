@@ -13,7 +13,8 @@
     "db:pull": "env-cmd -f .env.dev drizzle-kit introspect:pg",
     "db:studio": "env-cmd -f .env.dev drizzle-kit studio",
     "db:check": "env-cmd -f .env.dev drizzle-kit check:pg",
-    "db:sync": "pnpm run db:generate && pnpm run db:migrate && pnpm run dev"
+    "db:sync": "pnpm run db:generate && pnpm run db:migrate && pnpm run dev",
+    "db:seed": "env-cmd -f .env.dev tsx lib/db/seed.ts"
   },
   "dependencies": {
     "@auth/core": "^0.30.0",
@@ -30,6 +31,7 @@
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
     "@vercel/postgres": "^0.8.0",
+    "clsx": "^2.1.1",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
     "env-cmd": "^10.1.0",
@@ -42,6 +44,7 @@
     "react-hook-form": "^7.51.4",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
+    "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.7"
   },

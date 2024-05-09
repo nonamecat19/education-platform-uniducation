@@ -4,8 +4,12 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
+import {db} from "@/lib/db";
+import {teachers} from "@/lib/db/schema/teachers";
+import {generateTeacherRows} from "@/lib/db/seeds/teachers";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  await db.insert(teachers).values(generateTeacherRows(100)).returning();
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center">
