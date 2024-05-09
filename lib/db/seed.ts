@@ -3,7 +3,7 @@ import {teachers} from "./schema/teachers";
 import {generateTeacherRows} from "@/lib/db/seeds/teachers";
 // import {generateTeacherRows} from "@/lib/db/seeds/teachers";
 
-async function seed() {
+export async function seed() {
   console.log('Seeding...');
   console.time('DB has been seeded!');
 
