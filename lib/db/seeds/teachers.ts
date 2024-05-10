@@ -1,11 +1,11 @@
-import {faker} from '@faker-js/faker';
-import {z} from "zod";
-import {insertTeacherSchema} from "@/lib/db/schema/teachers";
+import { faker } from '@faker-js/faker'
+import { z } from 'zod'
+import { insertTeacherSchema } from '@/lib/db/schema/teachers'
 
-type TeachersToBeInserted = z.infer<typeof insertTeacherSchema>;
+type TeachersToBeInserted = z.infer<typeof insertTeacherSchema>
 
 export const generateTeacherRows = (count: number): TeachersToBeInserted[] => {
-  const rows: TeachersToBeInserted[] = [];
+  const rows: TeachersToBeInserted[] = []
 
   for (let i = 0; i < count; i++) {
     rows.push({
@@ -15,8 +15,8 @@ export const generateTeacherRows = (count: number): TeachersToBeInserted[] => {
       email: faker.internet.email(),
       profession: faker.person.jobTitle(),
       password: faker.internet.password(),
-    });
+    })
   }
 
-  return rows;
-};
+  return rows
+}

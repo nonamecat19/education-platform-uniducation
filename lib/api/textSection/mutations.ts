@@ -1,54 +1,58 @@
-import { db } from "@/lib/db/index";
-import { eq } from "drizzle-orm";
-import { 
-  TextSectionId, 
+import { db } from '@/lib/db/index'
+import { eq } from 'drizzle-orm'
+import {
+  TextSectionId,
   NewTextSectionParams,
-  UpdateTextSectionParams, 
+  UpdateTextSectionParams,
   updateTextSectionSchema,
-  insertTextSectionSchema, 
+  insertTextSectionSchema,
   textSection,
-  textSectionIdSchema 
-} from "@/lib/db/schema/textSection";
+  textSectionIdSchema,
+} from '@/lib/db/schema/textSection'
 
 export const createTextSection = async (textSection: NewTextSectionParams) => {
-  const newTextSection = insertTextSectionSchema.parse(textSection);
+  const newTextSection = insertTextSectionSchema.parse(textSection)
   try {
-    const [t] =  await db.insert(textSection).values(newTextSection).returning();
-    return { textSection: t };
+    const [t] = await db.insert(textSection).values(newTextSection).returning()
+    return { textSection: t }
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
-    console.error(message);
-    throw { error: message };
+    const message = (err as Error).message ?? 'Error, please try again'
+    console.error(message)
+    throw { error: message }
   }
-};
+}
 
-export const updateTextSection = async (id: TextSectionId, textSection: UpdateTextSectionParams) => {
-  const { id: textSectionId } = textSectionIdSchema.parse({ id });
-  const newTextSection = updateTextSectionSchema.parse(textSection);
+export const updateTextSection = async (
+  id: TextSectionId,
+  textSection: UpdateTextSectionParams,
+) => {
+  const { id: textSectionId } = textSectionIdSchema.parse({ id })
+  const newTextSection = updateTextSectionSchema.parse(textSection)
   try {
-    const [t] =  await db
-     .update(textSection)
-     .set({...newTextSection, updatedAt: new Date() })
-     .where(eq(textSection.id, textSectionId!))
-     .returning();
-    return { textSection: t };
+    const [t] = await db
+      .update(textSection)
+      .set({ ...newTextSection, updatedAt: new Date() })
+      .where(eq(textSection.id, textSectionId!))
+      .returning()
+    return { textSection: t }
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
-    console.error(message);
-    throw { error: message };
+    const message = (err as Error).message ?? 'Error, please try again'
+    console.error(message)
+    throw { error: message }
   }
-};
+}
 
 export const deleteTextSection = async (id: TextSectionId) => {
-  const { id: textSectionId } = textSectionIdSchema.parse({ id });
+  const { id: textSectionId } = textSectionIdSchema.parse({ id })
   try {
-    const [t] =  await db.delete(textSection).where(eq(textSection.id, textSectionId!))
-    .returning();
-    return { textSection: t };
+    const [t] = await db
+      .delete(textSection)
+      .where(eq(textSection.id, textSectionId!))
+      .returning()
+    return { textSection: t }
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
-    console.error(message);
-    throw { error: message };
+    const message = (err as Error).message ?? 'Error, please try again'
+    console.error(message)
+    throw { error: message }
   }
-};
-
+}

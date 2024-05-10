@@ -1,17 +1,16 @@
-"use client";
-import { CompleteGroup } from "@/lib/db/schema/groups";
-import { trpc } from "@/lib/trpc/client";
-import GroupModal from "./GroupModal";
-
+'use client'
+import { CompleteGroup } from '@/lib/db/schema/groups'
+import { trpc } from '@/lib/trpc/client'
+import GroupModal from './GroupModal'
 
 export default function GroupList({ groups }: { groups: CompleteGroup[] }) {
   const { data: g } = trpc.groups.getGroups.useQuery(undefined, {
     initialData: { groups },
     refetchOnMount: false,
-  });
+  })
 
   if (g.groups.length === 0) {
-    return <EmptyState />;
+    return <EmptyState />
   }
 
   return (
@@ -20,33 +19,32 @@ export default function GroupList({ groups }: { groups: CompleteGroup[] }) {
         <Group group={group} key={group.group.id} />
       ))}
     </ul>
-  );
+  )
 }
 
 const Group = ({ group }: { group: CompleteGroup }) => {
   return (
-    <li className="flex justify-between my-2">
-      <div className="w-full">
+    <li className='flex justify-between my-2'>
+      <div className='w-full'>
         <div>{group.group.name}</div>
       </div>
       <GroupModal group={group.group} />
     </li>
-  );
-};
+  )
+}
 
 const EmptyState = () => {
   return (
-    <div className="text-center">
-      <h3 className="mt-2 text-sm font-semibold text-secondary-foreground">
+    <div className='text-center'>
+      <h3 className='mt-2 text-sm font-semibold text-secondary-foreground'>
         No groups
       </h3>
-      <p className="mt-1 text-sm text-muted-foreground">
+      <p className='mt-1 text-sm text-muted-foreground'>
         Get started by creating a new group.
       </p>
-      <div className="mt-6">
+      <div className='mt-6'>
         <GroupModal emptyState={true} />
       </div>
     </div>
-  );
-};
-
+  )
+}

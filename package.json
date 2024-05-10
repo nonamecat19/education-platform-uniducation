@@ -6,7 +6,7 @@
     "dev": "env-cmd -f .env.dev next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "env-cmd -f .env.dev next lint",
+    "lint": "next lint",
     "db:generate": "env-cmd -f .env.dev drizzle-kit generate:pg",
     "db:migrate": "env-cmd -f .env.dev tsx lib/db/migrate.ts",
     "db:drop": "env-cmd -f .env.dev drizzle-kit drop",
@@ -14,7 +14,9 @@
     "db:studio": "env-cmd -f .env.dev drizzle-kit studio",
     "db:check": "env-cmd -f .env.dev drizzle-kit check:pg",
     "db:sync": "pnpm run db:generate && pnpm run db:migrate && pnpm run dev",
-    "db:seed": "env-cmd -f .env.dev tsx lib/db/seed.ts"
+    "db:seed": "env-cmd -f .env.dev tsx lib/db/seed.ts",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
     "@auth/core": "^0.30.0",
@@ -56,8 +58,11 @@
     "drizzle-kit": "^0.20.18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "eslint-config-prettier": "^9.1.0",
     "pg": "^8.11.5",
     "postcss": "^8",
+    "prettier": "2.8.8",
+    "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.9.3",
     "typescript": "^5"
