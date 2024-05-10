@@ -4,8 +4,10 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from 'next/link'
+import { seed } from '@/lib/db/seed'
 
 export default async function LandingPage() {
+  seed()
   return (
     <div className='flex flex-col min-h-screen'>
       <header className='px-4 lg:px-6 h-14 flex items-center'>

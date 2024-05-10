@@ -3,7 +3,7 @@ import { varchar, timestamp, pgTable } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 import { units } from './units'
-import { type getTextSection } from '@/lib/api/textSection/queries'
+import { type getTextSections } from '@/lib/api/textSection/queries'
 
 import { nanoid, timestamps } from '@/lib/utils'
 
@@ -53,5 +53,5 @@ export type TextSectionId = z.infer<typeof textSectionIdSchema>['id']
 
 // this type infers the return from getTextSection() - meaning it will include any joins
 export type CompleteTextSection = Awaited<
-  ReturnType<typeof getTextSection>
+  ReturnType<typeof getTextSections>
 >['textSection'][number]

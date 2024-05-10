@@ -8,7 +8,7 @@
   "rootPath": "",
   "componentLib": "shadcn-ui",
   "driver": "pg",
-  "provider": "vercel-pg",
+  "provider": "node-postgres",
   "orm": "drizzle",
   "auth": "next-auth"
 }
