@@ -1,7 +1,7 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import { Context } from "@/lib/trpc/context";
-import superjson from "superjson";
-import { ZodError } from "zod";
+import { initTRPC, TRPCError } from '@trpc/server'
+import { Context } from '@/lib/trpc/context'
+import superjson from 'superjson'
+import { ZodError } from 'zod'
 
 /**
  * Initialization of tRPC backend
@@ -17,20 +17,20 @@ const t = initTRPC.context<Context>().create({
         zodError:
           error.cause instanceof ZodError ? error.cause.flatten() : null,
       },
-    };
+    }
   },
-});
+})
 /**
  * Export reusable router and procedure helpers
  * that can be used throughout the router
  */
-export const router = t.router;
-export const publicProcedure = t.procedure;
+export const router = t.router
+export const publicProcedure = t.procedure
 
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.session) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' })
   }
   return next({
     ctx: {
@@ -38,8 +38,8 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
       // infers the `session` as non-nullable
       session: { ...ctx.session, user: ctx.session.user },
     },
-  });
-});
+  })
+})
 
 /**
  * Protected (authenticated) procedure
@@ -49,4 +49,4 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  *
  * @see https://trpc.io/docs/procedures
  */
-export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+export const protectedProcedure = t.procedure.use(enforceUserIsAuthed)

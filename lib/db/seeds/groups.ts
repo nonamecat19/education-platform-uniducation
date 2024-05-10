@@ -1,20 +1,13 @@
-import { faker } from '@faker-js/faker';
-import {z} from "zod";
-import {insertStudentSchema} from "@/lib/db/schema/students";
-import {insertGroupSchema} from "@/lib/db/schema/groups";
+import { faker } from '@faker-js/faker'
+import { NewGroup, teachers } from '@/lib/db/schema'
+import { getEntityIds, getRandomElementId, getSeed } from '@/lib/db/seed-utils'
 
-type GroupsToBeInserted = z.infer<typeof insertGroupSchema>;
+export const generateGroupRows = async (count: number): Promise<NewGroup[]> => {
+  const teacherIds = await getEntityIds(teachers)
 
-export const generateUserRows = (count: number): GroupsToBeInserted[] => {
-  const rows: GroupsToBeInserted[] = [];
-
-  for (let i = 0; i < count; i++) {
-    rows.push({
-      name: faker.string.nanoid(),
-      course: faker.string.numeric(),
-      teacherId: 'test',
-    });
-  }
-
-  return rows;
-};
+  return getSeed(count, () => ({
+    name: faker.string.nanoid(),
+    course: faker.string.numeric(),
+    teacherId: getRandomElementId(teacherIds),
+  }))
+}

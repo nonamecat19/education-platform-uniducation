@@ -1,22 +1,14 @@
-import {faker} from '@faker-js/faker';
-import {z} from "zod";
-import {insertTeacherSchema} from "@/lib/db/schema/teachers";
+import { faker } from '@faker-js/faker'
+import { NewTeacher } from '@/lib/db/schema/teachers'
+import { getSeed } from '@/lib/db/seed-utils'
 
-type TeachersToBeInserted = z.infer<typeof insertTeacherSchema>;
-
-export const generateTeacherRows = (count: number): TeachersToBeInserted[] => {
-  const rows: TeachersToBeInserted[] = [];
-
-  for (let i = 0; i < count; i++) {
-    rows.push({
-      name: faker.person.firstName(),
-      surname: faker.person.lastName(),
-      patronomyc: faker.person.middleName(),
-      email: faker.internet.email(),
-      profession: faker.person.jobTitle(),
-      password: faker.internet.password(),
-    });
-  }
-
-  return rows;
-};
+export const generateTeacherRows = async (count: number): Promise<NewTeacher[]> => {
+  return getSeed(count, () => ({
+    name: faker.person.firstName(),
+    surname: faker.person.lastName(),
+    patronomyc: faker.person.middleName(),
+    email: faker.internet.email(),
+    profession: faker.person.jobTitle(),
+    password: faker.internet.password(),
+  }))
+}
