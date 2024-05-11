@@ -1,12 +1,12 @@
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { PgTable } from 'drizzle-orm/pg-core'
 
 function getRandomElement<T>(arr: T[]): T {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
+  const randomIndex = Math.floor(Math.random() * arr.length)
+  return arr[randomIndex]
 }
 
-export function getRandomElementId<T extends {id: string}>(arr: T[]): string {
+export function getRandomElementId<T extends { id: string }>(arr: T[]): string {
   const element = getRandomElement(arr)
   return element.id
 }
@@ -21,9 +21,11 @@ export function getSeed<T>(count: number, makeRow: () => T): T[] {
   return rows
 }
 
-export function getEntityIds(entity: PgTable): Promise<{id: string}[]> {
-  return db.select({
-    // @ts-ignore
-    id: entity.id,
-  }).from(entity)
+export function getEntityIds(entity: PgTable): Promise<{ id: string }[]> {
+  return db
+    .select({
+      // @ts-ignore
+      id: entity.id,
+    })
+    .from(entity)
 }

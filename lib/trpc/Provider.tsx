@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client'
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import { trpc } from './client'
 import { getUrl } from './utils'
@@ -13,7 +13,7 @@ export default function TrpcProvider({
   children,
   cookies,
 }: {
-  children: React.ReactNode
+  children: ReactNode
   cookies: string
 }) {
   const [queryClient] = useState(() => new QueryClient({}))

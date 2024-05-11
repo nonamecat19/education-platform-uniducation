@@ -1,4 +1,4 @@
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import { DefaultSession, getServerSession, NextAuthOptions } from 'next-auth'
 import { Adapter } from 'next-auth/adapters'

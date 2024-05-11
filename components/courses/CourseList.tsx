@@ -16,7 +16,7 @@ export default function CourseList({ courses }: { courses: CompleteCourse[] }) {
   return (
     <ul>
       {c.courses.map((course) => (
-        <Course course={course} key={course.course.id} />
+        <Course course={course} key={course.id} />
       ))}
     </ul>
   )
@@ -26,9 +26,9 @@ const Course = ({ course }: { course: CompleteCourse }) => {
   return (
     <li className='flex justify-between my-2'>
       <div className='w-full'>
-        <div>{course.course.groupSubjectId}</div>
+        <div>{course.groupSubjectId}</div>
       </div>
-      <CourseModal course={course.course} />
+      <CourseModal course={course} />
     </li>
   )
 }

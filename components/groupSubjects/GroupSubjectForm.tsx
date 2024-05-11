@@ -49,6 +49,7 @@ const GroupSubjectForm = ({
     // open issue: https://github.com/colinhacks/zod/issues/2663
     // errors locally but not in production
     resolver: zodResolver(insertGroupSubjectParams),
+    // @ts-ignore
     defaultValues: groupSubject ?? {
       subjectId: '',
       groupId: '',
@@ -74,19 +75,19 @@ const GroupSubjectForm = ({
   const { mutate: createGroupSubject, isLoading: isCreating } =
     trpc.groupSubjects.createGroupSubject.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateGroupSubject, isLoading: isUpdating } =
     trpc.groupSubjects.updateGroupSubject.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteGroupSubject, isLoading: isDeleting } =
     trpc.groupSubjects.deleteGroupSubject.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewGroupSubjectParams) => {
@@ -147,11 +148,8 @@ const GroupSubjectForm = ({
                   </SelectTrigger>
                   <SelectContent>
                     {groups?.groups.map((group) => (
-                      <SelectItem
-                        key={group.group.id}
-                        value={group.group.id.toString()}
-                      >
-                        {group.group.id}{' '}
+                      <SelectItem key={group.id} value={group.id.toString()}>
+                        {group.id}{' '}
                         {/* TODO: Replace with a field from the group model */}
                       </SelectItem>
                     ))}

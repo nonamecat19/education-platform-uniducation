@@ -77,19 +77,19 @@ const StudentForm = ({
   const { mutate: createStudent, isLoading: isCreating } =
     trpc.students.createStudent.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateStudent, isLoading: isUpdating } =
     trpc.students.updateStudent.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteStudent, isLoading: isDeleting } =
     trpc.students.deleteStudent.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewStudentParams) => {
@@ -137,6 +137,7 @@ const StudentForm = ({
             <FormItem>
               <FormLabel>Patronomic</FormLabel>
               <FormControl>
+                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
 
@@ -160,11 +161,8 @@ const StudentForm = ({
                   </SelectTrigger>
                   <SelectContent>
                     {groups?.groups.map((group) => (
-                      <SelectItem
-                        key={group.group.id}
-                        value={group.group.id.toString()}
-                      >
-                        {group.group.id}{' '}
+                      <SelectItem key={group.id} value={group.id.toString()}>
+                        {group.id}{' '}
                         {/* TODO: Replace with a field from the group model */}
                       </SelectItem>
                     ))}
@@ -211,6 +209,7 @@ const StudentForm = ({
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
+                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
 

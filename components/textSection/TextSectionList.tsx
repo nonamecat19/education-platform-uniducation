@@ -20,10 +20,7 @@ export default function TextSectionList({
   return (
     <ul>
       {t.textSection.map((textSection) => (
-        <TextSection
-          textSection={textSection}
-          key={textSection.textSection.id}
-        />
+        <TextSection textSection={textSection} key={textSection.id} />
       ))}
     </ul>
   )
@@ -33,9 +30,9 @@ const TextSection = ({ textSection }: { textSection: CompleteTextSection }) => {
   return (
     <li className='flex justify-between my-2'>
       <div className='w-full'>
-        <div>{textSection.textSection.unitId}</div>
+        <div>{textSection.unitId}</div>
       </div>
-      <TextSectionModal textSection={textSection.textSection} />
+      <TextSectionModal textSection={textSection} />
     </li>
   )
 }

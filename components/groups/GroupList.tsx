@@ -16,7 +16,7 @@ export default function GroupList({ groups }: { groups: CompleteGroup[] }) {
   return (
     <ul>
       {g.groups.map((group) => (
-        <Group group={group} key={group.group.id} />
+        <Group group={group} key={group.id} />
       ))}
     </ul>
   )
@@ -26,9 +26,9 @@ const Group = ({ group }: { group: CompleteGroup }) => {
   return (
     <li className='flex justify-between my-2'>
       <div className='w-full'>
-        <div>{group.group.name}</div>
+        <div>{group.name}</div>
       </div>
-      <GroupModal group={group.group} />
+      <GroupModal group={group} />
     </li>
   )
 }

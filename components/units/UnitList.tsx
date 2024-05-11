@@ -16,7 +16,7 @@ export default function UnitList({ units }: { units: CompleteUnit[] }) {
   return (
     <ul>
       {u.units.map((unit) => (
-        <Unit unit={unit} key={unit.unit.id} />
+        <Unit unit={unit} key={unit.id} />
       ))}
     </ul>
   )
@@ -26,9 +26,9 @@ const Unit = ({ unit }: { unit: CompleteUnit }) => {
   return (
     <li className='flex justify-between my-2'>
       <div className='w-full'>
-        <div>{unit.unit.courseId}</div>
+        <div>{unit.courseId}</div>
       </div>
-      <UnitModal unit={unit.unit} />
+      <UnitModal unit={unit} />
     </li>
   )
 }

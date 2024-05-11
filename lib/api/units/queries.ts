@@ -1,4 +1,4 @@
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
 import { type UnitId, unitIdSchema, units } from '@/lib/db/schema/units'
 import { courses } from '@/lib/db/schema/courses'

@@ -1,4 +1,4 @@
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { and, eq } from 'drizzle-orm'
 import {
   StudentId,

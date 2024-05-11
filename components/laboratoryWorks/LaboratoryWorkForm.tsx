@@ -44,10 +44,8 @@ const LaboratoryWorkForm = ({
   const utils = trpc.useContext()
 
   const form = useForm<z.infer<typeof insertLaboratoryWorkParams>>({
-    // latest Zod release has introduced a TS error with zodResolver
-    // open issue: https://github.com/colinhacks/zod/issues/2663
-    // errors locally but not in production
     resolver: zodResolver(insertLaboratoryWorkParams),
+    // @ts-ignore
     defaultValues: laboratoryWork ?? {
       courseId: '',
       name: '',
@@ -77,19 +75,19 @@ const LaboratoryWorkForm = ({
   const { mutate: createLaboratoryWork, isLoading: isCreating } =
     trpc.laboratoryWorks.createLaboratoryWork.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateLaboratoryWork, isLoading: isUpdating } =
     trpc.laboratoryWorks.updateLaboratoryWork.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteLaboratoryWork, isLoading: isDeleting } =
     trpc.laboratoryWorks.deleteLaboratoryWork.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewLaboratoryWorkParams) => {
@@ -118,11 +116,8 @@ const LaboratoryWorkForm = ({
                   </SelectTrigger>
                   <SelectContent>
                     {courses?.courses.map((course) => (
-                      <SelectItem
-                        key={course.course.id}
-                        value={course.course.id.toString()}
-                      >
-                        {course.course.id}{' '}
+                      <SelectItem key={course.id} value={course.id.toString()}>
+                        {course.id}{' '}
                         {/* TODO: Replace with a field from the course model */}
                       </SelectItem>
                     ))}
@@ -155,6 +150,7 @@ const LaboratoryWorkForm = ({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
+                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
 

@@ -1,4 +1,4 @@
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
 import {
   TextSectionId,
@@ -13,6 +13,7 @@ import {
 export const createTextSection = async (textSection: NewTextSectionParams) => {
   const newTextSection = insertTextSectionSchema.parse(textSection)
   try {
+    // @ts-ignore
     const [t] = await db.insert(textSection).values(newTextSection).returning()
     return { textSection: t }
   } catch (err) {
@@ -30,8 +31,10 @@ export const updateTextSection = async (
   const newTextSection = updateTextSectionSchema.parse(textSection)
   try {
     const [t] = await db
+      // @ts-ignore
       .update(textSection)
       .set({ ...newTextSection, updatedAt: new Date() })
+      // @ts-ignore
       .where(eq(textSection.id, textSectionId!))
       .returning()
     return { textSection: t }

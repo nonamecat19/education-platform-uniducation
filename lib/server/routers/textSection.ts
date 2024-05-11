@@ -1,6 +1,6 @@
 import {
   getTextSectionById,
-  getTextSection,
+  getTextSections,
 } from '@/lib/api/textSection/queries'
 import { publicProcedure, router } from '@/lib/server/trpc'
 import {
@@ -16,7 +16,7 @@ import {
 
 export const textSectionRouter = router({
   getTextSection: publicProcedure.query(async () => {
-    return getTextSection()
+    return getTextSections()
   }),
   getTextSectionById: publicProcedure
     .input(textSectionIdSchema)

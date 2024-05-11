@@ -1,4 +1,4 @@
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
 import { type GroupId, groupIdSchema, groups } from '@/lib/db/schema/groups'
 import { teachers } from '@/lib/db/schema/teachers'

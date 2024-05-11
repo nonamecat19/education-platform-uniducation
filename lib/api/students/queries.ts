@@ -1,5 +1,5 @@
-import { db } from '@/lib/db/index'
-import { eq, and } from 'drizzle-orm'
+import { db } from '@/lib/db'
+import { and, eq } from 'drizzle-orm'
 import { getUserAuth } from '@/lib/auth/utils'
 import {
   type StudentId,
@@ -14,7 +14,6 @@ export const getStudents = async () => {
     .select({ student: students, group: groups })
     .from(students)
     .leftJoin(groups, eq(students.groupId, groups.id))
-    .where(eq(students.userId, session?.user.id!))
   const s = rows.map((r) => ({ ...r.student, group: r.group }))
   return { students: s }
 }

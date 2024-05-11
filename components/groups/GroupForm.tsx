@@ -73,19 +73,19 @@ const GroupForm = ({
   const { mutate: createGroup, isLoading: isCreating } =
     trpc.groups.createGroup.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateGroup, isLoading: isUpdating } =
     trpc.groups.updateGroup.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteGroup, isLoading: isDeleting } =
     trpc.groups.deleteGroup.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewGroupParams) => {

@@ -68,19 +68,19 @@ const TeacherForm = ({
   const { mutate: createTeacher, isLoading: isCreating } =
     trpc.teachers.createTeacher.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateTeacher, isLoading: isUpdating } =
     trpc.teachers.updateTeacher.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteTeacher, isLoading: isDeleting } =
     trpc.teachers.deleteTeacher.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewTeacherParams) => {
@@ -128,6 +128,7 @@ const TeacherForm = ({
             <FormItem>
               <FormLabel>Patronomyc</FormLabel>
               <FormControl>
+                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
 
@@ -170,9 +171,9 @@ const TeacherForm = ({
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
+                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}

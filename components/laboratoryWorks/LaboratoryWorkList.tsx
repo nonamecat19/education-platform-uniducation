@@ -25,7 +25,7 @@ export default function LaboratoryWorkList({
       {l.laboratoryWorks.map((laboratoryWork) => (
         <LaboratoryWork
           laboratoryWork={laboratoryWork}
-          key={laboratoryWork.laboratoryWork.id}
+          key={laboratoryWork.id}
         />
       ))}
     </ul>
@@ -40,9 +40,9 @@ const LaboratoryWork = ({
   return (
     <li className='flex justify-between my-2'>
       <div className='w-full'>
-        <div>{laboratoryWork.laboratoryWork.courseId}</div>
+        <div>{laboratoryWork.courseId}</div>
       </div>
-      <LaboratoryWorkModal laboratoryWork={laboratoryWork.laboratoryWork} />
+      <LaboratoryWorkModal laboratoryWork={laboratoryWork} />
     </li>
   )
 }

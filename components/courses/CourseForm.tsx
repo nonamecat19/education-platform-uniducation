@@ -73,19 +73,19 @@ const CourseForm = ({
   const { mutate: createCourse, isLoading: isCreating } =
     trpc.courses.createCourse.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateCourse, isLoading: isUpdating } =
     trpc.courses.updateCourse.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteCourse, isLoading: isDeleting } =
     trpc.courses.deleteCourse.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewCourseParams) => {
@@ -115,10 +115,10 @@ const CourseForm = ({
                   <SelectContent>
                     {groupSubjects?.groupSubjects.map((groupSubject) => (
                       <SelectItem
-                        key={groupSubject.groupSubject.id}
-                        value={groupSubject.groupSubject.id.toString()}
+                        key={groupSubject.id}
+                        value={groupSubject.id.toString()}
                       >
-                        {groupSubject.groupSubject.id}{' '}
+                        {groupSubject.id}{' '}
                         {/* TODO: Replace with a field from the groupSubject model */}
                       </SelectItem>
                     ))}

@@ -1,4 +1,4 @@
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { getUserAuth } from '@/lib/auth/utils'
 
 export async function createTRPCContext(opts: { headers: Headers }) {

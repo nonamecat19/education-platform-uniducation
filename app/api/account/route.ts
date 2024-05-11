@@ -1,5 +1,5 @@
 import { getUserAuth } from '@/lib/auth/utils'
-import { db } from '@/lib/db/index'
+import { db } from '@/lib/db'
 import { users } from '@/lib/db/schema/auth'
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'

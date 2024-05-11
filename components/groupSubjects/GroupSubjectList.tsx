@@ -20,10 +20,7 @@ export default function GroupSubjectList({
   return (
     <ul>
       {g.groupSubjects.map((groupSubject) => (
-        <GroupSubject
-          groupSubject={groupSubject}
-          key={groupSubject.groupSubject.id}
-        />
+        <GroupSubject groupSubject={groupSubject} key={groupSubject.id} />
       ))}
     </ul>
   )
@@ -37,9 +34,9 @@ const GroupSubject = ({
   return (
     <li className='flex justify-between my-2'>
       <div className='w-full'>
-        <div>{groupSubject.groupSubject.subjectId}</div>
+        <div>{groupSubject.subjectId}</div>
       </div>
-      <GroupSubjectModal groupSubject={groupSubject.groupSubject} />
+      <GroupSubjectModal groupSubject={groupSubject} />
     </li>
   )
 }

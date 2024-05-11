@@ -61,11 +61,6 @@ export const additionalLinks: AdditionalLinks[] = [
         title: 'Teachers',
         icon: Globe,
       },
-      {
-        href: '/teacher',
-        title: 'Teacher',
-        icon: Globe,
-      },
     ],
   },
 ]

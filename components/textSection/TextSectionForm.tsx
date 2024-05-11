@@ -73,19 +73,19 @@ const TextSectionForm = ({
   const { mutate: createTextSection, isLoading: isCreating } =
     trpc.textSection.createTextSection.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateTextSection, isLoading: isUpdating } =
     trpc.textSection.updateTextSection.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteTextSection, isLoading: isDeleting } =
     trpc.textSection.deleteTextSection.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewTextSectionParams) => {
@@ -114,11 +114,8 @@ const TextSectionForm = ({
                   </SelectTrigger>
                   <SelectContent>
                     {units?.units.map((unit) => (
-                      <SelectItem
-                        key={unit.unit.id}
-                        value={unit.unit.id.toString()}
-                      >
-                        {unit.unit.id}{' '}
+                      <SelectItem key={unit.id} value={unit.id.toString()}>
+                        {unit.id}{' '}
                         {/* TODO: Replace with a field from the unit model */}
                       </SelectItem>
                     ))}
@@ -151,6 +148,7 @@ const TextSectionForm = ({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
+                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
 

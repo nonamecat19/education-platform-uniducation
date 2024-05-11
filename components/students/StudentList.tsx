@@ -20,7 +20,7 @@ export default function StudentList({
   return (
     <ul>
       {s.students.map((student) => (
-        <Student student={student} key={student.student.id} />
+        <Student student={student} key={student.id} />
       ))}
     </ul>
   )
@@ -30,9 +30,9 @@ const Student = ({ student }: { student: CompleteStudent }) => {
   return (
     <li className='flex justify-between my-2'>
       <div className='w-full'>
-        <div>{student.student.name}</div>
+        <div>{student.name}</div>
       </div>
-      <StudentModal student={student.student} />
+      <StudentModal student={student} />
     </li>
   )
 }

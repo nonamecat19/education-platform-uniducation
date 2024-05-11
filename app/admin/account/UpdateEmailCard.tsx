@@ -1,31 +1,31 @@
-'use client'
 import { AccountCard, AccountCardFooter, AccountCardBody } from './AccountCard'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
-import { useTransition } from 'react'
+import { SyntheticEvent, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function UpdateNameCard({ name }: { name: string }) {
+export default function UpdateEmailCard({ email }: { email: string }) {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
-  const handleSubmit = async (event: React.SyntheticEvent) => {
+
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault()
     const target = event.target as HTMLFormElement
     const form = new FormData(target)
-    const { name } = Object.fromEntries(form.entries()) as { name: string }
-    if (name.length < 3) {
-      toast.error('Name must be longer than 3 characters.')
+    const { email } = Object.fromEntries(form.entries()) as { email: string }
+    if (email.length < 3) {
+      toast.error('Email must be longer than 3 characters.')
       return
     }
 
     startTransition(async () => {
       const res = await fetch('/api/account', {
         method: 'PUT',
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ email }),
         headers: { 'Content-Type': 'application/json' },
       })
-      if (res.status === 200) toast.success('Successfully updated name!')
+      if (res.status === 200) toast.success('Successfully updated email!')
       router.refresh()
     })
   }
@@ -33,17 +33,17 @@ export default function UpdateNameCard({ name }: { name: string }) {
   return (
     <AccountCard
       params={{
-        header: 'Your Name',
+        header: 'Your Email',
         description:
-          'Please enter your full name, or a display name you are comfortable with.',
+          'Please enter the email address you want to use with your account.',
       }}
     >
       <form onSubmit={handleSubmit}>
         <AccountCardBody>
-          <Input defaultValue={name ?? ''} name='name' disabled={true} />
+          <Input defaultValue={email ?? ''} name='email' disabled={true} />
         </AccountCardBody>
-        <AccountCardFooter description='64 characters maximum'>
-          <Button disabled={true}>Update Name</Button>
+        <AccountCardFooter description='We will email vou to verify the change.'>
+          <Button disabled={true}>Update Email</Button>
         </AccountCardFooter>
       </form>
     </AccountCard>

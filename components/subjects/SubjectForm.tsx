@@ -63,19 +63,19 @@ const SubjectForm = ({
   const { mutate: createSubject, isLoading: isCreating } =
     trpc.subjects.createSubject.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateSubject, isLoading: isUpdating } =
     trpc.subjects.updateSubject.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteSubject, isLoading: isDeleting } =
     trpc.subjects.deleteSubject.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewSubjectParams) => {

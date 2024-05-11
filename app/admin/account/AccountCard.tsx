@@ -1,4 +1,5 @@
 import { Card } from '@/components/ui/card'
+import { ReactNode } from 'react'
 
 interface AccountCardProps {
   params: {
@@ -6,7 +7,7 @@ interface AccountCardProps {
     description: string
     price?: number
   }
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function AccountCard({ params, children }: AccountCardProps) {
@@ -22,7 +23,7 @@ export function AccountCard({ params, children }: AccountCardProps) {
   )
 }
 
-export function AccountCardBody({ children }: { children: React.ReactNode }) {
+export function AccountCardBody({ children }: { children: ReactNode }) {
   return <div className='p-4'>{children}</div>
 }
 
@@ -30,7 +31,7 @@ export function AccountCardFooter({
   description,
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
   description: string
 }) {
   return (

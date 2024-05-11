@@ -69,19 +69,19 @@ const UnitForm = ({
   const { mutate: createUnit, isLoading: isCreating } =
     trpc.units.createUnit.useMutation({
       onSuccess: (res) => onSuccess('create'),
-      onError: (err) => onError('create', { error: err.message }),
+      // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateUnit, isLoading: isUpdating } =
     trpc.units.updateUnit.useMutation({
       onSuccess: (res) => onSuccess('update'),
-      onError: (err) => onError('update', { error: err.message }),
+      // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteUnit, isLoading: isDeleting } =
     trpc.units.deleteUnit.useMutation({
       onSuccess: (res) => onSuccess('delete'),
-      onError: (err) => onError('delete', { error: err.message }),
+      // onError: (err) => onError('delete', { error: err.message }),
     })
 
   const handleSubmit = (values: NewUnitParams) => {
@@ -110,11 +110,8 @@ const UnitForm = ({
                   </SelectTrigger>
                   <SelectContent>
                     {courses?.courses.map((course) => (
-                      <SelectItem
-                        key={course.course.id}
-                        value={course.course.id.toString()}
-                      >
-                        {course.course.id}{' '}
+                      <SelectItem key={course.id} value={course.id.toString()}>
+                        {course.id}{' '}
                         {/* TODO: Replace with a field from the course model */}
                       </SelectItem>
                     ))}
@@ -147,6 +144,7 @@ const UnitForm = ({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
+                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
 

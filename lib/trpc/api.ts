@@ -1,6 +1,4 @@
 import 'server-only'
-
-import { getUserAuth } from '@/lib/auth/utils'
 import { appRouter } from '@/lib/server/routers/_app'
 import { env } from '@/lib/env.mjs'
 import { createTRPCContext } from './context'

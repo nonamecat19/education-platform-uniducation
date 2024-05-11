@@ -1,17 +1,14 @@
 import { checkAuth } from '@/lib/auth/utils'
-import { checkAuth } from '@/lib/auth/utils'
 import { Toaster } from '@/components/ui/sonner'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import NextAuthProvider from '@/lib/auth/Provider'
 import TrpcProvider from '@/lib/trpc/Provider'
 import { cookies } from 'next/headers'
-export default async function AppLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  await checkAuth()
+import { ReactNode } from 'react'
+// import { seed } from '@/lib/db/seed'
+export default async function AppLayout({ children }: { children: ReactNode }) {
+  // await seed()
   await checkAuth()
   return (
     <main>
