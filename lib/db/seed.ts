@@ -23,28 +23,31 @@ import {
   generateUnitsRows,
   generateUsersRows,
 } from '@/lib/db/seeds'
+import { truncateDb } from '@/lib/db/truncate'
 
 export async function seed() {
   console.log('Seeding...')
 
+  await truncateDb()
+
   await db
     .insert(subjects)
-    .values(await generateSubjectsRows(100))
+    .values(await generateSubjectsRows(10))
     .returning()
 
   await db
     .insert(teachers)
-    .values(await generateTeacherRows(100))
+    .values(await generateTeacherRows(50))
     .returning()
 
   await db // teachers
     .insert(groups)
-    .values(await generateGroupRows(100))
+    .values(await generateGroupRows(10))
     .returning()
 
   await db // subjects, groups
     .insert(groupSubjects)
-    .values(await generateGroupSubjectsRows(100))
+    .values(await generateGroupSubjectsRows(20))
     .returning()
 
   await db // groupSubjects, teachers
@@ -54,7 +57,7 @@ export async function seed() {
 
   await db // courses
     .insert(laboratoryWorks)
-    .values(await generateLaboratoryWorksRows(100))
+    .values(await generateLaboratoryWorksRows(10))
     .returning()
 
   await db // courses
