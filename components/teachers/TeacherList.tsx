@@ -1,5 +1,5 @@
 'use client'
-import { CompleteTeacher } from '@/lib/db/schema/teachers'
+import { CompleteTeacher } from '@/lib/db/schema'
 import { trpc } from '@/lib/trpc/client'
 import TeacherModal from './TeacherModal'
 

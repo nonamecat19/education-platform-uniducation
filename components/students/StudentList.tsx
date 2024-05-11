@@ -1,5 +1,5 @@
 'use client'
-import { CompleteStudent } from '@/lib/db/schema/students'
+import { CompleteStudent } from '@/lib/db/schema'
 import { trpc } from '@/lib/trpc/client'
 import StudentModal from './StudentModal'
 

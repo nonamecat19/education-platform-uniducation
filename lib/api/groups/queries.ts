@@ -1,7 +1,7 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
-import { type GroupId, groupIdSchema, groups } from '@/lib/db/schema/groups'
-import { teachers } from '@/lib/db/schema/teachers'
+import { type GroupId, groupIdSchema, groups } from '@/lib/db/schema'
+import { teachers } from '@/lib/db/schema'
 
 export const getGroups = async () => {
   const rows = await db

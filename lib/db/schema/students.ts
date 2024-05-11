@@ -3,7 +3,7 @@ import { varchar, timestamp, pgTable, uniqueIndex } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
 import { groups } from './groups'
-import { users } from '@/lib/db/schema/auth'
+import { users } from '@/lib/db/schema'
 import { type getStudents } from '@/lib/api/students/queries'
 
 import { nanoid, timestamps } from '@/lib/utils'

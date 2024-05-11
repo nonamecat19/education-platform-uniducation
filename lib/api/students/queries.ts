@@ -1,12 +1,8 @@
 import { db } from '@/lib/db'
 import { and, eq } from 'drizzle-orm'
 import { getUserAuth } from '@/lib/auth/utils'
-import {
-  type StudentId,
-  studentIdSchema,
-  students,
-} from '@/lib/db/schema/students'
-import { groups } from '@/lib/db/schema/groups'
+import { type StudentId, studentIdSchema, students } from '@/lib/db/schema'
+import { groups } from '@/lib/db/schema'
 
 export const getStudents = async () => {
   const { session } = await getUserAuth()

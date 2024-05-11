@@ -11,7 +11,7 @@ import {
   subjectIdSchema,
   insertSubjectParams,
   updateSubjectParams,
-} from '@/lib/db/schema/subjects'
+} from '@/lib/db/schema'
 
 export async function POST(req: Request) {
   try {

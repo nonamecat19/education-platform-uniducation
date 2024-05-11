@@ -5,6 +5,15 @@ import { Adapter } from 'next-auth/adapters'
 import { redirect } from 'next/navigation'
 import { env } from '@/lib/env.mjs'
 import GoogleProvider from 'next-auth/providers/google'
+import {
+  accounts,
+  NewUser,
+  sessions,
+  users,
+  verificationTokens,
+} from '@/lib/db/schema'
+import { faker } from '@faker-js/faker'
+import { nanoid } from '@/lib/utils'
 
 declare module 'next-auth' {
   interface Session {
@@ -25,7 +34,12 @@ export type AuthSession = {
 }
 
 export const authOptions: NextAuthOptions = {
-  adapter: DrizzleAdapter(db) as Adapter,
+  adapter: DrizzleAdapter(db, {
+    usersTable: users,
+    accountsTable: accounts,
+    sessionsTable: sessions,
+    verificationTokensTable: verificationTokens,
+  }) as Adapter,
   callbacks: {
     session: ({ session, user }) => {
       session.user.id = user.id
@@ -36,6 +50,16 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+      profile: (profile) => {
+        const user: NewUser = {
+          id: nanoid(),
+          email: profile.email,
+          name: profile.name ?? 'User ' + faker.number.int(1000),
+          emailVerified: new Date(),
+          image: profile.picture ?? null,
+        }
+        return user
+      },
     }),
   ],
 }

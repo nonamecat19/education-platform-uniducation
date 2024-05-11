@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import GroupForm from './GroupForm'
-import { Group } from '@/lib/db/schema/groups'
+import { Group } from '@/lib/db/schema'
 
 export default function GroupModal({
   group,

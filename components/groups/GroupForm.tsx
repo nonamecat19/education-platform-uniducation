@@ -1,10 +1,6 @@
 'use client'
 
-import {
-  Group,
-  NewGroupParams,
-  insertGroupParams,
-} from '@/lib/db/schema/groups'
+import { Group, NewGroupParams, insertGroupParams } from '@/lib/db'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 

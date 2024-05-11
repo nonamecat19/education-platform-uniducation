@@ -1,5 +1,5 @@
 'use client'
-import { CompleteUnit } from '@/lib/db/schema/units'
+import { CompleteUnit } from '@/lib/db/schema'
 import { trpc } from '@/lib/trpc/client'
 import UnitModal from './UnitModal'
 

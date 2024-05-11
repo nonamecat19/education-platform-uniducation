@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import CourseForm from './CourseForm'
-import { Course } from '@/lib/db/schema/courses'
+import { Course } from '@/lib/db/schema'
 
 export default function CourseModal({
   course,

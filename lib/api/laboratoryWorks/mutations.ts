@@ -8,7 +8,7 @@ import {
   insertLaboratoryWorkSchema,
   laboratoryWorks,
   laboratoryWorkIdSchema,
-} from '@/lib/db/schema/laboratoryWorks'
+} from '@/lib/db/schema'
 
 export const createLaboratoryWork = async (
   laboratoryWork: NewLaboratoryWorkParams,

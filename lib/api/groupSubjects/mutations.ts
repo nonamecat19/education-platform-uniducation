@@ -8,7 +8,7 @@ import {
   insertGroupSubjectSchema,
   groupSubjects,
   groupSubjectIdSchema,
-} from '@/lib/db/schema/groupSubjects'
+} from '@/lib/db/schema'
 
 export const createGroupSubject = async (
   groupSubject: NewGroupSubjectParams,

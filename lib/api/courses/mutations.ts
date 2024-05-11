@@ -8,7 +8,7 @@ import {
   insertCourseSchema,
   courses,
   courseIdSchema,
-} from '@/lib/db/schema/courses'
+} from '@/lib/db/schema'
 
 export const createCourse = async (course: NewCourseParams) => {
   const newCourse = insertCourseSchema.parse(course)

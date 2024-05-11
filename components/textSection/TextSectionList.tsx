@@ -1,5 +1,5 @@
 'use client'
-import { CompleteTextSection } from '@/lib/db/schema/textSection'
+import { CompleteTextSection } from '@/lib/db/schema'
 import { trpc } from '@/lib/trpc/client'
 import TextSectionModal from './TextSectionModal'
 

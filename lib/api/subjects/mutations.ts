@@ -8,7 +8,7 @@ import {
   insertSubjectSchema,
   subjects,
   subjectIdSchema,
-} from '@/lib/db/schema/subjects'
+} from '@/lib/db/schema'
 
 export const createSubject = async (subject: NewSubjectParams) => {
   const newSubject = insertSubjectSchema.parse(subject)

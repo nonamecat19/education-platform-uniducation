@@ -4,7 +4,7 @@ import {
   groupIdSchema,
   insertGroupParams,
   updateGroupParams,
-} from '@/lib/db/schema/groups'
+} from '@/lib/db/schema'
 import {
   createGroup,
   deleteGroup,
