@@ -2,8 +2,10 @@
 
 import { Button } from '@/components/ui/button'
 import { useTheme } from 'next-themes'
+import { unstable_noStore } from 'next/cache'
 
 export default function Page() {
+  unstable_noStore()
   const { setTheme } = useTheme()
   return (
     <div>

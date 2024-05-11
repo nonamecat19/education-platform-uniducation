@@ -1,8 +1,10 @@
 import GroupList from '@/components/groups/GroupList'
 import NewGroupModal from '@/components/groups/GroupModal'
 import { api } from '@/lib/trpc/api'
+import { unstable_noStore } from 'next/cache'
 
 export default async function Groups() {
+  unstable_noStore()
   const { groups } = await api.groups.getGroups.query()
 
   return (

@@ -1,8 +1,10 @@
 import GroupSubjectList from '@/components/groupSubjects/GroupSubjectList'
 import NewGroupSubjectModal from '@/components/groupSubjects/GroupSubjectModal'
 import { api } from '@/lib/trpc/api'
+import { unstable_noStore } from 'next/cache'
 
 export default async function GroupSubjects() {
+  unstable_noStore()
   const { groupSubjects } = await api.groupSubjects.getGroupSubjects.query()
 
   return (

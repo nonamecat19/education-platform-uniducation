@@ -1,8 +1,10 @@
 import SubjectList from '@/components/subjects/SubjectList'
 import NewSubjectModal from '@/components/subjects/SubjectModal'
 import { api } from '@/lib/trpc/api'
+import { unstable_noStore } from 'next/cache'
 
 export default async function Subjects() {
+  unstable_noStore()
   const { subjects } = await api.subjects.getSubjects.query()
 
   return (
