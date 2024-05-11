@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd -f .env.dev next dev",
+    "prod": "env-cmd -f .env.prod next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "env-cmd -f .env.dev drizzle-kit generate:pg",
     "db:migrate": "env-cmd -f .env.dev tsx lib/db/migrate.ts",
+    "db:migrate:prod": "env-cmd -f .env.prod tsx lib/db/migrate.ts",
     "db:drop": "env-cmd -f .env.dev drizzle-kit drop",
     "db:pull": "env-cmd -f .env.dev drizzle-kit introspect:pg",
     "db:studio": "env-cmd -f .env.dev drizzle-kit studio",
