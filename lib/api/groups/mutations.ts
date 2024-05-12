@@ -8,7 +8,7 @@ import {
   insertGroupSchema,
   groups,
   groupIdSchema,
-} from '@/lib/db/schema/groups'
+} from '@/lib/db/schema'
 
 export const createGroup = async (group: NewGroupParams) => {
   const newGroup = insertGroupSchema.parse(group)

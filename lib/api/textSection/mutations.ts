@@ -8,7 +8,7 @@ import {
   insertTextSectionSchema,
   textSection,
   textSectionIdSchema,
-} from '@/lib/db/schema/textSection'
+} from '@/lib/db/schema'
 
 export const createTextSection = async (textSection: NewTextSectionParams) => {
   const newTextSection = insertTextSectionSchema.parse(textSection)

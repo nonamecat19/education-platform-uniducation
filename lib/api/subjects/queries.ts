@@ -1,10 +1,6 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
-import {
-  type SubjectId,
-  subjectIdSchema,
-  subjects,
-} from '@/lib/db/schema/subjects'
+import { type SubjectId, subjectIdSchema, subjects } from '@/lib/db/schema'
 
 export const getSubjects = async () => {
   const rows = await db.select().from(subjects)

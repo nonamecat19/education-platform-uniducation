@@ -11,7 +11,7 @@ import {
   studentIdSchema,
   insertStudentParams,
   updateStudentParams,
-} from '@/lib/db/schema/students'
+} from '@/lib/db/schema'
 
 export async function POST(req: Request) {
   try {

@@ -1,10 +1,5 @@
 'use client'
 
-import {
-  Group,
-  NewGroupParams,
-  insertGroupParams,
-} from '@/lib/db/schema/groups'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -29,6 +24,7 @@ import {
 } from '@/components/ui/select'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { Group, insertGroupParams, NewGroupParams } from '@/lib/db/schema'
 
 const GroupForm = ({
   group,

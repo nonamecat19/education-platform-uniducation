@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import TextSectionForm from './TextSectionForm'
-import { TextSection } from '@/lib/db/schema/textSection'
+import { TextSection } from '@/lib/db/schema'
 
 export default function TextSectionModal({
   textSection,

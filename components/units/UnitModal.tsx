@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import UnitForm from './UnitForm'
-import { Unit } from '@/lib/db/schema/units'
+import { Unit } from '@/lib/db/schema'
 
 export default function UnitModal({
   unit,

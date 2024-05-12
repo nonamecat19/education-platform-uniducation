@@ -8,7 +8,7 @@ import {
   insertStudentSchema,
   students,
   studentIdSchema,
-} from '@/lib/db/schema/students'
+} from '@/lib/db/schema'
 import { getUserAuth } from '@/lib/auth/utils'
 
 export const createStudent = async (student: NewStudentParams) => {

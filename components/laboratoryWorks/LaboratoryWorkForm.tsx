@@ -4,7 +4,7 @@ import {
   LaboratoryWork,
   NewLaboratoryWorkParams,
   insertLaboratoryWorkParams,
-} from '@/lib/db/schema/laboratoryWorks'
+} from '@/lib/db/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { NewTeacher } from '@/lib/db/schema/teachers'
+import { NewTeacher } from '@/lib/db/schema'
 import { getSeed } from '@/lib/db/seed-utils'
 
 export const generateTeacherRows = async (

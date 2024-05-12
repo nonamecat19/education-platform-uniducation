@@ -4,7 +4,7 @@ import {
   courseIdSchema,
   insertCourseParams,
   updateCourseParams,
-} from '@/lib/db/schema/courses'
+} from '@/lib/db/schema'
 import {
   createCourse,
   deleteCourse,

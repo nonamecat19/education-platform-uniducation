@@ -4,7 +4,7 @@ import {
   GroupSubject,
   NewGroupSubjectParams,
   insertGroupSubjectParams,
-} from '@/lib/db/schema/groupSubjects'
+} from '@/lib/db/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 

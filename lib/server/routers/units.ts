@@ -4,7 +4,7 @@ import {
   unitIdSchema,
   insertUnitParams,
   updateUnitParams,
-} from '@/lib/db/schema/units'
+} from '@/lib/db/schema'
 import { createUnit, deleteUnit, updateUnit } from '@/lib/api/units/mutations'
 
 export const unitsRouter = router({

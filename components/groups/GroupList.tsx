@@ -1,5 +1,5 @@
 'use client'
-import { CompleteGroup } from '@/lib/db/schema/groups'
+import { CompleteGroup } from '@/lib/db/schema'
 import { trpc } from '@/lib/trpc/client'
 import GroupModal from './GroupModal'
 

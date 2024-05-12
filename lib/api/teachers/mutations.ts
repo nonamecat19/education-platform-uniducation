@@ -8,7 +8,7 @@ import {
   insertTeacherSchema,
   teachers,
   teacherIdSchema,
-} from '@/lib/db/schema/teachers'
+} from '@/lib/db/schema'
 
 export const createTeacher = async (teacher: NewTeacherParams) => {
   const newTeacher = insertTeacherSchema.parse(teacher)

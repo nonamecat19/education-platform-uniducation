@@ -1,6 +1,6 @@
 'use client'
 
-import { Unit, NewUnitParams, insertUnitParams } from '@/lib/db/schema/units'
+import { Unit, NewUnitParams, insertUnitParams } from '@/lib/db/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 

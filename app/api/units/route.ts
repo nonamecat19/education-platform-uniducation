@@ -7,7 +7,7 @@ import {
   unitIdSchema,
   insertUnitParams,
   updateUnitParams,
-} from '@/lib/db/schema/units'
+} from '@/lib/db/schema'
 
 export async function POST(req: Request) {
   try {

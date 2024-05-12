@@ -1,10 +1,6 @@
 'use client'
 
-import {
-  Subject,
-  NewSubjectParams,
-  insertSubjectParams,
-} from '@/lib/db/schema/subjects'
+import { Subject, NewSubjectParams, insertSubjectParams } from '@/lib/db/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
