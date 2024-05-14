@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:generate": "env-cmd -f .env.dev drizzle-kit generate:pg",
+    "db:generate": "env-cmd -f .env.dev drizzle-kit generate",
     "db:migrate": "env-cmd -f .env.dev tsx lib/db/migrate.ts",
     "db:migrate:prod": "env-cmd -f .env.prod tsx lib/db/migrate.ts",
     "db:drop": "env-cmd -f .env.dev drizzle-kit drop",

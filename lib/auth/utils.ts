@@ -52,12 +52,14 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
       profile: (profile) => {
+        console.log({ profile })
         const user: NewUser = {
           id: nanoid(),
           email: profile.email,
           name: profile.name ?? 'User ' + faker.number.int(1000),
           emailVerified: new Date(),
           image: profile.picture ?? null,
+          role: 'user',
         }
         return user
       },
