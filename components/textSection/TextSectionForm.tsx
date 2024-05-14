@@ -103,7 +103,7 @@ const TextSectionForm = ({
           name='unitId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Unit Id</FormLabel>
+              <FormLabel>Unit</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -115,8 +115,7 @@ const TextSectionForm = ({
                   <SelectContent>
                     {units?.units.map((unit) => (
                       <SelectItem key={unit.id} value={unit.id.toString()}>
-                        {unit.id}{' '}
-                        {/* TODO: Replace with a field from the unit model */}
+                        {unit.name}
                       </SelectItem>
                     ))}
                   </SelectContent>

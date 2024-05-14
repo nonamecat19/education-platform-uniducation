@@ -146,7 +146,7 @@ const StudentForm = ({
           name='groupId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Group Id</FormLabel>
+              <FormLabel>Group</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -158,8 +158,7 @@ const StudentForm = ({
                   <SelectContent>
                     {groups?.groups.map((group) => (
                       <SelectItem key={group.id} value={group.id.toString()}>
-                        {group.id}{' '}
-                        {/* TODO: Replace with a field from the group model */}
+                        {group.name}
                       </SelectItem>
                     ))}
                   </SelectContent>

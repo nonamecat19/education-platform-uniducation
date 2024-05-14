@@ -105,7 +105,7 @@ const GroupSubjectForm = ({
           name='subjectId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subject Id</FormLabel>
+              <FormLabel>Subject</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -120,8 +120,7 @@ const GroupSubjectForm = ({
                         key={subject.id}
                         value={subject.id.toString()}
                       >
-                        {subject.id}{' '}
-                        {/* TODO: Replace with a field from the subject model */}
+                        {subject.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -137,7 +136,7 @@ const GroupSubjectForm = ({
           name='groupId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Group Id</FormLabel>
+              <FormLabel>Group</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -149,8 +148,7 @@ const GroupSubjectForm = ({
                   <SelectContent>
                     {groups?.groups.map((group) => (
                       <SelectItem key={group.id} value={group.id.toString()}>
-                        {group.id}{' '}
-                        {/* TODO: Replace with a field from the group model */}
+                        {group.name}
                       </SelectItem>
                     ))}
                   </SelectContent>

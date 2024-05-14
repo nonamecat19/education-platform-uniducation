@@ -105,7 +105,7 @@ const LaboratoryWorkForm = ({
           name='courseId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Course Id</FormLabel>
+              <FormLabel>Course</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -118,7 +118,6 @@ const LaboratoryWorkForm = ({
                     {courses?.courses.map((course) => (
                       <SelectItem key={course.id} value={course.id.toString()}>
                         {course.id}{' '}
-                        {/* TODO: Replace with a field from the course model */}
                       </SelectItem>
                     ))}
                   </SelectContent>
