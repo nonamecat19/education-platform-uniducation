@@ -11,7 +11,7 @@ import {
   laboratoryWorkIdSchema,
   insertLaboratoryWorkParams,
   updateLaboratoryWorkParams,
-} from '@/lib/db/schema/laboratoryWorks'
+} from '@/lib/db/schema'
 
 export async function POST(req: Request) {
   try {

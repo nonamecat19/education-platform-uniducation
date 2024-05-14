@@ -1,12 +1,12 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
 import {
+  groups,
   type GroupSubjectId,
   groupSubjectIdSchema,
   groupSubjects,
-} from '@/lib/db/schema/groupSubjects'
-import { subjects } from '@/lib/db/schema/subjects'
-import { groups } from '@/lib/db/schema/groups'
+  subjects,
+} from '@/lib/db/schema'
 
 export const getGroupSubjects = async () => {
   const rows = await db

@@ -7,7 +7,7 @@ import {
   textSectionIdSchema,
   insertTextSectionParams,
   updateTextSectionParams,
-} from '@/lib/db/schema/textSection'
+} from '@/lib/db/schema'
 import {
   createTextSection,
   deleteTextSection,

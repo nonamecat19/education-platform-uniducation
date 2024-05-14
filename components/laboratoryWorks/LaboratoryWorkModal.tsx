@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import LaboratoryWorkForm from './LaboratoryWorkForm'
-import { LaboratoryWork } from '@/lib/db/schema/laboratoryWorks'
+import { LaboratoryWork } from '@/lib/db/schema'
 
 export default function LaboratoryWorkModal({
   laboratoryWork,

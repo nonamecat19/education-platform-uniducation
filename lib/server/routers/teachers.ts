@@ -4,7 +4,7 @@ import {
   teacherIdSchema,
   insertTeacherParams,
   updateTeacherParams,
-} from '@/lib/db/schema/teachers'
+} from '@/lib/db/schema'
 import {
   createTeacher,
   deleteTeacher,

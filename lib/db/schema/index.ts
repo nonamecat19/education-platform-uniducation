@@ -1,5 +1,6 @@
 export * from './auth'
 export * from './units'
+export * from './users'
 export * from './groups'
 export * from './courses'
 export * from './students'

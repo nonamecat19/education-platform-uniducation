@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import TeacherForm from './TeacherForm'
-import { Teacher } from '@/lib/db/schema/teachers'
+import { Teacher } from '@/lib/db/schema'
 
 export default function TeacherModal({
   teacher,

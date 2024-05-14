@@ -4,8 +4,8 @@ import {
   type LaboratoryWorkId,
   laboratoryWorkIdSchema,
   laboratoryWorks,
-} from '@/lib/db/schema/laboratoryWorks'
-import { courses } from '@/lib/db/schema/courses'
+} from '@/lib/db/schema'
+import { courses } from '@/lib/db/schema'
 
 export const getLaboratoryWorks = async () => {
   const rows = await db

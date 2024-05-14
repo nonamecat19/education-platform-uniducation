@@ -7,7 +7,7 @@ type AdditionalLinks = {
 }
 
 export const defaultLinks: SidebarLink[] = [
-  { href: '/dashboard', title: 'Home', icon: HomeIcon },
+  { href: '/admin/dashboard', title: 'Home', icon: HomeIcon },
   { href: '/account', title: 'Account', icon: Cog },
   { href: '/settings', title: 'Settings', icon: Cog },
 ]
@@ -17,47 +17,47 @@ export const additionalLinks: AdditionalLinks[] = [
     title: 'Entities',
     links: [
       {
-        href: '/laboratory-works',
+        href: '/admin/laboratory-works',
         title: 'Laboratory Works',
         icon: Globe,
       },
       {
-        href: '/text-section',
+        href: '/admin/text-section',
         title: 'Text Section',
         icon: Globe,
       },
       {
-        href: '/units',
+        href: '/admin/units',
         title: 'Units',
         icon: Globe,
       },
       {
-        href: '/courses',
+        href: '/admin/courses',
         title: 'Courses',
         icon: Globe,
       },
       {
-        href: '/group-subjects',
+        href: '/admin/group-subjects',
         title: 'Group Subjects',
         icon: Globe,
       },
       {
-        href: '/subjects',
+        href: '/admin/subjects',
         title: 'Subjects',
         icon: Globe,
       },
       {
-        href: '/students',
+        href: '/admin/students',
         title: 'Students',
         icon: Globe,
       },
       {
-        href: '/groups',
+        href: '/admin/groups',
         title: 'Groups',
         icon: Globe,
       },
       {
-        href: '/teachers',
+        href: '/admin/teachers',
         title: 'Teachers',
         icon: Globe,
       },

@@ -1,5 +1,5 @@
 'use client'
-import { CompleteSubject } from '@/lib/db/schema/subjects'
+import { CompleteSubject } from '@/lib/db/schema'
 import { trpc } from '@/lib/trpc/client'
 import SubjectModal from './SubjectModal'
 

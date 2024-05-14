@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '../ui/dialog'
 import SubjectForm from './SubjectForm'
-import { Subject } from '@/lib/db/schema/subjects'
+import { Subject } from '@/lib/db/schema'
 
 export default function SubjectModal({
   subject,

@@ -1,10 +1,6 @@
 'use client'
 
-import {
-  Teacher,
-  NewTeacherParams,
-  insertTeacherParams,
-} from '@/lib/db/schema/teachers'
+import { Teacher, NewTeacherParams, insertTeacherParams } from '@/lib/db/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 

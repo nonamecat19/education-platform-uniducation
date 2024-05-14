@@ -1,7 +1,6 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
-import { type UnitId, unitIdSchema, units } from '@/lib/db/schema/units'
-import { courses } from '@/lib/db/schema/courses'
+import { courses, type UnitId, unitIdSchema, units } from '@/lib/db/schema'
 
 export const getUnits = async () => {
   const rows = await db

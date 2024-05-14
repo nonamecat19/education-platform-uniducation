@@ -7,7 +7,7 @@ import {
   groupSubjectIdSchema,
   insertGroupSubjectParams,
   updateGroupSubjectParams,
-} from '@/lib/db/schema/groupSubjects'
+} from '@/lib/db/schema'
 import {
   createGroupSubject,
   deleteGroupSubject,

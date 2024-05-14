@@ -11,7 +11,7 @@ import {
   groupSubjectIdSchema,
   insertGroupSubjectParams,
   updateGroupSubjectParams,
-} from '@/lib/db/schema/groupSubjects'
+} from '@/lib/db/schema'
 
 export async function POST(req: Request) {
   try {

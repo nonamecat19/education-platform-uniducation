@@ -1,5 +1,5 @@
 'use client'
-import { CompleteLaboratoryWork } from '@/lib/db/schema/laboratoryWorks'
+import { CompleteLaboratoryWork } from '@/lib/db/schema'
 import { trpc } from '@/lib/trpc/client'
 import LaboratoryWorkModal from './LaboratoryWorkModal'
 

@@ -7,7 +7,7 @@ import {
   laboratoryWorkIdSchema,
   insertLaboratoryWorkParams,
   updateLaboratoryWorkParams,
-} from '@/lib/db/schema/laboratoryWorks'
+} from '@/lib/db/schema'
 import {
   createLaboratoryWork,
   deleteLaboratoryWork,

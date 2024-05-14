@@ -4,7 +4,7 @@ import {
   TextSection,
   NewTextSectionParams,
   insertTextSectionParams,
-} from '@/lib/db/schema/textSection'
+} from '@/lib/db/schema'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 

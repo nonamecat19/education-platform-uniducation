@@ -7,3 +7,6 @@ pnpm-lock.yaml
 
 portal-service
 users-service
+
+# Sentry Config File
+.sentryclirc
