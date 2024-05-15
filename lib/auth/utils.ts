@@ -43,6 +43,8 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     session: ({ session, user }) => {
       session.user.id = user.id
+      // @ts-ignore
+      session.user.role = user.role
       return session
     },
   },
@@ -52,14 +54,16 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
       profile: (profile) => {
-        console.log({ profile })
         const user: NewUser = {
           id: nanoid(),
           email: profile.email,
           name: profile.name ?? 'User ' + faker.number.int(1000),
           emailVerified: new Date(),
           image: profile.picture ?? null,
-          role: 'user',
+          role:
+            env.NODE_ENV === 'development' && env.ADMIN_EMAIL === profile.email
+              ? 'admin'
+              : 'student',
         }
         return user
       },
@@ -69,10 +73,24 @@ export const authOptions: NextAuthOptions = {
 
 export const getUserAuth = async () => {
   const session = await getServerSession(authOptions)
-  return { session } as AuthSession
+  return { session } as AuthSession & { session: { user: { role: string } } }
 }
 
 export const checkAuth = async () => {
   const { session } = await getUserAuth()
   if (!session) redirect('/api/auth/signin')
 }
+
+export const requireRoles = async (roles: string[]) => {
+  const { session } = await getUserAuth()
+  const { user } = session
+  if (!roles.includes(user.role)) {
+    redirect('/')
+  }
+}
+
+export const checkAdminAuth = async () => requireRoles(['admin'])
+export const checkTeacherAuth = async () => requireRoles(['teacher'])
+export const checkStudentAuth = async () => requireRoles(['student'])
+
+// TODO: make functions for all roles
