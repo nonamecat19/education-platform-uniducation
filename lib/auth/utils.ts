@@ -92,5 +92,3 @@ export const requireRoles = async (roles: string[]) => {
 export const checkAdminAuth = async () => requireRoles(['admin'])
 export const checkTeacherAuth = async () => requireRoles(['teacher'])
 export const checkStudentAuth = async () => requireRoles(['student'])
-
-// TODO: make functions for all roles

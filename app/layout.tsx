@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ReactNode } from 'react'
+import { cookies } from 'next/headers'
+import NextAuthProvider from '@/lib/auth/Provider'
+import TrpcProvider from '@/lib/trpc/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +28,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <NextAuthProvider>
+            <TrpcProvider cookies={cookies().toString()}>
+              {children}
+            </TrpcProvider>
+          </NextAuthProvider>
         </ThemeProvider>
       </body>
     </html>

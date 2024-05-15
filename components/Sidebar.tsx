@@ -4,8 +4,9 @@ import SidebarItems from './SidebarItems'
 import { Avatar, AvatarFallback } from './ui/avatar'
 
 import { AuthSession, getUserAuth } from '@/lib/auth/utils'
+import SignOutBtn from '@/components/auth/SignOutBtn'
 
-const Sidebar = async () => {
+export async function Sidebar() {
   const session = await getUserAuth()
   if (session.session === null) return null
 
@@ -16,15 +17,16 @@ const Sidebar = async () => {
           <h3 className='text-lg font-semibold ml-4'>Logo</h3>
           <SidebarItems />
         </div>
-        <UserDetails session={session} />
+        <div className='flex flex-col'>
+          <UserDetails session={session} />
+          <SignOutBtn />
+        </div>
       </div>
     </aside>
   )
 }
 
-export default Sidebar
-
-const UserDetails = ({ session }: { session: AuthSession }) => {
+function UserDetails({ session }: { session: AuthSession }) {
   if (session.session === null) return null
   const { user } = session.session
 
