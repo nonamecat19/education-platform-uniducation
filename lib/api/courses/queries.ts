@@ -5,21 +5,32 @@ import {
   courseIdSchema,
   courses,
   groupSubjects,
+  subjects,
   teachers,
 } from '@/lib/db/schema'
+import { Course } from '@/lib/types'
 
 export const getCourses = async () => {
   const rows = await db
-    .select({ course: courses, groupSubject: groupSubjects, teacher: teachers })
+    .select({
+      course: courses,
+      groupSubject: groupSubjects,
+      teacher: teachers,
+      subject: subjects,
+    })
     .from(courses)
     .leftJoin(groupSubjects, eq(courses.groupSubjectId, groupSubjects.id))
     .leftJoin(teachers, eq(courses.teacherId, teachers.id))
+    .leftJoin(subjects, eq(groupSubjects.subjectId, subjects.id))
   const c = rows.map((r) => ({
     ...r.course,
-    groupSubject: r.groupSubject,
+    groupSubject: {
+      ...r.groupSubject,
+      subject: r.subject,
+    },
     teacher: r.teacher,
   }))
-  return { courses: c }
+  return { courses: c } as { courses: Course[] }
 }
 
 export const getCourseById = async (id: CourseId) => {
