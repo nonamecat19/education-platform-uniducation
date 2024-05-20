@@ -1,10 +1,10 @@
 'use client'
 import { CompleteGroup } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import GroupModal from './GroupModal'
 
 export default function GroupList({ groups }: { groups: CompleteGroup[] }) {
-  const { data: g } = trpc.groups.getGroups.useQuery(undefined, {
+  const { data: g } = trpcCSR.groups.getGroups.useQuery(undefined, {
     initialData: { groups },
     refetchOnMount: false,
   })

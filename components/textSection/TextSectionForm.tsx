@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import {
@@ -37,11 +37,11 @@ const TextSectionForm = ({
   textSection?: TextSection
   closeModal?: () => void
 }) => {
-  const { data: units } = trpc.units.getUnits.useQuery()
+  const { data: units } = trpcCSR.units.getUnits.useQuery()
   const editing = !!textSection?.id
 
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertTextSectionParams>>({
     // latest Zod release has introduced a TS error with zodResolver
@@ -71,19 +71,19 @@ const TextSectionForm = ({
   }
 
   const { mutate: createTextSection, isLoading: isCreating } =
-    trpc.textSection.createTextSection.useMutation({
+    trpcCSR.textSection.createTextSection.useMutation({
       onSuccess: (res) => onSuccess('create'),
       // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateTextSection, isLoading: isUpdating } =
-    trpc.textSection.updateTextSection.useMutation({
+    trpcCSR.textSection.updateTextSection.useMutation({
       onSuccess: (res) => onSuccess('update'),
       // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteTextSection, isLoading: isDeleting } =
-    trpc.textSection.deleteTextSection.useMutation({
+    trpcCSR.textSection.deleteTextSection.useMutation({
       onSuccess: (res) => onSuccess('delete'),
       // onError: (err) => onError('delete', { error: err.message }),
     })

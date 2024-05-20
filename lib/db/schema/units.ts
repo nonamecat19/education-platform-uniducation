@@ -2,7 +2,7 @@ import { sql } from 'drizzle-orm'
 import { varchar, timestamp, pgTable, uniqueIndex } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
-import { courses } from './courses'
+import { courses } from '@/lib/db/schema'
 import { type getUnits } from '@/lib/api/units/queries'
 
 import { nanoid, timestamps } from '@/lib/utils'

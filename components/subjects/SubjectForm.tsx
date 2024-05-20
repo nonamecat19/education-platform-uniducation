@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
@@ -29,7 +29,7 @@ const SubjectForm = ({
   const editing = !!subject?.id
 
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertSubjectParams>>({
     // latest Zod release has introduced a TS error with zodResolver
@@ -57,19 +57,19 @@ const SubjectForm = ({
   }
 
   const { mutate: createSubject, isLoading: isCreating } =
-    trpc.subjects.createSubject.useMutation({
+    trpcCSR.subjects.createSubject.useMutation({
       onSuccess: (res) => onSuccess('create'),
       // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateSubject, isLoading: isUpdating } =
-    trpc.subjects.updateSubject.useMutation({
+    trpcCSR.subjects.updateSubject.useMutation({
       onSuccess: (res) => onSuccess('update'),
       // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteSubject, isLoading: isDeleting } =
-    trpc.subjects.deleteSubject.useMutation({
+    trpcCSR.subjects.deleteSubject.useMutation({
       onSuccess: (res) => onSuccess('delete'),
       // onError: (err) => onError('delete', { error: err.message }),
     })

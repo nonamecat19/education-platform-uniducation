@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import {
@@ -37,11 +37,11 @@ const LaboratoryWorkForm = ({
   laboratoryWork?: LaboratoryWork
   closeModal?: () => void
 }) => {
-  const { data: courses } = trpc.courses.getCourses.useQuery()
+  const { data: courses } = trpcCSR.courses.getCourses.useQuery()
   const editing = !!laboratoryWork?.id
 
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertLaboratoryWorkParams>>({
     resolver: zodResolver(insertLaboratoryWorkParams),
@@ -73,19 +73,19 @@ const LaboratoryWorkForm = ({
   }
 
   const { mutate: createLaboratoryWork, isLoading: isCreating } =
-    trpc.laboratoryWorks.createLaboratoryWork.useMutation({
+    trpcCSR.laboratoryWorks.createLaboratoryWork.useMutation({
       onSuccess: (res) => onSuccess('create'),
       // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateLaboratoryWork, isLoading: isUpdating } =
-    trpc.laboratoryWorks.updateLaboratoryWork.useMutation({
+    trpcCSR.laboratoryWorks.updateLaboratoryWork.useMutation({
       onSuccess: (res) => onSuccess('update'),
       // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteLaboratoryWork, isLoading: isDeleting } =
-    trpc.laboratoryWorks.deleteLaboratoryWork.useMutation({
+    trpcCSR.laboratoryWorks.deleteLaboratoryWork.useMutation({
       onSuccess: (res) => onSuccess('delete'),
       // onError: (err) => onError('delete', { error: err.message }),
     })

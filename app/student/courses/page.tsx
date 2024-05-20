@@ -1,12 +1,12 @@
 'use client'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { PageGrid } from '@/components/layout/PageGrid'
 import { CourseCard } from '@/components/courses/CourseCard'
 import { useRouter } from 'next/navigation'
 import { CourseId, TeacherId } from '@/lib/db/schema'
 
 export default function CoursesPage() {
-  const { data } = trpc.courses.getCourses.useQuery()
+  const { data } = trpcCSR.courses.getCourses.useQuery()
   const router = useRouter()
 
   const courseClickHandler = (id: CourseId | undefined) => {

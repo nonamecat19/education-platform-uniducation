@@ -1,6 +1,6 @@
 'use client'
 import { CompleteSubject } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import SubjectModal from './SubjectModal'
 
 export default function SubjectList({
@@ -8,7 +8,7 @@ export default function SubjectList({
 }: {
   subjects: CompleteSubject[]
 }) {
-  const { data: s } = trpc.subjects.getSubjects.useQuery(undefined, {
+  const { data: s } = trpcCSR.subjects.getSubjects.useQuery(undefined, {
     initialData: { subjects },
     refetchOnMount: false,
   })

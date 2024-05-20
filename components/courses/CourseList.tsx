@@ -1,10 +1,10 @@
 'use client'
 import { CompleteCourse } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import CourseModal from './CourseModal'
 
 export default function CourseList({ courses }: { courses: CompleteCourse[] }) {
-  const { data: c } = trpc.courses.getCourses.useQuery(undefined, {
+  const { data: c } = trpcCSR.courses.getCourses.useQuery(undefined, {
     initialData: { courses },
     refetchOnMount: false,
   })

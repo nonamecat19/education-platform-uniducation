@@ -1,24 +1,27 @@
-export interface Course {
+import { TextSection } from '@/lib/db/schema'
+
+export interface BaseTable {
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface Course extends BaseTable {
   id: string
   groupSubjectId: string
   teacherId: string
-  createdAt: Date
-  updatedAt: Date
   groupSubject: GroupSubject | null
   teacher: Teacher | null
 }
 
-export interface GroupSubject {
+export interface GroupSubject extends BaseTable {
   id: string
   subjectId: string
   groupId: string
   hours: number | null
-  createdAt: Date
-  updatedAt: Date
   subject: Subject | null
 }
 
-export interface Teacher {
+export interface Teacher extends BaseTable {
   id: string
   name: string
   surname: string
@@ -26,13 +29,17 @@ export interface Teacher {
   email: string
   profession: string
   password: string | null
-  createdAt: Date
-  updatedAt: Date
 }
 
-export interface Subject {
+export interface Subject extends BaseTable {
   id: string
   name: string
-  createdAt: Date
-  updatedAt: Date
+}
+
+export interface UnitWithTextSections extends BaseTable {
+  id: string
+  courseId: string
+  name: string
+  description: string
+  textSections: TextSection[]
 }

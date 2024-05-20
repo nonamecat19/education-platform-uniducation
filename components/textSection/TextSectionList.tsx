@@ -1,6 +1,6 @@
 'use client'
 import { CompleteTextSection } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import TextSectionModal from './TextSectionModal'
 
 export default function TextSectionList({
@@ -8,7 +8,7 @@ export default function TextSectionList({
 }: {
   textSection: CompleteTextSection[]
 }) {
-  const { data: t } = trpc.textSection.getTextSection.useQuery(undefined, {
+  const { data: t } = trpcCSR.textSection.getTextSection.useQuery(undefined, {
     initialData: { textSection },
     refetchOnMount: false,
   })
