@@ -5,6 +5,7 @@ import { Adapter } from 'next-auth/adapters'
 import { redirect } from 'next/navigation'
 import { env } from '@/lib/env.mjs'
 import GoogleProvider from 'next-auth/providers/google'
+import GithubProvider from 'next-auth/providers/github'
 import {
   accounts,
   NewUser,
@@ -67,6 +68,10 @@ export const authOptions: NextAuthOptions = {
         }
         return user
       },
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
 }
