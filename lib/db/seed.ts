@@ -67,7 +67,7 @@ export async function seed() {
 
   await db // units
     .insert(textSection)
-    .values(await generateTextSectionRows(100))
+    .values(await generateTextSectionRows(500))
     .returning()
 
   await db

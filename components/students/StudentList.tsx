@@ -1,6 +1,6 @@
 'use client'
 import { CompleteStudent } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import StudentModal from './StudentModal'
 
 export default function StudentList({
@@ -8,7 +8,7 @@ export default function StudentList({
 }: {
   students: CompleteStudent[]
 }) {
-  const { data: s } = trpc.students.getStudents.useQuery(undefined, {
+  const { data: s } = trpcCSR.students.getStudents.useQuery(undefined, {
     initialData: { students },
     refetchOnMount: false,
   })

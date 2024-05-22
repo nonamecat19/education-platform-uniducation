@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import {
@@ -33,11 +33,11 @@ const GroupForm = ({
   group?: Group
   closeModal?: () => void
 }) => {
-  const { data: teachers } = trpc.teachers.getTeachers.useQuery()
+  const { data: teachers } = trpcCSR.teachers.getTeachers.useQuery()
   const editing = !!group?.id
 
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertGroupParams>>({
     // latest Zod release has introduced a TS error with zodResolver
@@ -67,19 +67,19 @@ const GroupForm = ({
   }
 
   const { mutate: createGroup, isLoading: isCreating } =
-    trpc.groups.createGroup.useMutation({
+    trpcCSR.groups.createGroup.useMutation({
       onSuccess: (res) => onSuccess('create'),
       // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateGroup, isLoading: isUpdating } =
-    trpc.groups.updateGroup.useMutation({
+    trpcCSR.groups.updateGroup.useMutation({
       onSuccess: (res) => onSuccess('update'),
       // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteGroup, isLoading: isDeleting } =
-    trpc.groups.deleteGroup.useMutation({
+    trpcCSR.groups.deleteGroup.useMutation({
       onSuccess: (res) => onSuccess('delete'),
       // onError: (err) => onError('delete', { error: err.message }),
     })

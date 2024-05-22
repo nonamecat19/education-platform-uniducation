@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import {
@@ -33,11 +33,11 @@ const StudentForm = ({
   student?: Student
   closeModal?: () => void
 }) => {
-  const { data: groups } = trpc.groups.getGroups.useQuery()
+  const { data: groups } = trpcCSR.groups.getGroups.useQuery()
   const editing = !!student?.id
 
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertStudentParams>>({
     // latest Zod release has introduced a TS error with zodResolver
@@ -71,19 +71,19 @@ const StudentForm = ({
   }
 
   const { mutate: createStudent, isLoading: isCreating } =
-    trpc.students.createStudent.useMutation({
+    trpcCSR.students.createStudent.useMutation({
       onSuccess: (res) => onSuccess('create'),
       // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateStudent, isLoading: isUpdating } =
-    trpc.students.updateStudent.useMutation({
+    trpcCSR.students.updateStudent.useMutation({
       onSuccess: (res) => onSuccess('update'),
       // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteStudent, isLoading: isDeleting } =
-    trpc.students.deleteStudent.useMutation({
+    trpcCSR.students.deleteStudent.useMutation({
       onSuccess: (res) => onSuccess('delete'),
       // onError: (err) => onError('delete', { error: err.message }),
     })
@@ -146,7 +146,7 @@ const StudentForm = ({
           name='groupId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Group Id</FormLabel>
+              <FormLabel>Group</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -158,8 +158,7 @@ const StudentForm = ({
                   <SelectContent>
                     {groups?.groups.map((group) => (
                       <SelectItem key={group.id} value={group.id.toString()}>
-                        {group.id}{' '}
-                        {/* TODO: Replace with a field from the group model */}
+                        {group.name}
                       </SelectItem>
                     ))}
                   </SelectContent>

@@ -1,4 +1,3 @@
-import SignIn from '@/components/auth/SignIn'
 import { getUserAuth } from '@/lib/auth/utils'
 import { unstable_noStore } from 'next/cache'
 
@@ -12,7 +11,6 @@ export default async function Home() {
           {JSON.stringify(session, null, 2)}
         </pre>
       ) : null}
-      <SignIn />
     </main>
   )
 }

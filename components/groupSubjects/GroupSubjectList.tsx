@@ -1,6 +1,6 @@
 'use client'
 import { CompleteGroupSubject } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import GroupSubjectModal from './GroupSubjectModal'
 
 export default function GroupSubjectList({
@@ -8,10 +8,13 @@ export default function GroupSubjectList({
 }: {
   groupSubjects: CompleteGroupSubject[]
 }) {
-  const { data: g } = trpc.groupSubjects.getGroupSubjects.useQuery(undefined, {
-    initialData: { groupSubjects },
-    refetchOnMount: false,
-  })
+  const { data: g } = trpcCSR.groupSubjects.getGroupSubjects.useQuery(
+    undefined,
+    {
+      initialData: { groupSubjects },
+      refetchOnMount: false,
+    },
+  )
 
   if (g.groupSubjects.length === 0) {
     return <EmptyState />

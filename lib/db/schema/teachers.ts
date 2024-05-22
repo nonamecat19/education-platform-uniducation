@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm'
+import { relations, sql } from 'drizzle-orm'
 import { pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { type getTeachers } from '@/lib/api/teachers/queries'
 
 import { nanoid, timestamps } from '@/lib/utils'
+import { courses } from '@/lib/db/schema/courses'
 
 export const teachers = pgTable('teachers', {
   id: varchar('id', { length: 191 })
@@ -47,3 +48,9 @@ export type TeacherId = z.infer<typeof teacherIdSchema>['id']
 export type CompleteTeacher = Awaited<
   ReturnType<typeof getTeachers>
 >['teachers'][number]
+
+// export const TeacherTableRelations = relations(teachers, ({ one, many }) => {
+//   return {
+//     courses: many(courses),
+//   }
+// })

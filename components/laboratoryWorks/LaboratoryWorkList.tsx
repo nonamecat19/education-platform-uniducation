@@ -1,6 +1,6 @@
 'use client'
 import { CompleteLaboratoryWork } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import LaboratoryWorkModal from './LaboratoryWorkModal'
 
 export default function LaboratoryWorkList({
@@ -8,7 +8,7 @@ export default function LaboratoryWorkList({
 }: {
   laboratoryWorks: CompleteLaboratoryWork[]
 }) {
-  const { data: l } = trpc.laboratoryWorks.getLaboratoryWorks.useQuery(
+  const { data: l } = trpcCSR.laboratoryWorks.getLaboratoryWorks.useQuery(
     undefined,
     {
       initialData: { laboratoryWorks },

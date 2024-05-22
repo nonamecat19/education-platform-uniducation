@@ -1,10 +1,10 @@
 'use client'
 import { CompleteUnit } from '@/lib/db/schema'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import UnitModal from './UnitModal'
 
 export default function UnitList({ units }: { units: CompleteUnit[] }) {
-  const { data: u } = trpc.units.getUnits.useQuery(undefined, {
+  const { data: u } = trpcCSR.units.getUnits.useQuery(undefined, {
     initialData: { units },
     refetchOnMount: false,
   })

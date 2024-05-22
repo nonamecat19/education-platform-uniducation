@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import {
@@ -33,12 +33,13 @@ const CourseForm = ({
   course?: Course
   closeModal?: () => void
 }) => {
-  const { data: groupSubjects } = trpc.groupSubjects.getGroupSubjects.useQuery()
-  const { data: teachers } = trpc.teachers.getTeachers.useQuery()
+  const { data: groupSubjects } =
+    trpcCSR.groupSubjects.getGroupSubjects.useQuery()
+  const { data: teachers } = trpcCSR.teachers.getTeachers.useQuery()
   const editing = !!course?.id
 
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertCourseParams>>({
     // latest Zod release has introduced a TS error with zodResolver
@@ -67,19 +68,19 @@ const CourseForm = ({
   }
 
   const { mutate: createCourse, isLoading: isCreating } =
-    trpc.courses.createCourse.useMutation({
+    trpcCSR.courses.createCourse.useMutation({
       onSuccess: (res) => onSuccess('create'),
       // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateCourse, isLoading: isUpdating } =
-    trpc.courses.updateCourse.useMutation({
+    trpcCSR.courses.updateCourse.useMutation({
       onSuccess: (res) => onSuccess('update'),
       // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteCourse, isLoading: isDeleting } =
-    trpc.courses.deleteCourse.useMutation({
+    trpcCSR.courses.deleteCourse.useMutation({
       onSuccess: (res) => onSuccess('delete'),
       // onError: (err) => onError('delete', { error: err.message }),
     })
@@ -131,7 +132,7 @@ const CourseForm = ({
           name='teacherId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Teacher Id</FormLabel>
+              <FormLabel>Teacher</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -146,8 +147,7 @@ const CourseForm = ({
                         key={teacher.id}
                         value={teacher.id.toString()}
                       >
-                        {teacher.id}{' '}
-                        {/* TODO: Replace with a field from the teacher model */}
+                        {teacher.name} {teacher.surname}
                       </SelectItem>
                     ))}
                   </SelectContent>

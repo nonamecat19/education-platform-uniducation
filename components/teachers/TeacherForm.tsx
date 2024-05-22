@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { trpc } from '@/lib/trpc/client'
+import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
@@ -29,7 +29,7 @@ const TeacherForm = ({
   const editing = !!teacher?.id
 
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertTeacherParams>>({
     // latest Zod release has introduced a TS error with zodResolver
@@ -62,19 +62,19 @@ const TeacherForm = ({
   }
 
   const { mutate: createTeacher, isLoading: isCreating } =
-    trpc.teachers.createTeacher.useMutation({
+    trpcCSR.teachers.createTeacher.useMutation({
       onSuccess: (res) => onSuccess('create'),
       // onError: (err) => onError('create', { error: err.message }),
     })
 
   const { mutate: updateTeacher, isLoading: isUpdating } =
-    trpc.teachers.updateTeacher.useMutation({
+    trpcCSR.teachers.updateTeacher.useMutation({
       onSuccess: (res) => onSuccess('update'),
       // onError: (err) => onError('update', { error: err.message }),
     })
 
   const { mutate: deleteTeacher, isLoading: isDeleting } =
-    trpc.teachers.deleteTeacher.useMutation({
+    trpcCSR.teachers.deleteTeacher.useMutation({
       onSuccess: (res) => onSuccess('delete'),
       // onError: (err) => onError('delete', { error: err.message }),
     })
