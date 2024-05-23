@@ -35,12 +35,7 @@ export type AuthSession = {
 }
 
 export const authOptions: NextAuthOptions = {
-  adapter: DrizzleAdapter(db, {
-    usersTable: users,
-    accountsTable: accounts,
-    sessionsTable: sessions,
-    verificationTokensTable: verificationTokens,
-  }) as Adapter,
+  adapter: DrizzleAdapter(db ) as Adapter,
   callbacks: {
     session: ({ session, user }) => {
       session.user.id = user.id
