@@ -9,6 +9,7 @@ export const users = pgTable('user', {
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
   role: text('role'),
+  clerkId: text('clerkId'),
 })
 
 export const insertUsersSchema = createInsertSchema(users)

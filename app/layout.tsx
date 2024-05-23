@@ -4,8 +4,14 @@ import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ReactNode } from 'react'
 import { cookies } from 'next/headers'
-import NextAuthProvider from '@/lib/auth/Provider'
 import TrpcProvider from '@/lib/trpc/Provider'
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,21 +26,27 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextAuthProvider>
+    <ClerkProvider>
+      <html lang='en'>
+        <body className={inter.className}>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
             <TrpcProvider cookies={cookies().toString()}>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
               {children}
             </TrpcProvider>
-          </NextAuthProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

@@ -21,8 +21,7 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@auth/core": "^0.30.0",
-    "@auth/drizzle-adapter": "^1.1.0",
+    "@clerk/nextjs": "^4.31.0",
     "@faker-js/faker": "^8.4.1",
     "@hookform/resolvers": "^3.4.0",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -57,7 +56,6 @@
     "lucide-react": "^0.378.0",
     "nanoid": "^5.0.7",
     "next": "14.2.3",
-    "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
     "pg": "^8.11.5",
     "postcss": "^8",

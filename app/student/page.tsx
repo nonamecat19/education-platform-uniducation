@@ -1,7 +1,10 @@
-import { checkStudentAuth } from '@/lib/auth/utils'
+import { checkUserRole } from '@/lib/utils'
+import { useSession } from '@clerk/nextjs'
 
 export default async function StudentsPage() {
-  await checkStudentAuth()
+  const { session } = useSession()
+  const userRole = checkUserRole(session)
+  console.log({ session, userRole })
 
   return <div>Students page</div>
 }
