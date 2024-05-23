@@ -1,17 +1,6 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/PmwTvNfrVgf
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import Link from 'next/link'
-import { truncateDb } from '@/lib/db/truncate'
-import { runMigrate } from '@/lib/db/migrate'
-import { seed } from '@/lib/db/seed'
 
 export default async function LandingPage() {
-  // await runMigrate()
-  // await seed()
-  // await truncateDb()
   return (
     <div className='flex flex-col min-h-screen'>
       <header className='px-4 lg:px-6 h-14 flex items-center'>
