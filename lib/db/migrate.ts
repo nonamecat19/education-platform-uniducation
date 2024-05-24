@@ -4,6 +4,9 @@ import { migrate } from 'drizzle-orm/node-postgres/migrator'
 import { db } from '@/lib/db'
 
 export const runMigrate = async () => {
+  if (env.NODE_ENV !== 'development') {
+    return
+  }
   if (!env.DATABASE_URL) {
     throw new Error('DATABASE_URL is not defined')
   }
