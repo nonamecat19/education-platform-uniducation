@@ -14,8 +14,12 @@ import {
   users,
   verificationTokens,
 } from '@/lib/db/schema'
+import { env } from '@/lib/env.mjs'
 
 export const truncateDb = async () => {
+  if (env.NODE_ENV !== 'development') {
+    return
+  }
   await db.delete(verificationTokens)
   await db.delete(students)
   await db.delete(users)

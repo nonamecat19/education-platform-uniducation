@@ -1,4 +1,6 @@
 {
+  "id": "2ef5e64a-14cc-496e-8c1e-2f8396cd6e06",
+  "prevId": "5cea42b7-f60d-4449-a967-5b43d955070e",
   "version": "6",
   "dialect": "postgresql",
   "tables": {
@@ -78,15 +80,15 @@
         "account_userId_user_id_fk": {
           "name": "account_userId_user_id_fk",
           "tableFrom": "account",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
@@ -128,57 +130,17 @@
         "session_userId_user_id_fk": {
           "name": "session_userId_user_id_fk",
           "tableFrom": "session",
+          "tableTo": "user",
           "columnsFrom": [
             "userId"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.user": {
-      "name": "user",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "emailVerified": {
-          "name": "emailVerified",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "image": {
-          "name": "image",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -260,28 +222,28 @@
         "courses_group_subject_id_group_subjects_id_fk": {
           "name": "courses_group_subject_id_group_subjects_id_fk",
           "tableFrom": "courses",
+          "tableTo": "group_subjects",
           "columnsFrom": [
             "group_subject_id"
           ],
-          "tableTo": "group_subjects",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
         "courses_teacher_id_teachers_id_fk": {
           "name": "courses_teacher_id_teachers_id_fk",
           "tableFrom": "courses",
+          "tableTo": "teachers",
           "columnsFrom": [
             "teacher_id"
           ],
-          "tableTo": "teachers",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -335,28 +297,28 @@
         "group_subjects_subject_id_subjects_id_fk": {
           "name": "group_subjects_subject_id_subjects_id_fk",
           "tableFrom": "group_subjects",
+          "tableTo": "subjects",
           "columnsFrom": [
             "subject_id"
           ],
-          "tableTo": "subjects",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
         "group_subjects_group_id_groups_id_fk": {
           "name": "group_subjects_group_id_groups_id_fk",
           "tableFrom": "group_subjects",
+          "tableTo": "groups",
           "columnsFrom": [
             "group_id"
           ],
-          "tableTo": "groups",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -418,22 +380,22 @@
         "groups_teacher_id_teachers_id_fk": {
           "name": "groups_teacher_id_teachers_id_fk",
           "tableFrom": "groups",
+          "tableTo": "teachers",
           "columnsFrom": [
             "teacher_id"
           ],
-          "tableTo": "teachers",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.laboratory_works": {
-      "name": "laboratory_works",
+    "public.units": {
+      "name": "units",
       "schema": "",
       "columns": {
         "id": {
@@ -460,30 +422,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "order": {
-          "name": "order",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "max_mark": {
-          "name": "max_mark",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "max_bonus": {
-          "name": "max_bonus",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "penalty": {
-          "name": "penalty",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -501,20 +439,67 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "laboratory_works_course_id_courses_id_fk": {
-          "name": "laboratory_works_course_id_courses_id_fk",
-          "tableFrom": "laboratory_works",
+        "units_course_id_courses_id_fk": {
+          "name": "units_course_id_courses_id_fk",
+          "tableFrom": "units",
+          "tableTo": "courses",
           "columnsFrom": [
             "course_id"
           ],
-          "tableTo": "courses",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emailVerified": {
+          "name": "emailVerified",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'student'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -604,28 +589,28 @@
         "students_group_id_groups_id_fk": {
           "name": "students_group_id_groups_id_fk",
           "tableFrom": "students",
+          "tableTo": "groups",
           "columnsFrom": [
             "group_id"
           ],
-          "tableTo": "groups",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         },
         "students_user_id_user_id_fk": {
           "name": "students_user_id_user_id_fk",
           "tableFrom": "students",
+          "tableTo": "user",
           "columnsFrom": [
             "user_id"
           ],
-          "tableTo": "user",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -718,14 +703,14 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
-          "default": "now()"
+          "default": "now\n        ()"
         },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
-          "default": "now()"
+          "default": "now\n        ()"
         }
       },
       "indexes": {},
@@ -781,22 +766,22 @@
         "text_section_unit_id_units_id_fk": {
           "name": "text_section_unit_id_units_id_fk",
           "tableFrom": "text_section",
+          "tableTo": "units",
           "columnsFrom": [
             "unit_id"
           ],
-          "tableTo": "units",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.units": {
-      "name": "units",
+    "public.laboratory_works": {
+      "name": "laboratory_works",
       "schema": "",
       "columns": {
         "id": {
@@ -823,6 +808,30 @@
           "primaryKey": false,
           "notNull": false
         },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_mark": {
+          "name": "max_mark",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "max_bonus": {
+          "name": "max_bonus",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "penalty": {
+          "name": "penalty",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -840,18 +849,18 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "units_course_id_courses_id_fk": {
-          "name": "units_course_id_courses_id_fk",
-          "tableFrom": "units",
+        "laboratory_works_course_id_courses_id_fk": {
+          "name": "laboratory_works_course_id_courses_id_fk",
+          "tableFrom": "laboratory_works",
+          "tableTo": "courses",
           "columnsFrom": [
             "course_id"
           ],
-          "tableTo": "courses",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "no action"
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -861,10 +870,8 @@
   "enums": {},
   "schemas": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "id": "103491b2-9618-465d-ac7d-9afa60322ce0",
-  "prevId": "00000000-0000-0000-0000-000000000000"
+    "tables": {}
+  }
 }

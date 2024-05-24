@@ -1,13 +1,11 @@
-import { checkAuth } from '@/lib/auth/utils'
 import { Toaster } from '@/components/ui/sonner'
 import { Navbar } from '@/components/Navbar'
 import { Sidebar } from '@/components/Sidebar'
-import { ReactNode } from 'react'
-// import { seed } from '@/lib/db/seed'
-export default async function AppLayout({ children }: { children: ReactNode }) {
-  // await seed()
-  await checkAuth()
+import { PropsWithChildren } from 'react'
 
+interface Props extends PropsWithChildren {}
+
+export default async function AppLayout({ children }: Props) {
   return (
     <main>
       <div className='flex h-screen'>

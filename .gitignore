@@ -1,5 +1,6 @@
 node_modules
 pnpm-lock.yaml
+package-lock.json
 .idea
 .next
 .env.dev
@@ -10,3 +11,4 @@ users-service
 
 # Sentry Config File
 .sentryclirc
+.vercel

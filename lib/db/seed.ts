@@ -24,8 +24,12 @@ import {
   generateUsersRows,
 } from '@/lib/db/seeds'
 import { truncateDb } from '@/lib/db/truncate'
+import { env } from '@/lib/env.mjs'
 
 export async function seed() {
+  if (env.NODE_ENV !== 'development') {
+    return
+  }
   console.log('Seeding...')
 
   await truncateDb()
