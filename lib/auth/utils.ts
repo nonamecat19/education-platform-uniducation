@@ -7,14 +7,11 @@ import { env } from '@/lib/env.mjs'
 import GoogleProvider from 'next-auth/providers/google'
 import GithubProvider from 'next-auth/providers/github'
 import {
-  accounts,
   NewUser,
-  sessions,
-  users,
-  verificationTokens,
 } from '@/lib/db/schema'
 import { faker } from '@faker-js/faker'
 import { nanoid } from '@/lib/utils'
+import { getRoleByEmail } from '@/lib/redis'
 
 declare module 'next-auth' {
   interface Session {
@@ -56,8 +53,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.name ?? 'User ' + faker.number.int(1000),
           emailVerified: new Date(),
           image: profile.picture ?? null,
-          role:
-            env.NODE_ENV === 'development' && env.ADMIN_EMAIL === profile.email
+          role: env.ADMIN_EMAIL === profile.email
               ? 'admin'
               : 'student',
         }
@@ -82,9 +78,15 @@ export const checkAuth = async () => {
 }
 
 export const requireRoles = async (roles: string[]) => {
-  const { session } = await getUserAuth()
-  const { user } = session
-  if (!roles.includes(user.role)) {
+  try {
+    const { session } = await getUserAuth()
+    const role = await getRoleByEmail(session?.user?.email!)
+
+    if (!roles.includes(role!)) {
+      throw new Error(`Role ${role} have no access to ${JSON.stringify(roles)}`)
+    }
+  } catch (e) {
+    console.error(e)
     redirect('/')
   }
 }

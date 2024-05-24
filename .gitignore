@@ -10,3 +10,4 @@ users-service
 
 # Sentry Config File
 .sentryclirc
+.vercel

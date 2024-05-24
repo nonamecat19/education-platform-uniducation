@@ -7,8 +7,8 @@ if (!env.DATABASE_URL) {
 const config = {
   schema: './lib/db/schema',
   out: './lib/db/migrations',
-  driver: 'pg',
-  // dialect: 'postgresql',
+  // driver: 'pg',
+  dialect: 'postgresql',
   dbCredentials: {
     connectionString: env.DATABASE_URL,
     // url: env.DATABASE_URL,
