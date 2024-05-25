@@ -20,9 +20,7 @@ export const students = pgTable(
     groupId: varchar('group_id', { length: 256 })
       .references(() => groups.id)
       .notNull(),
-    email: varchar('email', { length: 256 }).notNull(),
     stuentId: varchar('stuent_id', { length: 256 }).notNull(),
-    password: varchar('password', { length: 256 }),
     userId: varchar('user_id', { length: 256 })
       .references(() => users.id, { onDelete: 'cascade' })
       .notNull(),
@@ -33,11 +31,6 @@ export const students = pgTable(
     updatedAt: timestamp('updated_at')
       .notNull()
       .default(sql`now()`),
-  },
-  (students) => {
-    return {
-      emailIndex: uniqueIndex('email_idx').on(students.email),
-    }
   },
 )
 

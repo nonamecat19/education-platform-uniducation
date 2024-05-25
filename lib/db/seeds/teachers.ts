@@ -10,9 +10,7 @@ export const generateTeacherRows = async (
     name: faker.person.firstName(),
     surname: faker.person.lastName(),
     patronomyc: faker.person.middleName(),
-    email: faker.internet.email(),
     profession: faker.person.jobTitle(),
-    password: faker.internet.password(),
     userId: getRandomElementId(usersIds),
   }))
 }

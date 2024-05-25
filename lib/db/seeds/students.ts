@@ -13,9 +13,7 @@ export const generateStudentRows = async (
     surname: faker.person.lastName(),
     patronomic: faker.person.middleName(),
     groupId: getRandomElementId(groupIds),
-    email: faker.internet.email(),
     stuentId: faker.number.int().toString(),
-    password: faker.internet.password(),
     userId: getRandomElementId(usersIds),
   }))
 }

@@ -15,9 +15,7 @@ export const teachers = pgTable('teachers', {
   name: varchar('name', { length: 256 }).notNull(),
   surname: varchar('surname', { length: 256 }).notNull(),
   patronomyc: varchar('patronomyc', { length: 256 }),
-  email: varchar('email', { length: 256 }).notNull(),
   profession: varchar('profession', { length: 256 }).notNull(),
-  password: varchar('password', { length: 256 }),
   userId: varchar('user_id', { length: 256 })
     .references(() => users.id, { onDelete: 'cascade' })
     .notNull(),
