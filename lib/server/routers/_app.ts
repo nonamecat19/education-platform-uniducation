@@ -9,6 +9,7 @@ import { coursesRouter } from './courses'
 import { unitsRouter } from './units'
 import { textSectionRouter } from './textSection'
 import { laboratoryWorksRouter } from './laboratoryWorks'
+import { usersRouter } from '@/lib/server/routers/users'
 
 export const appRouter = router({
   computers: computersRouter,
@@ -21,6 +22,7 @@ export const appRouter = router({
   units: unitsRouter,
   textSection: textSectionRouter,
   laboratoryWorks: laboratoryWorksRouter,
+  users: usersRouter,
 })
 
 export type AppRouter = typeof appRouter

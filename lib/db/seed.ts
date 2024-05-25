@@ -40,6 +40,11 @@ export async function seed() {
     .returning()
 
   await db
+    .insert(users)
+    .values(await generateUsersRows(100))
+    .returning()
+
+  await db // users
     .insert(teachers)
     .values(await generateTeacherRows(50))
     .returning()
@@ -72,11 +77,6 @@ export async function seed() {
   await db // units
     .insert(textSection)
     .values(await generateTextSectionRows(500))
-    .returning()
-
-  await db
-    .insert(users)
-    .values(await generateUsersRows(100))
     .returning()
 
   await db

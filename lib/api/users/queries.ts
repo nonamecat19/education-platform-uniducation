@@ -1,6 +1,7 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
 import { UserId, userIdSchema, users } from '@/lib/db/schema'
+import { getUserAuth } from '@/lib/auth/utils'
 
 export const getUsers = async () => {
   const rows = await db
@@ -26,3 +27,11 @@ export const getUserByEmail = async (email: string) => {
   return { user: row }
 }
 
+export const getCurrentUser = async () => {
+  const { session } = await getUserAuth()
+  const [row] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, session?.user.id!))
+  return { user: row }
+}
