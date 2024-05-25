@@ -9,7 +9,7 @@ export const users = pgTable('user', {
   email: text('email').notNull(),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
-  role: text('role').default('student'),
+  role: text('role'),
 })
 
 const baseSchema = createSelectSchema(users)

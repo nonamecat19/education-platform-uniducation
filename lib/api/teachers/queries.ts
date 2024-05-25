@@ -1,11 +1,11 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
 import { type TeacherId, teacherIdSchema, teachers } from '@/lib/db/schema'
+import { getUserAuth } from '@/lib/auth/utils'
 
 export const getTeachers = async () => {
   const rows = await db.select().from(teachers)
-  const t = rows
-  return { teachers: t }
+  return { teachers: rows }
 }
 
 export const getTeacherById = async (id: TeacherId) => {
@@ -14,7 +14,14 @@ export const getTeacherById = async (id: TeacherId) => {
     .select()
     .from(teachers)
     .where(eq(teachers.id, teacherId))
-  if (row === undefined) return {}
-  const t = row
-  return { teacher: t }
+  return { teacher: row }
+}
+
+export const getCurrentTeacher = async () => {
+  const { session } = await getUserAuth()
+  const [row] = await db
+    .select()
+    .from(teachers)
+    .where(eq(teachers.id, session?.user?.id!))
+  return { teacher: row }
 }
