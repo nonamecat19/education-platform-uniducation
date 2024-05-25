@@ -2,10 +2,13 @@ import { Toaster } from '@/components/ui/sonner'
 import { Navbar } from '@/components/Navbar'
 import { Sidebar } from '@/components/Sidebar'
 import { PropsWithChildren } from 'react'
+import { checkAdminAuth } from '@/lib/auth/utils'
 
 interface Props extends PropsWithChildren {}
 
-export default async function AppLayout({ children }: Props) {
+export default async function AdminLayout({ children }: Props) {
+  await checkAdminAuth()
+
   return (
     <main>
       <div className='flex h-screen'>

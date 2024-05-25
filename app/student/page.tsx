@@ -1,9 +1,16 @@
-import { checkStudentAuth } from '@/lib/auth/utils'
-
-export const dynamic = 'force-dynamic';
+import { trpcSSR } from '@/lib/trpc/ssr'
 
 export default async function StudentsPage() {
-  await checkStudentAuth()
+  const { student } = await trpcSSR.students.getCurrentStudent()
 
-  return <div>Students page</div>
+  console.log({ student })
+
+  return (
+    <div>
+      <div>Name: {student.name}</div>
+      <div>Surname: {student.surname}</div>
+      <div>Patronymic: {student.patronymic}</div>
+      <div>StudentID: {student.stuentId}</div>
+    </div>
+  )
 }

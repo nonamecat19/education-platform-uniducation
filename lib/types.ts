@@ -25,7 +25,7 @@ export interface Teacher extends BaseTable {
   id: string
   name: string
   surname: string
-  patronomyc: string | null
+  patronymic: string | null
   email: string
   profession: string
   password: string | null
@@ -43,3 +43,5 @@ export interface UnitWithTextSections extends BaseTable {
   description: string
   textSections: TextSection[]
 }
+
+export type ValueOf<T> = T[keyof T];

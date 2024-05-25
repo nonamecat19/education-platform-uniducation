@@ -10,7 +10,7 @@ const Page = () => {
       </h1>
       <div className='mt-4'>
         <button
-          onClick={() => signIn(undefined, { callbackUrl: '/admin/dashboard' })}
+          onClick={() => signIn(undefined, { callbackUrl: '/complete-register' })}
           className='w-full bg-primary text-primary-foreground text-center hover:opacity-90 font-medium px-4 py-2 rounded-lg block'
         >
           Sign In

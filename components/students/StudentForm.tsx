@@ -40,18 +40,13 @@ const StudentForm = ({
   const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertStudentParams>>({
-    // latest Zod release has introduced a TS error with zodResolver
-    // open issue: https://github.com/colinhacks/zod/issues/2663
-    // errors locally but not in production
     resolver: zodResolver(insertStudentParams),
     defaultValues: student ?? {
       name: '',
       surname: '',
-      patronomic: '',
+      patronymic: '',
       groupId: '',
-      email: '',
       stuentId: '',
-      password: '',
     },
   })
 
@@ -128,10 +123,10 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          name='patronomic'
+          name='patronymic'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Patronomic</FormLabel>
+              <FormLabel>patronymic</FormLabel>
               <FormControl>
                 {/* @ts-ignore */}
                 <Input {...field} />
@@ -171,40 +166,11 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
           name='stuentId'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Stuent Id</FormLabel>
               <FormControl>
-                <Input {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
 

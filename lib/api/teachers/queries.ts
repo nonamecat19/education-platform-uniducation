@@ -22,6 +22,6 @@ export const getCurrentTeacher = async () => {
   const [row] = await db
     .select()
     .from(teachers)
-    .where(eq(teachers.id, session?.user?.id!))
+    .where(eq(teachers.userId, session?.user?.id!))
   return { teacher: row }
 }

@@ -1,4 +1,4 @@
-import { getStudentById, getStudents } from '@/lib/api/students/queries'
+import { getCurrentStudent, getStudentById, getStudents } from '@/lib/api/students/queries'
 import { publicProcedure, router } from '@/lib/server/trpc'
 import {
   studentIdSchema,
@@ -35,4 +35,8 @@ export const studentsRouter = router({
     .mutation(async ({ input }) => {
       return deleteStudent(input.id)
     }),
+  getCurrentStudent: publicProcedure
+    .query(async () => {
+      return getCurrentStudent()
+    })
 })

@@ -39,10 +39,8 @@ const TeacherForm = ({
     defaultValues: teacher ?? {
       name: '',
       surname: '',
-      patronomyc: '',
-      email: '',
+      patronymic: '',
       profession: '',
-      password: '',
     },
   })
 
@@ -119,26 +117,12 @@ const TeacherForm = ({
         />
         <FormField
           control={form.control}
-          name='patronomyc'
+          name='patronymic'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Patronomyc</FormLabel>
+              <FormLabel>patronymic</FormLabel>
               <FormControl>
                 {/* @ts-ignore */}
-                <Input {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
                 <Input {...field} />
               </FormControl>
 
@@ -153,23 +137,10 @@ const TeacherForm = ({
             <FormItem>
               <FormLabel>Profession</FormLabel>
               <FormControl>
-                <Input {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
                 {/* @ts-ignore */}
                 <Input {...field} />
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}

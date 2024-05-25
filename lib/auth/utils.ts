@@ -70,7 +70,7 @@ export const authOptions: NextAuthOptions = {
 
 export const getUserAuth = async () => {
   const session = await getServerSession(authOptions)
-  return { session } as AuthSession & { session: { user: { role: string } } }
+  return { session } as AuthSession
 }
 
 export const checkAuth = async () => {
@@ -95,3 +95,7 @@ export const requireRoles = async (roles: string[]) => {
 export const checkAdminAuth = async () => requireRoles(['admin'])
 export const checkTeacherAuth = async () => requireRoles(['teacher'])
 export const checkStudentAuth = async () => requireRoles(['student'])
+
+// export const checkAdminAuth = async () => requireRoles(['admin', 'teacher', 'student'])
+// export const checkTeacherAuth = async () => requireRoles(['admin', 'teacher', 'student'])
+// export const checkStudentAuth = async () => requireRoles(['admin', 'teacher', 'student'])

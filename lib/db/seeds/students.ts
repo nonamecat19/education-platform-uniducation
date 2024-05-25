@@ -11,7 +11,7 @@ export const generateStudentRows = async (
   return getSeed(count, () => ({
     name: faker.person.firstName(),
     surname: faker.person.lastName(),
-    patronomic: faker.person.middleName(),
+    patronymic: faker.person.middleName(),
     groupId: getRandomElementId(groupIds),
     stuentId: faker.number.int().toString(),
     userId: getRandomElementId(usersIds),

@@ -31,12 +31,12 @@ export const getStudentById = async (id: StudentId) => {
 
 export const getCurrentStudent = async () => {
   const { session } = await getUserAuth()
+  console.log({session})
   const [row] = await db
-    .select({ student: students, group: groups })
+    .select()
     .from(students)
     .where(
-      and(eq(students.userId, session?.user.id!)),
+      eq(students.userId, session?.user.id!),
     )
-    .leftJoin(groups, eq(students.groupId, groups.id))
   return { student: row }
 }

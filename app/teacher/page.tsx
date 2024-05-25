@@ -1,16 +1,14 @@
 import { trpcSSR } from '@/lib/trpc/ssr'
-import { getUserAuth } from '@/lib/auth/utils'
 
 export default async function TeacherPage() {
-  const auth = await getUserAuth()
-  console.log({ auth })
-
-  const data = await trpcSSR.teachers.getTeacherById({
-    id: '',
-  })
+  const { teacher } = await trpcSSR.teachers.getCurrentTeacher()
 
   return (
     <div>
+      Name: {teacher.name}
+      Surname: {teacher.surname}
+      Patronymic: {teacher.patronymic}
+      Profession: {teacher.profession}
       <div>asdf</div>
     </div>
   )
