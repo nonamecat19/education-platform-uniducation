@@ -9,7 +9,7 @@ export const generateTeacherRows = async (
   return getSeed(count, () => ({
     name: faker.person.firstName(),
     surname: faker.person.lastName(),
-    patronomyc: faker.person.middleName(),
+    patronymic: faker.person.middleName(),
     profession: faker.person.jobTitle(),
     userId: getRandomElementId(usersIds),
   }))

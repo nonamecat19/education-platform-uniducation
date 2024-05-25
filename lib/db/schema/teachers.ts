@@ -14,8 +14,8 @@ export const teachers = pgTable('teachers', {
     .$defaultFn(() => nanoid()),
   name: varchar('name', { length: 256 }).notNull(),
   surname: varchar('surname', { length: 256 }).notNull(),
-  patronomyc: varchar('patronomyc', { length: 256 }),
-  profession: varchar('profession', { length: 256 }).notNull(),
+  patronymic: varchar('patronymic', { length: 256 }),
+  profession: varchar('profession', { length: 256 }),
   userId: varchar('user_id', { length: 256 })
     .references(() => users.id, { onDelete: 'cascade' })
     .notNull(),

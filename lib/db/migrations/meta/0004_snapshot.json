@@ -524,8 +524,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "patronomic": {
-          "name": "patronomic",
+        "patronymic": {
+          "name": "patronymic",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
@@ -653,8 +653,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "patronomyc": {
-          "name": "patronomyc",
+        "patronymic": {
+          "name": "patronymic",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false

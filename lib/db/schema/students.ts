@@ -16,10 +16,9 @@ export const students = pgTable(
       .$defaultFn(() => nanoid()),
     name: varchar('name', { length: 256 }).notNull(),
     surname: varchar('surname', { length: 256 }).notNull(),
-    patronomic: varchar('patronomic', { length: 256 }),
+    patronymic: varchar('patronymic', { length: 256 }),
     groupId: varchar('group_id', { length: 256 })
-      .references(() => groups.id)
-      .notNull(),
+      .references(() => groups.id),
     stuentId: varchar('stuent_id', { length: 256 }).notNull(),
     userId: varchar('user_id', { length: 256 })
       .references(() => users.id, { onDelete: 'cascade' })

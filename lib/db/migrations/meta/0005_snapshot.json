@@ -1,6 +1,6 @@
 {
-  "id": "2ef5e64a-14cc-496e-8c1e-2f8396cd6e06",
-  "prevId": "5cea42b7-f60d-4449-a967-5b43d955070e",
+  "id": "3e8d643f-f4e6-4a69-bae7-a181d5553250",
+  "prevId": "d8b28fcf-d1ab-41f3-b22a-348c04f71b39",
   "version": "6",
   "dialect": "postgresql",
   "tables": {
@@ -494,8 +494,7 @@
           "name": "role",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'student'"
+          "notNull": false
         }
       },
       "indexes": {},
@@ -535,25 +534,13 @@
           "name": "group_id",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "stuent_id": {
           "name": "stuent_id",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true
-        },
-        "password": {
-          "name": "password",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
         },
         "user_id": {
           "name": "user_id",
@@ -576,15 +563,7 @@
           "default": "now()"
         }
       },
-      "indexes": {
-        "email_idx": {
-          "name": "email_idx",
-          "columns": [
-            "email"
-          ],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "students_group_id_groups_id_fk": {
           "name": "students_group_id_groups_id_fk",
@@ -680,23 +659,17 @@
           "primaryKey": false,
           "notNull": false
         },
-        "email": {
-          "name": "email",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": true
-        },
         "profession": {
           "name": "profession",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "password": {
-          "name": "password",
+        "user_id": {
+          "name": "user_id",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -714,7 +687,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "teachers_user_id_user_id_fk": {
+          "name": "teachers_user_id_user_id_fk",
+          "tableFrom": "teachers",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
