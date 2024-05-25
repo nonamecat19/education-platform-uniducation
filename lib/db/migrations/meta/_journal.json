@@ -4,44 +4,9 @@
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1715237317323,
-      "tag": "0000_dry_purple_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
       "version": "6",
-      "when": 1715716930760,
-      "tag": "0001_magenta_roxanne_simpson",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1716490647190,
-      "tag": "0002_messy_bushwacker",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1716635834412,
-      "tag": "0003_tiny_puff_adder",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1716639416003,
-      "tag": "0004_jittery_shinobi_shaw",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1716655125117,
-      "tag": "0005_third_crystal",
+      "when": 1716664331912,
+      "tag": "0000_useful_centennial",
       "breakpoints": true
     }
   ]
