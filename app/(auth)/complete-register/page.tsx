@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 export default async function CompleteRegisterPage() {
   const { user } = await getCurrentUser()
   if (user.role) {
-    redirect("/");
+    redirect(`/${user.role}`);
   }
 
   return (
