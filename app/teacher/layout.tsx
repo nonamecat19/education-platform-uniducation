@@ -9,6 +9,7 @@ export default async function TeacherLayout({ children }: Props) {
 
   return (
     <main>
+      {/*TODO: add links*/}
       {children}
     </main>
   )

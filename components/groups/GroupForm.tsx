@@ -127,7 +127,7 @@ const GroupForm = ({
           name='teacherId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Teacher Id</FormLabel>
+              <FormLabel>Teacher</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -142,7 +142,7 @@ const GroupForm = ({
                         key={teacher.id}
                         value={teacher.id.toString()}
                       >
-                        {teacher.id}{' '}
+                        {teacher.name}{' '}{teacher.surname}
                         {/* TODO: Replace with a field from the teacher model */}
                       </SelectItem>
                     ))}

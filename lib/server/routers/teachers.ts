@@ -1,4 +1,10 @@
-import { getCurrentTeacher, getTeacherById, getTeachers } from '@/lib/api/teachers/queries'
+import {
+  getCurrentTeacher,
+  getTeacherById,
+  getTeacherCourses,
+  getTeacherGroups,
+  getTeachers,
+} from '@/lib/api/teachers/queries'
 import { publicProcedure, router } from '@/lib/server/trpc'
 import {
   teacherIdSchema,
@@ -38,5 +44,13 @@ export const teachersRouter = router({
   getCurrentTeacher: publicProcedure
     .query(async () => {
       return getCurrentTeacher()
-    })
+    }),
+  getTeacherGroups: publicProcedure
+    .query(async () => {
+      return getTeacherGroups()
+    }),
+  getTeacherCourses: publicProcedure
+    .query(async () => {
+      return getTeacherCourses()
+    }),
 })
