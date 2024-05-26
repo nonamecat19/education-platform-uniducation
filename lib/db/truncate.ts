@@ -22,7 +22,6 @@ export const truncateDb = async () => {
   }
   await db.delete(verificationTokens)
   await db.delete(students)
-  await db.delete(users)
   await db.delete(textSection)
   await db.delete(units)
   await db.delete(laboratoryWorks)
@@ -32,6 +31,7 @@ export const truncateDb = async () => {
   await db.delete(teachers)
   await db.delete(subjects)
   await db.delete(sessions)
+  await db.delete(users)
   await db.delete(accounts)
 
   console.log('truncate finished')
