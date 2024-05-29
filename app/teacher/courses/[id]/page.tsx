@@ -3,6 +3,8 @@ import { trpcSSR } from '@/lib/trpc/ssr'
 import { TextSectionBlock } from '@/components/courses/TextSectionBlock'
 import { UnitBlock } from '@/components/courses/UnitBlock'
 import { DescriptionBlock } from '@/components/courses/DescriptionBlock'
+import { EditElement } from '@/components/layout/EditElement'
+import { Button } from '@/components/ui/button'
 
 interface Params {
   params: {
@@ -11,9 +13,13 @@ interface Params {
 }
 
 export default async function CourseIdPage({ params }: Params) {
-  const { units,  teacher, subject, groupSubject } = await trpcSSR.courses.getCourseById({
+  const { units, course, teacher, groupSubject, subject } = await trpcSSR.courses.getCourseById({
     id: params.id,
   })
+
+  const addSectionHandler = async () => {
+
+  }
 
   return (
     <div>
@@ -25,8 +31,16 @@ export default async function CourseIdPage({ params }: Params) {
       {units?.map((unit) => (
         <UnitBlock key={unit.id} value={unit}>
           {unit.textSections.map((textSection) => (
-            <TextSectionBlock key={textSection.id} value={textSection} />
+            <EditElement key={textSection.id}>
+              <TextSectionBlock value={textSection} />
+            </EditElement>
           ))}
+          <Button
+            onClick={addSectionHandler}
+            className="w-full"
+          >
+            +
+          </Button>
         </UnitBlock>
       ))}
     </div>

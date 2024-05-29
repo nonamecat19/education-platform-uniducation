@@ -26,9 +26,7 @@ export interface Teacher extends BaseTable {
   name: string
   surname: string
   patronymic: string | null
-  email: string
   profession: string
-  password: string | null
 }
 
 export interface Subject extends BaseTable {

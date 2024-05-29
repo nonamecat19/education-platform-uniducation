@@ -10,5 +10,6 @@ export const generateTextSectionRows = async (
   return getSeed(count, () => ({
     unitId: getRandomElementId(unitsIds),
     name: faker.commerce.productDescription(),
+    description: faker.commerce.productDescription(),
   }))
 }

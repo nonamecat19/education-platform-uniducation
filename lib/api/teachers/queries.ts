@@ -1,7 +1,8 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
-import { courses, groups, type TeacherId, teacherIdSchema, teachers } from '@/lib/db/schema'
+import { courses, groups, groupSubjects, subjects, type TeacherId, teacherIdSchema, teachers } from '@/lib/db/schema'
 import { getUserAuth } from '@/lib/auth/utils'
+import { Course } from '@/lib/types'
 
 export const getTeachers = async () => {
   const rows = await db.select().from(teachers)
@@ -28,6 +29,9 @@ export const getCurrentTeacher = async () => {
 
 export const getTeacherGroups = async () => {
   const { teacher } = await getCurrentTeacher()
+  if (!teacher) {
+    return { groups: [] }
+  }
   const g = await db
     .select()
     .from(groups)
@@ -35,11 +39,30 @@ export const getTeacherGroups = async () => {
   return { groups: g }
 }
 
-export const getTeacherCourses = async () => {
+export const getTeacherCourses = async (): Promise<{ courses: Course[] }> => {
   const { teacher } = await getCurrentTeacher()
-  const c = await db
-    .select()
+  if (!teacher) {
+    return { courses: [] }
+  }
+  const rows = await db
+    .select({
+      course: courses,
+      groupSubject: groupSubjects,
+      teacher: teachers,
+      subject: subjects,
+    })
     .from(courses)
     .where(eq(courses.teacherId, teacher.id))
+    .leftJoin(groupSubjects, eq(courses.groupSubjectId, groupSubjects.id))
+    .leftJoin(teachers, eq(courses.teacherId, teachers.id))
+    .leftJoin(subjects, eq(groupSubjects.subjectId, subjects.id))
+  const c = rows.map((r) => ({
+    ...r.course,
+    groupSubject: {
+      ...r.groupSubject,
+      subject: r.subject,
+    },
+    teacher: r.teacher,
+  })) as Course[]
   return { courses: c }
 }

@@ -1,18 +1,16 @@
 import { db } from '@/lib/db'
-import { eq, getTableColumns } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import {
   type CourseId,
   courseIdSchema,
   courses,
-  GroupSubject,
   groupSubjects,
   subjects,
-  Teacher,
   teachers,
   textSection,
   units,
 } from '@/lib/db/schema'
-import { Course, UnitWithTextSections } from '@/lib/types'
+import { Course, GroupSubject, Subject, Teacher, UnitWithTextSections } from '@/lib/types'
 
 export const getCourses = async () => {
   const rows = await db
@@ -44,14 +42,23 @@ export const getCourseById = async (id: CourseId) => {
       course: courses,
       groupSubject: groupSubjects,
       teacher: teachers,
+      subject: subjects
     })
     .from(courses)
     .where(eq(courses.id, courseId))
     .leftJoin(groupSubjects, eq(courses.groupSubjectId, groupSubjects.id))
     .leftJoin(teachers, eq(courses.teacherId, teachers.id))
+    .leftJoin(subjects, eq(groupSubjects.subjectId, subjects.id))
+
 
   if (row === undefined) {
-    return { course: null }
+    return {
+      course: undefined,
+      teacher: undefined,
+      groupSubject: undefined,
+      subject: undefined,
+      units: []
+    }
   }
 
   const u = await db.select().from(units).where(eq(units.courseId, courseId))
@@ -68,6 +75,7 @@ export const getCourseById = async (id: CourseId) => {
     course: row.course as Course,
     teacher: row.teacher as Teacher,
     groupSubject: row.groupSubject as GroupSubject,
+    subject: row.subject as Subject,
     units: u as UnitWithTextSections[],
   }
 }

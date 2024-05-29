@@ -1,30 +1,26 @@
 import { trpcSSR } from '@/lib/trpc/ssr'
 import Link from 'next/link'
+import { GroupCard } from '@/components/groups/GroupCard'
+import { PageGrid } from '@/components/layout/PageGrid'
 
 export default async function Page() {
-
   const { groups } = await trpcSSR.teachers.getTeacherGroups()
 
   return (
     <div>
-      {
-        groups.map((group) => {
+      <PageGrid>
+        {groups.map((group) => {
           return (
             <Link
               href={`/teacher/groups/${group.id}`}
               key={group.id}
               className="p-2"
             >
-              <div>
-                Name: {group.name}
-              </div>
-              <div>
-                Course: {group.course}
-              </div>
+              <GroupCard group={group} />
             </Link>
           )
-        })
-      }
+        })}
+      </PageGrid>
     </div>
   )
 }

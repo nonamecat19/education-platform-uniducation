@@ -1,11 +1,10 @@
 import { db } from '@/lib/db'
 import { and, eq } from 'drizzle-orm'
 import { getUserAuth } from '@/lib/auth/utils'
-import { type StudentId, studentIdSchema, students, UserId } from '@/lib/db/schema'
+import { GroupId, groupIdSchema, type StudentId, studentIdSchema, students, UserId } from '@/lib/db/schema'
 import { groups } from '@/lib/db/schema'
 
 export const getStudents = async () => {
-  const { session } = await getUserAuth()
   const rows = await db
     .select({ student: students, group: groups })
     .from(students)
@@ -31,7 +30,6 @@ export const getStudentById = async (id: StudentId) => {
 
 export const getCurrentStudent = async () => {
   const { session } = await getUserAuth()
-  console.log({session})
   const [row] = await db
     .select()
     .from(students)
@@ -39,4 +37,13 @@ export const getCurrentStudent = async () => {
       eq(students.userId, session?.user.id!),
     )
   return { student: row }
+}
+
+export const getStudentsByGroupId = async (id: GroupId) => {
+  const { id: groupId } = groupIdSchema.parse({ id })
+  const rows = await db
+    .select()
+    .from(students)
+    .where(eq(students.groupId, groupId))
+  return { students: rows }
 }

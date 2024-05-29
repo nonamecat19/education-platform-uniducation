@@ -1,9 +1,9 @@
-import { getCurrentStudent, getStudentById, getStudents } from '@/lib/api/students/queries'
+import { getCurrentStudent, getStudentById, getStudents, getStudentsByGroupId } from '@/lib/api/students/queries'
 import { publicProcedure, router } from '@/lib/server/trpc'
 import {
   studentIdSchema,
   insertStudentParams,
-  updateStudentParams,
+  updateStudentParams, groupIdSchema,
 } from '@/lib/db/schema'
 import {
   createStudent,
@@ -12,7 +12,8 @@ import {
 } from '@/lib/api/students/mutations'
 
 export const studentsRouter = router({
-  getStudents: publicProcedure.query(async () => {
+  getStudents: publicProcedure
+    .query(async () => {
     return getStudents()
   }),
   getStudentById: publicProcedure
@@ -38,5 +39,10 @@ export const studentsRouter = router({
   getCurrentStudent: publicProcedure
     .query(async () => {
       return getCurrentStudent()
+    }),
+  getStudentsByGroupId: publicProcedure
+    .input(groupIdSchema)
+    .query(async ({input}) => {
+      return getStudentsByGroupId(input.id)
     })
 })

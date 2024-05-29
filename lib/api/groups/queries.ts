@@ -1,6 +1,6 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
-import { type GroupId, groupIdSchema, groups } from '@/lib/db/schema'
+import { type GroupId, groupIdSchema, groups, students } from '@/lib/db/schema'
 import { teachers } from '@/lib/db/schema'
 
 export const getGroups = async () => {
@@ -19,7 +19,5 @@ export const getGroupById = async (id: GroupId) => {
     .from(groups)
     .where(eq(groups.id, groupId))
     .leftJoin(teachers, eq(groups.teacherId, teachers.id))
-  if (row === undefined) return {}
-  const g = { ...row.group, teacher: row.teacher }
-  return { group: g }
+  return { group: row?.group, teacher: row?.teacher }
 }
