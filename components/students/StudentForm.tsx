@@ -47,7 +47,7 @@ const StudentForm = ({
       patronymic: '',
       groupId: '',
       stuentId: '',
-    },
+    } as any,
   })
 
   const onSuccess = async (
