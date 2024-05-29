@@ -43,3 +43,8 @@ export interface UnitWithTextSections extends BaseTable {
 }
 
 export type ValueOf<T> = T[keyof T];
+
+export type HeaderLinks = {
+  url: string
+  name: string
+}[]

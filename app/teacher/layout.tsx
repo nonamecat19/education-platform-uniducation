@@ -1,6 +1,22 @@
 import { PropsWithChildren } from 'react'
 import { checkTeacherAuth } from '@/lib/auth/utils'
-import Link from 'next/link'
+import { Header } from '@/components/layout/Header'
+import { HeaderLinks } from '@/lib/types'
+
+const headerLinks: HeaderLinks = [
+  {
+    url: '/teacher',
+    name: 'Main',
+  },
+  {
+    url: '/teacher/courses',
+    name: 'Courses',
+  },
+  {
+    url: '/teacher/groups',
+    name: 'Groups',
+  },
+]
 
 interface Props extends PropsWithChildren {
 }
@@ -10,17 +26,7 @@ export default async function TeacherLayout({ children }: Props) {
 
   return (
     <main>
-      <nav className="flex gap-5 p-2">
-        <Link href="/teacher">
-          Main
-        </Link>
-        <Link href="/teacher/courses">
-          Courses
-        </Link>
-        <Link href="/teacher/groups">
-          Groups
-        </Link>
-      </nav>
+      <Header links={headerLinks} />
       {children}
     </main>
   )
