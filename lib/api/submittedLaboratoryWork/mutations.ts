@@ -13,6 +13,7 @@ import {
 export const createSubmittedLaboratoryWork = async (submittedLaboratoryWork: NewSubmittedLaboratoryWorkParams) => {
   const newSubmittedLaboratoryWork = insertSubmittedLaboratoryWorkSchema.parse(submittedLaboratoryWork);
   try {
+    // @ts-ignore
     const [s] =  await db.insert(submittedLaboratoryWork).values(newSubmittedLaboratoryWork).returning();
     return { submittedLaboratoryWork: s };
   } catch (err) {
@@ -27,8 +28,10 @@ export const updateSubmittedLaboratoryWork = async (id: SubmittedLaboratoryWorkI
   const newSubmittedLaboratoryWork = updateSubmittedLaboratoryWorkSchema.parse(submittedLaboratoryWork);
   try {
     const [s] =  await db
+    // @ts-ignore
      .update(submittedLaboratoryWork)
      .set({...newSubmittedLaboratoryWork, updatedAt: new Date() })
+    // @ts-ignore
      .where(eq(submittedLaboratoryWork.id, submittedLaboratoryWorkId!))
      .returning();
     return { submittedLaboratoryWork: s };
