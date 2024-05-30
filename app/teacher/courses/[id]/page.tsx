@@ -1,10 +1,10 @@
 import { CourseId } from '@/lib/db/schema'
 import { trpcSSR } from '@/lib/trpc/ssr'
-import { TextSectionBlock } from '@/components/courses/TextSectionBlock'
+import { TextSectionBlock } from '@/components/textSection/TextSectionBlock'
 import { UnitBlock } from '@/components/courses/UnitBlock'
 import { DescriptionBlock } from '@/components/courses/DescriptionBlock'
 import { EditElement } from '@/components/layout/EditElement'
-import { Button } from '@/components/ui/button'
+import { LaboratoryWorkBlock } from '@/components/laboratoryWorks/LaboratoryWorkBlock'
 
 interface Params {
   params: {
@@ -35,12 +35,18 @@ export default async function CourseIdPage({ params }: Params) {
               <TextSectionBlock value={textSection} />
             </EditElement>
           ))}
-          <Button
-            onClick={addSectionHandler}
-            className="w-full"
-          >
-            +
-          </Button>
+          {unit.laboratoryWorks.map((laboratoryWork) => (
+            <EditElement key={laboratoryWork.id}>
+              <LaboratoryWorkBlock value={laboratoryWork} url={'/teacher'} />
+            </EditElement>
+          ))}
+          {/*TODO: add button*/}
+          {/*<Button*/}
+          {/*  onClick={addSectionHandler}*/}
+          {/*  className="w-full"*/}
+          {/*>*/}
+          {/*  +*/}
+          {/*</Button>*/}
         </UnitBlock>
       ))}
     </div>

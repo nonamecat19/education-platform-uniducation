@@ -1,8 +1,9 @@
 import { CourseId } from '@/lib/db/schema'
 import { trpcSSR } from '@/lib/trpc/ssr'
-import { TextSectionBlock } from '@/components/courses/TextSectionBlock'
+import { TextSectionBlock } from '@/components/textSection/TextSectionBlock'
 import { UnitBlock } from '@/components/courses/UnitBlock'
 import { DescriptionBlock } from '@/components/courses/DescriptionBlock'
+import { RenderJSON } from '@/components/utils/RenderJSON'
 
 interface Params {
   params: {
@@ -26,6 +27,9 @@ export default async function CourseIdPage({ params }: Params) {
         <UnitBlock key={unit.id} value={unit}>
           {unit.textSections.map((textSection) => (
             <TextSectionBlock key={textSection.id} value={textSection} />
+          ))}
+          {unit.laboratoryWorks.map((laboratoryWork) => (
+            <RenderJSON key={laboratoryWork.id} json={laboratoryWork}/>
           ))}
         </UnitBlock>
       ))}

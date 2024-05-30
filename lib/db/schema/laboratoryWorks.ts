@@ -2,17 +2,17 @@ import { sql } from 'drizzle-orm'
 import { varchar, integer, timestamp, pgTable } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod'
 import { z } from 'zod'
-import { courses } from './courses'
 import { type getLaboratoryWorks } from '@/lib/api/laboratoryWorks/queries'
 
 import { nanoid, timestamps } from '@/lib/utils'
+import { units } from '@/lib/db/schema/units'
 
 export const laboratoryWorks = pgTable('laboratory_works', {
   id: varchar('id', { length: 191 })
     .primaryKey()
     .$defaultFn(() => nanoid()),
-  courseId: varchar('course_id', { length: 256 })
-    .references(() => courses.id)
+  unitId: varchar('unit_id', { length: 256 })
+    .references(() => units.id)
     .notNull(),
   name: varchar('name', { length: 256 }).notNull(),
   description: varchar('description', { length: 256 }),

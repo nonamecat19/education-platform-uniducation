@@ -11,19 +11,14 @@ export const getLaboratoryWorks = async () => {
   const rows = await db
     .select({ laboratoryWork: laboratoryWorks, course: courses })
     .from(laboratoryWorks)
-    .leftJoin(courses, eq(laboratoryWorks.courseId, courses.id))
-  const l = rows.map((r) => ({ ...r.laboratoryWork, course: r.course }))
-  return { laboratoryWorks: l }
+  return { laboratoryWorks: rows }
 }
 
 export const getLaboratoryWorkById = async (id: LaboratoryWorkId) => {
   const { id: laboratoryWorkId } = laboratoryWorkIdSchema.parse({ id })
   const [row] = await db
-    .select({ laboratoryWork: laboratoryWorks, course: courses })
+    .select({ laboratoryWork: laboratoryWorks })
     .from(laboratoryWorks)
     .where(eq(laboratoryWorks.id, laboratoryWorkId))
-    .leftJoin(courses, eq(laboratoryWorks.courseId, courses.id))
-  if (row === undefined) return {}
-  const l = { ...row.laboratoryWork, course: row.course }
-  return { laboratoryWork: l }
+  return { laboratoryWork: row.laboratoryWork }
 }

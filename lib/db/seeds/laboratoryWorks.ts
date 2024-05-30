@@ -1,14 +1,14 @@
-import { courses, NewLaboratoryWork } from '@/lib/db/schema'
+import { NewLaboratoryWork, units } from '@/lib/db/schema'
 import { getEntityIds, getRandomElementId, getSeed } from '@/lib/db/seed-utils'
 import { faker } from '@faker-js/faker'
 
 export const generateLaboratoryWorksRows = async (
   count: number,
 ): Promise<NewLaboratoryWork[]> => {
-  const coursesIds = await getEntityIds(courses)
+  const unitsIds = await getEntityIds(units)
 
   return getSeed(count, () => ({
-    courseId: getRandomElementId(coursesIds),
+    unitId: getRandomElementId(unitsIds),
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     order: faker.number.int(100),

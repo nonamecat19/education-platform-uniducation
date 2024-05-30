@@ -4,7 +4,7 @@ import {
   type CourseId,
   courseIdSchema,
   courses,
-  groupSubjects,
+  groupSubjects, laboratoryWorks,
   subjects,
   teachers,
   textSection,
@@ -69,6 +69,11 @@ export const getCourseById = async (id: CourseId) => {
       .select()
       .from(textSection)
       .where(eq(textSection.unitId, unit.id))
+    // @ts-ignore
+    unit['laboratoryWorks'] = await db
+      .select()
+      .from(laboratoryWorks)
+      .where(eq(laboratoryWorks.unitId, unit.id))
   }
 
   return {

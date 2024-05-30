@@ -1,4 +1,4 @@
-import { TextSection } from '@/lib/db/schema'
+import { LaboratoryWork, TextSection } from '@/lib/db/schema'
 
 export interface BaseTable {
   createdAt: Date
@@ -40,6 +40,7 @@ export interface UnitWithTextSections extends BaseTable {
   name: string
   description: string
   textSections: TextSection[]
+  laboratoryWorks: LaboratoryWork[]
 }
 
 export type ValueOf<T> = T[keyof T];
