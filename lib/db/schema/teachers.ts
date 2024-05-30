@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { type getTeachers } from '@/lib/api/teachers/queries'
 
 import { nanoid, timestamps } from '@/lib/utils'
-import { users } from '@/lib/db/schema/users'
+import { users } from '@/lib/db/schema'
 
 export const teachers = pgTable('teachers', {
   id: varchar('id', { length: 191 })

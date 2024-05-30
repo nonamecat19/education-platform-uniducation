@@ -1,6 +1,6 @@
 "use client";
 
-import { SubmittedLaboratoryWork, NewSubmittedLaboratoryWorkParams, insertSubmittedLaboratoryWorkParams } from "@/lib/db/schema/submittedLaboratoryWork";
+import { SubmittedLaboratoryWork, NewSubmittedLaboratoryWorkParams, insertSubmittedLaboratoryWorkParams } from "@/lib/db/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 

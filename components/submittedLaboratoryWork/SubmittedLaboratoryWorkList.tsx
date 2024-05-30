@@ -1,5 +1,5 @@
 "use client";
-import { CompleteSubmittedLaboratoryWork } from "@/lib/db/schema/submittedLaboratoryWork";
+import { CompleteSubmittedLaboratoryWork } from "@/lib/db/schema";
 import { trpcCSR } from "@/lib/trpc/client";
 import SubmittedLaboratoryWorkModal from "./SubmittedLaboratoryWorkModal";
 

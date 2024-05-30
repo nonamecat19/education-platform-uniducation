@@ -7,11 +7,11 @@ import {
   deleteSubmittedLaboratoryWork,
   updateSubmittedLaboratoryWork,
 } from "@/lib/api/submittedLaboratoryWork/mutations";
-import { 
+import {
   submittedLaboratoryWorkIdSchema,
   insertSubmittedLaboratoryWorkParams,
-  updateSubmittedLaboratoryWorkParams 
-} from "@/lib/db/schema/submittedLaboratoryWork";
+  updateSubmittedLaboratoryWorkParams
+} from "@/lib/db/schema";
 
 export async function POST(req: Request) {
   try {

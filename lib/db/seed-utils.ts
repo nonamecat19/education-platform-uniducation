@@ -1,7 +1,7 @@
 import { db } from '@/lib/db'
 import { PgTable } from 'drizzle-orm/pg-core'
 
-function getRandomElement<T>(arr: T[]): T {
+export function getRandomElement<T>(arr: T[]): T {
   const randomIndex = Math.floor(Math.random() * arr.length)
   return arr[randomIndex]
 }
@@ -28,4 +28,13 @@ export function getEntityIds(entity: PgTable): Promise<{ id: string }[]> {
       id: entity.id,
     })
     .from(entity)
+}
+
+export function getRandomInt(min: number, max: number): number {
+  if (min > max) {
+    throw new Error('The min value should not be greater than the max value.');
+  }
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

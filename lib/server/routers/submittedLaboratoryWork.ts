@@ -4,7 +4,7 @@ import {
   submittedLaboratoryWorkIdSchema,
   insertSubmittedLaboratoryWorkParams,
   updateSubmittedLaboratoryWorkParams,
-} from "@/lib/db/schema/submittedLaboratoryWork";
+} from "@/lib/db/schema";
 import { createSubmittedLaboratoryWork, deleteSubmittedLaboratoryWork, updateSubmittedLaboratoryWork } from "@/lib/api/submittedLaboratoryWork/mutations";
 
 export const submittedLaboratoryWorkRouter = router({

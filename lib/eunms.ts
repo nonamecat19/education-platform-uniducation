@@ -3,3 +3,10 @@ export enum UserRole {
   Teacher = 'teacher',
   Student = 'student'
 }
+
+export enum SubmittedLaboratoryWorkStatus {
+  Submitted = 'submitted',
+  Graded = 'graded',
+  Rejected = 'rejected',
+  NotSubmitted = 'notSubmitted',
+}

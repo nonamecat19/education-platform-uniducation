@@ -1,11 +1,6 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
-import {
-  type TextSectionId,
-  textSectionIdSchema,
-  textSection,
-} from '@/lib/db/schema'
-import { units } from '@/lib/db/schema'
+import { textSection, type TextSectionId, textSectionIdSchema, units } from '@/lib/db/schema'
 
 export const getTextSections = async () => {
   const rows = await db

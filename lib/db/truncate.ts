@@ -8,6 +8,7 @@ import {
   sessions,
   students,
   subjects,
+  submittedLaboratoryWork,
   teachers,
   textSection,
   units,
@@ -20,19 +21,20 @@ export const truncateDb = async () => {
   if (env.NODE_ENV !== 'development') {
     return
   }
-  await db.delete(verificationTokens)
+  await db.delete(submittedLaboratoryWork)
   await db.delete(students)
+  await db.delete(laboratoryWorks)
   await db.delete(textSection)
   await db.delete(units)
-  await db.delete(laboratoryWorks)
   await db.delete(courses)
   await db.delete(groupSubjects)
   await db.delete(groups)
   await db.delete(teachers)
-  await db.delete(subjects)
-  await db.delete(sessions)
   await db.delete(users)
+  await db.delete(subjects)
   await db.delete(accounts)
+  await db.delete(verificationTokens)
+  await db.delete(sessions)
 
   console.log('truncate finished')
 }

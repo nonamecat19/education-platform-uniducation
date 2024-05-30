@@ -5,7 +5,7 @@ import {
   groupSubjects,
   laboratoryWorks,
   students,
-  subjects,
+  subjects, submittedLaboratoryWork,
   teachers,
   textSection,
   units,
@@ -17,7 +17,7 @@ import {
   generateGroupSubjectsRows,
   generateLaboratoryWorksRows,
   generateStudentRows,
-  generateSubjectsRows,
+  generateSubjectsRows, generateSubmittedLaboratoryWorksRows,
   generateTeacherRows,
   generateTextSectionRows,
   generateUnitsRows,
@@ -79,9 +79,14 @@ export async function seed() {
     .values(await generateLaboratoryWorksRows(10))
     .returning()
 
-  await db
+  await db // group, user
     .insert(students)
     .values(await generateStudentRows(100))
+    .returning()
+
+  await db // laboratoryWork, student
+    .insert(submittedLaboratoryWork)
+    .values(await generateSubmittedLaboratoryWorksRows(1000))
     .returning()
 }
 

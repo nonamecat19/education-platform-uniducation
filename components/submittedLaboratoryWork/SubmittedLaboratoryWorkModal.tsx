@@ -10,12 +10,12 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import SubmittedLaboratoryWorkForm from "./SubmittedLaboratoryWorkForm";
-import { SubmittedLaboratoryWork } from "@/lib/db/schema/submittedLaboratoryWork";
+import { SubmittedLaboratoryWork } from "@/lib/db/schema";
 
-export default function SubmittedLaboratoryWorkModal({ 
+export default function SubmittedLaboratoryWorkModal({
   submittedLaboratoryWork,
   emptyState,
-}: { 
+}: {
   submittedLaboratoryWork?: SubmittedLaboratoryWork;
   emptyState?: boolean;
 }) {

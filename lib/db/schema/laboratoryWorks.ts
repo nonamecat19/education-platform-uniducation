@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { type getLaboratoryWorks } from '@/lib/api/laboratoryWorks/queries'
 
 import { nanoid, timestamps } from '@/lib/utils'
-import { units } from '@/lib/db/schema/units'
+import { units } from '@/lib/db/schema'
 
 export const laboratoryWorks = pgTable('laboratory_works', {
   id: varchar('id', { length: 191 })

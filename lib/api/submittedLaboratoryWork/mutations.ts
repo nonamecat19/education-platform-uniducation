@@ -1,14 +1,14 @@
-import { db } from "@/lib/db/index";
+import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { 
-  SubmittedLaboratoryWorkId, 
+import {
+  SubmittedLaboratoryWorkId,
   NewSubmittedLaboratoryWorkParams,
-  UpdateSubmittedLaboratoryWorkParams, 
+  UpdateSubmittedLaboratoryWorkParams,
   updateSubmittedLaboratoryWorkSchema,
-  insertSubmittedLaboratoryWorkSchema, 
+  insertSubmittedLaboratoryWorkSchema,
   submittedLaboratoryWork,
-  submittedLaboratoryWorkIdSchema 
-} from "@/lib/db/schema/submittedLaboratoryWork";
+  submittedLaboratoryWorkIdSchema
+} from "@/lib/db/schema";
 
 export const createSubmittedLaboratoryWork = async (submittedLaboratoryWork: NewSubmittedLaboratoryWorkParams) => {
   const newSubmittedLaboratoryWork = insertSubmittedLaboratoryWorkSchema.parse(submittedLaboratoryWork);
