@@ -15,6 +15,13 @@
       "when": 1717007446464,
       "tag": "0001_cute_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1717049767739,
+      "tag": "0002_empty_inertia",
+      "breakpoints": true
     }
   ]
 }

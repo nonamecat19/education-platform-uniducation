@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid'
-import { clsx, type ClassValue } from 'clsx'
+import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -12,3 +12,4 @@ export const timestamps: { createdAt: true; updatedAt: true } = {
   createdAt: true,
   updatedAt: true,
 }
+

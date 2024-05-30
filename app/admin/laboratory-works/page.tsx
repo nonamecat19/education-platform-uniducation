@@ -5,8 +5,7 @@ import { unstable_noStore } from 'next/cache'
 
 export default async function LaboratoryWorks() {
   unstable_noStore()
-  const { laboratoryWorks } =
-    await api.laboratoryWorks.getLaboratoryWorks.query()
+  const { laboratoryWorks } = await api.laboratoryWorks.getLaboratoryWorks.query()
 
   return (
     <main>
