@@ -115,8 +115,7 @@ const CourseForm = ({
                         key={groupSubject.id}
                         value={groupSubject.id.toString()}
                       >
-                        {groupSubject.id}{' '}
-                        {/* TODO: Replace with a field from the groupSubject model */}
+                        {groupSubject?.subject?.name}{' '}{groupSubject?.group?.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
