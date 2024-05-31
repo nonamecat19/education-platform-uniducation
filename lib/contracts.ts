@@ -2,8 +2,8 @@ import { z } from 'zod'
 import { UserRole } from '@/lib/eunms'
 
 export const completeRegisterFormParams = z.object({
-  name: z.string(),
-  surname: z.string(),
+  name: z.string().optional(),
+  surname: z.string().optional(),
   patronymic: z.string().optional(),
   profession: z.string().optional(),
 })

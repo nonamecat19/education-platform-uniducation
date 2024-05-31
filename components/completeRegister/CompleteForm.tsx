@@ -17,7 +17,7 @@ interface Props {
 }
 
 export function CompleteForm({ userId }: Props) {
-  type FormRoles = UserRole.Student | UserRole.Teacher
+  type FormRoles = UserRole.Student | UserRole.Teacher | UserRole.Admin
 
   const [role, setRole] = useState<FormRoles>(UserRole.Student)
   const router = useRouter()
@@ -57,71 +57,80 @@ export function CompleteForm({ userId }: Props) {
 
             <Tabs value={role} onValueChange={onRoleChange}>
               <FormLabel>Role</FormLabel>
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value={UserRole.Student}>
                   Student
                 </TabsTrigger>
                 <TabsTrigger value={UserRole.Teacher}>
                   Teacher
                 </TabsTrigger>
+                <TabsTrigger value={UserRole.Admin}>
+                  Admin
+                </TabsTrigger>
               </TabsList>
             </Tabs>
 
             <div className="grid gap-4">
 
-              <div className="space-y-2">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
+              {
+                [UserRole.Student, UserRole.Teacher].includes(role) && (
+                  <>
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                              <Input {...field} />
+                            </FormControl>
 
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
-              <div className="space-y-2">
-                <FormField
-                  control={form.control}
-                  name="surname"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Surname</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="surname"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Surname</FormLabel>
+                            <FormControl>
+                              <Input {...field} />
+                            </FormControl>
 
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
-              <div className="space-y-2">
-                <FormField
-                  control={form.control}
-                  name="patronymic"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Patronymic</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
+                    <div className="space-y-2">
+                      <FormField
+                        control={form.control}
+                        name="patronymic"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Patronymic</FormLabel>
+                            <FormControl>
+                              <Input {...field} />
+                            </FormControl>
 
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </>
+                )
+              }
 
               {
-                role === UserRole.Teacher && (
+                [UserRole.Teacher].includes(role) && (
                   <div className="space-y-2">
                     <FormField
                       control={form.control}

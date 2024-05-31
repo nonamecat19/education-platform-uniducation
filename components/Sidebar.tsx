@@ -16,7 +16,7 @@ export async function Sidebar() {
         <div className='space-y-4'>
           <Link href="/">
             <h3 className='text-lg font-semibold ml-4'>
-              Logo
+              Return to main
             </h3>
           </Link>
           <SidebarItems />

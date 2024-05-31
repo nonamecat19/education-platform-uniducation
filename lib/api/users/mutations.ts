@@ -19,9 +19,9 @@ export const completeUserRegisterForm = async (form: CompleteRegisterParams) => 
     switch (value.role) {
       case UserRole.Student: {
         await db.insert(students).values({
-          name: form.name,
-          surname: form.surname,
-          patronymic: form.patronymic,
+          name: form.name!,
+          surname: form.surname!,
+          patronymic: form.patronymic!,
           stuentId: nanoid(8),
           groupId: null,
           userId: form.userId,
@@ -32,12 +32,17 @@ export const completeUserRegisterForm = async (form: CompleteRegisterParams) => 
       }
       case UserRole.Teacher: {
         await db.insert(teachers).values({
-          name: form.name,
-          surname: form.surname,
-          patronymic: form.patronymic,
-          profession: form.profession,
+          name: form.name!,
+          surname: form.surname!,
+          patronymic: form.patronymic!,
+          profession: form.profession!,
           userId: form.userId,
         })
+        await setRoleByEmail(user.email, form.role)
+        await changeUserRole({userId: form.userId, role: form.role})
+        return
+      }
+      case UserRole.Admin: {
         await setRoleByEmail(user.email, form.role)
         await changeUserRole({userId: form.userId, role: form.role})
         return
