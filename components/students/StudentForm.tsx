@@ -38,6 +38,7 @@ const StudentForm = ({
 
   const router = useRouter()
   const utils = trpcCSR.useContext()
+  const { data: users } = trpcCSR.users.getUsers.useQuery()
 
   const form = useForm<z.infer<typeof insertStudentParams>>({
     resolver: zodResolver(insertStudentParams),
@@ -47,6 +48,7 @@ const StudentForm = ({
       patronymic: '',
       groupId: '',
       stuentId: '',
+      userId: ''
     } as any,
   })
 
@@ -92,7 +94,7 @@ const StudentForm = ({
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className={'space-y-8'}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-8'>
         <FormField
           control={form.control}
           name='name'
@@ -126,7 +128,7 @@ const StudentForm = ({
           name='patronymic'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>patronymic</FormLabel>
+              <FormLabel>Patronymic</FormLabel>
               <FormControl>
                 {/* @ts-ignore */}
                 <Input {...field} />
@@ -172,6 +174,35 @@ const StudentForm = ({
               <FormLabel>Stuent Id</FormLabel>
               <FormControl>
                 <Input {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          // @ts-ignore
+          name='userId'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>User</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={String(field.value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder='Select a user' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {users?.users?.map((user) => (
+                      <SelectItem key={user.id} value={user.id.toString()}>
+                        {user?.name}{' '}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormControl>
 
               <FormMessage />
