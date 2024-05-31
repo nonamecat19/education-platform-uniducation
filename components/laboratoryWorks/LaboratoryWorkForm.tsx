@@ -37,7 +37,7 @@ const LaboratoryWorkForm = ({
   laboratoryWork?: LaboratoryWork
   closeModal?: () => void
 }) => {
-  const { data: courses } = trpcCSR.courses.getCourses.useQuery()
+  const { data: units } = trpcCSR.units.getUnits.useQuery()
   const editing = !!laboratoryWork?.id
 
   const router = useRouter()
@@ -47,7 +47,7 @@ const LaboratoryWorkForm = ({
     resolver: zodResolver(insertLaboratoryWorkParams),
     // @ts-ignore
     defaultValues: laboratoryWork ?? {
-      courseId: '',
+      unitId: '',
       name: '',
       description: '',
       order: 0,
@@ -102,22 +102,22 @@ const LaboratoryWorkForm = ({
       <form onSubmit={form.handleSubmit(handleSubmit)} className={'space-y-8'}>
         <FormField
           control={form.control}
-          name='courseId'
+          name='unitId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Course</FormLabel>
+              <FormLabel>Unit</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={String(field.value)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder='Select a course' />
+                    <SelectValue placeholder='Select a unit' />
                   </SelectTrigger>
                   <SelectContent>
-                    {courses?.courses.map((course) => (
-                      <SelectItem key={course.id} value={course.id.toString()}>
-                        {course.id}{' '}
+                    {units?.units?.map((unit) => (
+                      <SelectItem key={unit.id} value={unit.id.toString()}>
+                        {unit.name}{' '}
                       </SelectItem>
                     ))}
                   </SelectContent>
