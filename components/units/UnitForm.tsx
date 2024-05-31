@@ -40,9 +40,6 @@ const UnitForm = ({
   const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertUnitParams>>({
-    // latest Zod release has introduced a TS error with zodResolver
-    // open issue: https://github.com/colinhacks/zod/issues/2663
-    // errors locally but not in production
     resolver: zodResolver(insertUnitParams),
     defaultValues: unit ?? {
       courseId: '',
@@ -93,13 +90,13 @@ const UnitForm = ({
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className={'space-y-8'}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-8'>
         <FormField
           control={form.control}
           name='courseId'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Course Id</FormLabel>
+              <FormLabel>Course</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -111,8 +108,13 @@ const UnitForm = ({
                   <SelectContent>
                     {courses?.courses.map((course) => (
                       <SelectItem key={course.id} value={course.id.toString()}>
-                        {course.id}{' '}
-                        {/* TODO: Replace with a field from the course model */}
+                        {course?.groupSubject?.subject?.name}
+                        {' '}
+                        {/*@ts-ignore*/}
+                        {course?.teacher.name}
+                        {' '}
+                        {/*@ts-ignore*/}
+                        {course?.teahcer?.surname}
                       </SelectItem>
                     ))}
                   </SelectContent>
