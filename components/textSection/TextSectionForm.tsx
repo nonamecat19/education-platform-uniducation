@@ -44,9 +44,6 @@ const TextSectionForm = ({
   const utils = trpcCSR.useContext()
 
   const form = useForm<z.infer<typeof insertTextSectionParams>>({
-    // latest Zod release has introduced a TS error with zodResolver
-    // open issue: https://github.com/colinhacks/zod/issues/2663
-    // errors locally but not in production
     resolver: zodResolver(insertTextSectionParams),
     defaultValues: textSection ?? {
       unitId: '',
