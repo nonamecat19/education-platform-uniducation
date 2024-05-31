@@ -10,11 +10,15 @@ import {
   textSectionIdSchema,
 } from '@/lib/db/schema'
 
-export const createTextSection = async (textSection: NewTextSectionParams) => {
-  const newTextSection = insertTextSectionSchema.parse(textSection)
+export const createTextSection = async (value: NewTextSectionParams) => {
+  console.log({value})
+  const newTextSection = insertTextSectionSchema.parse(value)
   try {
+    const [t] = await db
     // @ts-ignore
-    const [t] = await db.insert(textSection).values(newTextSection).returning()
+      .insert(textSection)
+      .values(newTextSection)
+      .returning()
     return { textSection: t }
   } catch (err) {
     const message = (err as Error).message ?? 'Error, please try again'
@@ -25,10 +29,10 @@ export const createTextSection = async (textSection: NewTextSectionParams) => {
 
 export const updateTextSection = async (
   id: TextSectionId,
-  textSection: UpdateTextSectionParams,
+  value: UpdateTextSectionParams,
 ) => {
   const { id: textSectionId } = textSectionIdSchema.parse({ id })
-  const newTextSection = updateTextSectionSchema.parse(textSection)
+  const newTextSection = updateTextSectionSchema.parse(value)
   try {
     const [t] = await db
       // @ts-ignore
