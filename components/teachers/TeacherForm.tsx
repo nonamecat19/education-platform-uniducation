@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const TeacherForm = ({
   teacher,
@@ -30,6 +31,7 @@ const TeacherForm = ({
 
   const router = useRouter()
   const utils = trpcCSR.useContext()
+  const { data: users } = trpcCSR.users.getUsers.useQuery()
 
   const form = useForm<z.infer<typeof insertTeacherParams>>({
     // latest Zod release has introduced a TS error with zodResolver
@@ -139,6 +141,34 @@ const TeacherForm = ({
               <FormControl>
                 {/* @ts-ignore */}
                 <Input {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='userId'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>User</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={String(field.value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder='Select a user' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {users?.users?.map((user) => (
+                      <SelectItem key={user.id} value={user.id.toString()}>
+                        {user?.name}{' '}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormControl>
 
               <FormMessage />
