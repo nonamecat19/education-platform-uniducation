@@ -2,6 +2,7 @@ import { trpcSSR } from '@/lib/trpc/ssr'
 import { CourseCard } from '@/components/courses/CourseCard'
 import { PageGrid } from '@/components/layout/PageGrid'
 import Link from 'next/link'
+import { NoItems } from '@/components/layout/NoItems'
 
 export default async function Page() {
   const { courses } = await trpcSSR.teachers.getTeacherCourses()
@@ -16,6 +17,7 @@ export default async function Page() {
             </Link>
           )
         })}
+        {courses.length || <NoItems/>}
       </PageGrid>
     </div>
   )

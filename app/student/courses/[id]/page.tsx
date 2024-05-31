@@ -4,6 +4,7 @@ import { TextSectionBlock } from '@/components/textSection/TextSectionBlock'
 import { UnitBlock } from '@/components/courses/UnitBlock'
 import { DescriptionBlock } from '@/components/courses/DescriptionBlock'
 import { RenderJSON } from '@/components/utils/RenderJSON'
+import { NoItems } from '@/components/layout/NoItems'
 
 interface Params {
   params: {
@@ -33,6 +34,7 @@ export default async function CourseIdPage({ params }: Params) {
           ))}
         </UnitBlock>
       ))}
+      {units?.length || <NoItems/>}
     </div>
   )
 }

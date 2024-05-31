@@ -1,6 +1,7 @@
 import { trpcSSR } from '@/lib/trpc/ssr'
 import { CourseId } from '@/lib/db/schema'
 import { StudentCard } from '@/components/students/StudentCard'
+import { NoItems } from '@/components/layout/NoItems'
 
 interface Params {
   params: {
@@ -27,6 +28,7 @@ export default async function GroupPage({ params }: Params) {
         {students.map((el) => {
           return <StudentCard key={el.id} student={el} />
         })}
+        {students.length || <NoItems/>}
       </div>
     </div>
   )

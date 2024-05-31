@@ -37,6 +37,7 @@ export default function CoursesPage() {
           </div>
         )
       })}
+      {data?.courses.length || <NoItems/>}
     </PageGrid>
   )
 }
