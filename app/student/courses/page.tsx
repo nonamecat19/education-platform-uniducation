@@ -4,9 +4,10 @@ import { PageGrid } from '@/components/layout/PageGrid'
 import { CourseCard } from '@/components/courses/CourseCard'
 import { useRouter } from 'next/navigation'
 import { CourseId, TeacherId } from '@/lib/db/schema'
+import { NoItems } from '@/components/layout/NoItems'
 
 export default function CoursesPage() {
-  const { data } = trpcCSR.courses.getCourses.useQuery()
+  const { data } = trpcCSR.courses.getStudentCourses.useQuery()
   const router = useRouter()
 
   const courseClickHandler = (id: CourseId | undefined) => {

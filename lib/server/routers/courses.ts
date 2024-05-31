@@ -1,4 +1,4 @@
-import { getCourseById, getCourses } from '@/lib/api/courses/queries'
+import { getCourseById, getCourses, getStudentCourses } from '@/lib/api/courses/queries'
 import { publicProcedure, router } from '@/lib/server/trpc'
 import {
   courseIdSchema,
@@ -14,6 +14,9 @@ import {
 export const coursesRouter = router({
   getCourses: publicProcedure.query(async () => {
     return getCourses()
+  }),
+  getStudentCourses: publicProcedure.query(async () => {
+    return getStudentCourses()
   }),
   getCourseById: publicProcedure
     .input(courseIdSchema)

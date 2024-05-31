@@ -10,7 +10,7 @@ interface Props {
 export function CourseCard({ value, onCardClick, onTeacherClick }: Props) {
   let { teacher, groupSubject, id } = value
   return (
-    <div className='w-80 h-20 bg-white flex flex-col justify-between p-3 rounded-2xl'>
+    <div className='w-80 h-20 bg-white flex flex-col justify-between p-3 rounded-lg'>
       <div className='text-black cursor-pointer' onClick={onCardClick}>
         {groupSubject?.subject?.name}
       </div>

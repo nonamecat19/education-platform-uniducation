@@ -3,14 +3,16 @@ import { eq } from 'drizzle-orm'
 import {
   type CourseId,
   courseIdSchema,
-  courses,
-  groupSubjects, laboratoryWorks,
+  courses, groups,
+  groupSubjects,
+  laboratoryWorks,
   subjects,
   teachers,
   textSection,
   units,
 } from '@/lib/db/schema'
 import { Course, GroupSubject, Subject, Teacher, UnitWithTextSections } from '@/lib/types'
+import { getCurrentStudent } from '@/lib/api/students/queries'
 
 export const getCourses = async () => {
   const rows = await db
@@ -32,7 +34,34 @@ export const getCourses = async () => {
     },
     teacher: r.teacher,
   }))
-  return { courses: c } as { courses: Course[] }
+  return { courses: c as Course[] }
+}
+
+export const getStudentCourses = async () => {
+  const { student } = await getCurrentStudent()
+  const rows = await db
+    .select({
+      course: courses,
+      groupSubject: groupSubjects,
+      teacher: teachers,
+      subject: subjects,
+    })
+    .from(courses)
+    .leftJoin(groupSubjects, eq(courses.groupSubjectId, groupSubjects.id))
+    .leftJoin(teachers, eq(courses.teacherId, teachers.id))
+    .leftJoin(subjects, eq(groupSubjects.subjectId, subjects.id))
+    .leftJoin(groups, eq(groupSubjects.groupId, subjects.id))
+    .where(eq(groups.id, student?.groupId!))
+
+  const c = rows.map((r) => ({
+    ...r.course,
+    groupSubject: {
+      ...r.groupSubject,
+      subject: r.subject,
+    },
+    teacher: r.teacher,
+  }))
+  return { courses: c as Course[] }
 }
 
 export const getCourseById = async (id: CourseId) => {
@@ -42,7 +71,7 @@ export const getCourseById = async (id: CourseId) => {
       course: courses,
       groupSubject: groupSubjects,
       teacher: teachers,
-      subject: subjects
+      subject: subjects,
     })
     .from(courses)
     .where(eq(courses.id, courseId))
@@ -57,7 +86,7 @@ export const getCourseById = async (id: CourseId) => {
       teacher: undefined,
       groupSubject: undefined,
       subject: undefined,
-      units: []
+      units: [],
     }
   }
 
