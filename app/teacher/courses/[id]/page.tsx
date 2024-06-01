@@ -7,6 +7,7 @@ import { EditElement } from '@/components/layout/EditElement'
 import { LaboratoryWorkBlock } from '@/components/laboratoryWorks/LaboratoryWorkBlock'
 import { NoItems } from '@/components/layout/NoItems'
 import { AddUnitButton } from '@/components/units/AddUnitButton'
+import { AddSectionButton } from '@/components/units/AddSectionButton'
 
 interface Params {
   params: {
@@ -18,10 +19,6 @@ export default async function CourseIdPage({ params }: Params) {
   const { units, course, teacher, groupSubject, subject } = await trpcSSR.courses.getCourseById({
     id: params.id,
   })
-
-  const addSectionHandler = async () => {
-
-  }
 
   return (
     <div>
@@ -42,13 +39,8 @@ export default async function CourseIdPage({ params }: Params) {
               <LaboratoryWorkBlock value={laboratoryWork} url={'/teacher'} />
             </EditElement>
           ))}
-          {/*TODO: add button*/}
-          {/*<Button*/}
-          {/*  onClick={addSectionHandler}*/}
-          {/*  className="w-full"*/}
-          {/*>*/}
-          {/*  +*/}
-          {/*</Button>*/}
+          <AddSectionButton unitId={unit.id}/>
+          {/*  TODO: delete unit*/}
         </UnitBlock>
       ))}
       {units?.length === 0 && <NoItems/>}

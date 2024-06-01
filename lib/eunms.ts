@@ -10,3 +10,8 @@ export enum SubmittedLaboratoryWorkStatus {
   Rejected = 'rejected',
   NotSubmitted = 'notSubmitted',
 }
+
+export enum UnitSections {
+  TextSection = 'textSection',
+  LaboratoryWork = 'laboratoryWork',
+}

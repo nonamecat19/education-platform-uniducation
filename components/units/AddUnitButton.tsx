@@ -17,7 +17,6 @@ interface Props {
 }
 
 export function AddUnitButton({courseId}: Props) {
-
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter()
 
@@ -47,7 +46,7 @@ export function AddUnitButton({courseId}: Props) {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>
-        <div className="bg-white py-2 px-5 rounded-xl text-black">
+        <div className="bg-white py-2 px-5 rounded-md text-black">
           Add unit
         </div>
       </SheetTrigger>
