@@ -34,7 +34,7 @@ export default async function CourseIdPage({ params }: Params) {
           ))}
         </UnitBlock>
       ))}
-      {units?.length || <NoItems/>}
+      {units?.length === 0 && <NoItems/>}
     </div>
   )
 }

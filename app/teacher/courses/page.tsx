@@ -17,7 +17,7 @@ export default async function Page() {
             </Link>
           )
         })}
-        {courses.length || <NoItems/>}
+        {courses.length === 0 && <NoItems/>}
       </PageGrid>
     </div>
   )

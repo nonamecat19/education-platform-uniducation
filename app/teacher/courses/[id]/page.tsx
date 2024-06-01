@@ -50,7 +50,7 @@ export default async function CourseIdPage({ params }: Params) {
           {/*</Button>*/}
         </UnitBlock>
       ))}
-      {units?.length || <NoItems/>}
+      {units?.length === 0 && <NoItems/>}
     </div>
   )
 }

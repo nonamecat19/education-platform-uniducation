@@ -28,7 +28,7 @@ export default async function GroupPage({ params }: Params) {
         {students.map((el) => {
           return <StudentCard key={el.id} student={el} />
         })}
-        {students.length || <NoItems/>}
+        {students.length === 0 && <NoItems/>}
       </div>
     </div>
   )

@@ -21,7 +21,7 @@ export default async function Page() {
             </Link>
           )
         })}
-        {groups?.length || <NoItems/>}
+        {groups?.length === 0 && <NoItems/>}
       </PageGrid>
     </div>
   )
