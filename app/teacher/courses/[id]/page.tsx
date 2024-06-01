@@ -6,6 +6,7 @@ import { DescriptionBlock } from '@/components/courses/DescriptionBlock'
 import { EditElement } from '@/components/layout/EditElement'
 import { LaboratoryWorkBlock } from '@/components/laboratoryWorks/LaboratoryWorkBlock'
 import { NoItems } from '@/components/layout/NoItems'
+import { AddUnitButton } from '@/components/units/AddUnitButton'
 
 interface Params {
   params: {
@@ -51,6 +52,9 @@ export default async function CourseIdPage({ params }: Params) {
         </UnitBlock>
       ))}
       {units?.length === 0 && <NoItems/>}
+      <div className="px-3">
+        <AddUnitButton courseId={params.id} />
+      </div>
     </div>
   )
 }
