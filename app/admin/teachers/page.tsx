@@ -11,7 +11,7 @@ export default async function Teachers() {
     <main>
       <div className='flex justify-between'>
         <h1 className='font-semibold text-2xl my-2'>Teachers</h1>
-        <NewTeacherModal />
+        {/*<NewTeacherModal />*/}
       </div>
       <TeacherList teachers={teachers} />
     </main>

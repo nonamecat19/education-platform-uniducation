@@ -40,6 +40,7 @@ export const insertStudentSchema = createInsertSchema(students).omit(timestamps)
 export const insertStudentParams = baseSchema
   .extend({
     groupId: z.coerce.string().min(1),
+    userId: z.coerce.string().min(1).optional(),
   })
   .omit({
     id: true,
@@ -50,6 +51,7 @@ export const updateStudentSchema = baseSchema
 export const updateStudentParams = baseSchema
   .extend({
     groupId: z.coerce.string().min(1),
+    userId: z.coerce.string().min(1).optional(),
   })
   .omit({
     userId: true,

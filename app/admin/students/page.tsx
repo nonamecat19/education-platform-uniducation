@@ -13,7 +13,7 @@ export default async function Students() {
     <main>
       <div className='flex justify-between'>
         <h1 className='font-semibold text-2xl my-2'>Students</h1>
-        <NewStudentModal />
+        {/*<NewStudentModal />*/}
       </div>
       <StudentList students={students} />
     </main>

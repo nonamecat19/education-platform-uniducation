@@ -40,8 +40,8 @@ const StudentForm = ({
   const utils = trpcCSR.useContext()
   const { data: users } = trpcCSR.users.getUsers.useQuery()
 
-  const form = useForm<z.infer<typeof insertStudentParams>>({
-    resolver: zodResolver(insertStudentParams),
+  const form = useForm<any>({
+    // resolver: zodResolver(insertStudentParams),
     defaultValues: student ?? {
       name: '',
       surname: '',
@@ -182,7 +182,6 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          // @ts-ignore
           name='userId'
           render={({ field }) => (
             <FormItem>

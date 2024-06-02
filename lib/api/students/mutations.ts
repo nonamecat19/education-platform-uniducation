@@ -7,7 +7,7 @@ import {
   updateStudentSchema,
   insertStudentSchema,
   students,
-  studentIdSchema,
+  studentIdSchema, updateStudentParams,
 } from '@/lib/db/schema'
 import { getUserAuth } from '@/lib/auth/utils'
 
@@ -32,7 +32,7 @@ export const updateStudent = async (
   student: UpdateStudentParams,
 ) => {
   const { id: studentId } = studentIdSchema.parse({ id })
-  const newStudent = updateStudentSchema.parse(student)
+  const newStudent = updateStudentParams.parse(student)
   try {
     const [s] = await db
       .update(students)
