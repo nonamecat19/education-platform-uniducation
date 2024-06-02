@@ -16,7 +16,7 @@ interface Params {
 }
 
 export default async function CourseIdPage({ params }: Params) {
-  const { units, course, teacher, groupSubject, subject } = await trpcSSR.courses.getCourseById({
+  const { units,  teacher, groupSubject, subject } = await trpcSSR.courses.getCourseById({
     id: params.id,
   })
 

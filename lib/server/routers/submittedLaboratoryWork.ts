@@ -1,10 +1,14 @@
-import { getSubmittedLaboratoryWorkById, getSubmittedLaboratoryWorks } from "@/lib/api/submittedLaboratoryWork/queries";
+import {
+  getSubmittedLaboratoryWorkById,
+  getSubmittedLaboratoryWorks,
+  getSubmittedLaboratoryWorksByLaboratoryWorkId,
+} from '@/lib/api/submittedLaboratoryWork/queries'
 import { publicProcedure, router } from "@/lib/server/trpc";
 import {
   submittedLaboratoryWorkIdSchema,
   insertSubmittedLaboratoryWorkParams,
-  updateSubmittedLaboratoryWorkParams,
-} from "@/lib/db/schema";
+  updateSubmittedLaboratoryWorkParams, unitIdSchema,
+} from '@/lib/db/schema'
 import { createSubmittedLaboratoryWork, deleteSubmittedLaboratoryWork, updateSubmittedLaboratoryWork } from "@/lib/api/submittedLaboratoryWork/mutations";
 
 export const submittedLaboratoryWorkRouter = router({
@@ -13,6 +17,9 @@ export const submittedLaboratoryWorkRouter = router({
   }),
   getSubmittedLaboratoryWorkById: publicProcedure.input(submittedLaboratoryWorkIdSchema).query(async ({ input }) => {
     return getSubmittedLaboratoryWorkById(input.id);
+  }),
+  getSubmittedLaboratoryWorkByLaboratoryWorkId: publicProcedure.input(unitIdSchema).query(async ({ input }) => {
+    return getSubmittedLaboratoryWorksByLaboratoryWorkId(input.id);
   }),
   createSubmittedLaboratoryWork: publicProcedure
     .input(insertSubmittedLaboratoryWorkParams)

@@ -1,11 +1,13 @@
 import { db } from '@/lib/db'
 import { eq } from 'drizzle-orm'
 import {
+  LaboratoryWorkId,
+  laboratoryWorkIdSchema,
   laboratoryWorks,
   students,
   submittedLaboratoryWork,
   type SubmittedLaboratoryWorkId,
-  submittedLaboratoryWorkIdSchema,
+  submittedLaboratoryWorkIdSchema, users,
 } from '@/lib/db/schema'
 
 export const getSubmittedLaboratoryWorks = async () => {
@@ -34,9 +36,24 @@ export const getSubmittedLaboratoryWorkById = async (id: SubmittedLaboratoryWork
     .where(eq(submittedLaboratoryWork.id, submittedLaboratoryWorkId))
     .leftJoin(students, eq(submittedLaboratoryWork.studentId, students.id))
     .leftJoin(laboratoryWorks, eq(submittedLaboratoryWork.laboratoryWorkId, laboratoryWorks.id))
-  if (row === undefined) return {}
-  const s = { ...row.submittedLaboratoryWork, student: row.student, laboratoryWork: row.laboratoryWork }
-  return { submittedLaboratoryWork: s }
+  return {
+    submittedLaboratoryWork: row.submittedLaboratoryWork,
+    student: row.student,
+    laboratoryWork: row.laboratoryWork,
+  }
 }
 
 
+export const getSubmittedLaboratoryWorksByLaboratoryWorkId = async (id: LaboratoryWorkId) => {
+  const { id: laboratoryWorkId } = laboratoryWorkIdSchema.parse({ id })
+  return db
+    .select({
+      submittedLaboratoryWork: submittedLaboratoryWork,
+      student: students,
+      user: users
+    })
+    .from(submittedLaboratoryWork)
+    .where(eq(submittedLaboratoryWork.laboratoryWorkId, laboratoryWorkId))
+    .leftJoin(students, eq(submittedLaboratoryWork.studentId, students.id))
+    .leftJoin(users, eq(users.id, students.userId))
+}
