@@ -100,7 +100,3 @@ export const requireRoles = async (roles: string[]) => {
 export const checkAdminAuth = async () => requireRoles(['admin'])
 export const checkTeacherAuth = async () => requireRoles(['teacher'])
 export const checkStudentAuth = async () => requireRoles(['student'])
-
-// export const checkAdminAuth = async () => requireRoles(['admin', 'teacher', 'student'])
-// export const checkTeacherAuth = async () => requireRoles(['admin', 'teacher', 'student'])
-// export const checkStudentAuth = async () => requireRoles(['admin', 'teacher', 'student'])

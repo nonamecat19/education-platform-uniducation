@@ -22,7 +22,7 @@ export function CompleteForm({ userId }: Props) {
   const [role, setRole] = useState<FormRoles>(UserRole.Student)
   const router = useRouter()
 
-  const { mutate } = trpcCSR.users.completeUserRegisterForm.useMutation({
+  const { mutate, isLoading } = trpcCSR.users.completeUserRegisterForm.useMutation({
     onSuccess: () => {
       router.push(`/${role}`)
     },
@@ -153,7 +153,9 @@ export function CompleteForm({ userId }: Props) {
 
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full">Submit</Button>
+            <Button type="submit" className="w-full">
+              {isLoading ? 'Loading... Please wait' : 'Submit'}
+            </Button>
           </CardFooter>
         </Card>
       </form>

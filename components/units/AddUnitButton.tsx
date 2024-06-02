@@ -20,7 +20,7 @@ export function AddUnitButton({courseId}: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter()
 
-  const { mutate } = trpcCSR.units.createUnit.useMutation({
+  const { mutate, isLoading } = trpcCSR.units.createUnit.useMutation({
     onSuccess: () => {
       setIsOpen(false)
       router.refresh()
@@ -88,7 +88,7 @@ export function AddUnitButton({courseId}: Props) {
                 )}
               />
               <Button type="submit">
-                Add unit
+                {isLoading ? 'Loading...' : 'Add unit'}
               </Button>
             </div>
           </form>

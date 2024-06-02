@@ -10,9 +10,8 @@ interface Props {
 }
 
 export function DeleteUnitButton({ unitId, disabled = false }: Props) {
-
   const router = useRouter()
-  const { mutate } = trpcCSR.units.deleteUnit.useMutation({
+  const { mutate, isLoading } = trpcCSR.units.deleteUnit.useMutation({
     onSuccess: () => {
       router.refresh()
     },
@@ -28,7 +27,7 @@ export function DeleteUnitButton({ unitId, disabled = false }: Props) {
       disabled={disabled}
       onClick={deleteUnitHandler}
     >
-      Delete unit
+      {isLoading ? 'Loading...' : 'Delete unit'}
     </Button>
   )
 }

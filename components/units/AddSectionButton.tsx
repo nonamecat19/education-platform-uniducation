@@ -21,7 +21,7 @@ export function AddSectionButton({ unitId }: Props) {
   const [type, setType] = useState<UnitSections.TextSection | UnitSections.LaboratoryWork>(UnitSections.TextSection)
   const router = useRouter()
 
-  const { mutate: createTextSection } = trpcCSR.textSection.createTextSection.useMutation({
+  const { mutate: createTextSection, isLoading: isLoadingTextSection } = trpcCSR.textSection.createTextSection.useMutation({
     onSuccess: () => {
       setIsOpen(false)
       router.refresh()
@@ -31,7 +31,7 @@ export function AddSectionButton({ unitId }: Props) {
     },
   })
 
-  const { mutate: createLaboratoryWork } = trpcCSR.laboratoryWorks.createLaboratoryWork.useMutation({
+  const { mutate: createLaboratoryWork, isLoading: isLoadingLaboratoryWork } = trpcCSR.laboratoryWorks.createLaboratoryWork.useMutation({
     onSuccess: () => {
       setIsOpen(false)
       router.refresh()
@@ -176,7 +176,7 @@ export function AddSectionButton({ unitId }: Props) {
               )}
 
               <Button type="submit">
-                Add section
+                {(isLoadingLaboratoryWork || isLoadingTextSection) ? 'Loading...' : 'Add section' }
               </Button>
             </div>
           </form>

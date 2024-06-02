@@ -16,7 +16,7 @@ interface Props {
 
 export function LaboratoryWorkBlock({ value, url, isEditable }: Props) {
   const router = useRouter()
-  const { mutate: deleteLaboratoryWork } = trpcCSR.laboratoryWorks.deleteLaboratoryWork.useMutation({
+  const { mutate: deleteLaboratoryWork, isLoading } = trpcCSR.laboratoryWorks.deleteLaboratoryWork.useMutation({
     onSuccess: () => {
       router.refresh()
     }
@@ -55,7 +55,7 @@ export function LaboratoryWorkBlock({ value, url, isEditable }: Props) {
   }
 
   return (
-    <EditElement disableEdit deleteHandler={deleteHandler}>
+    <EditElement disableEdit deleteHandler={deleteHandler} deleteLoading={isLoading}>
       {content}
     </EditElement>
   )

@@ -1,15 +1,16 @@
 import { PropsWithChildren } from 'react'
 import { Button } from '@/components/ui/button'
-import { EditIcon, Trash2Icon } from 'lucide-react'
+import { EditIcon, Loader, Trash2Icon } from 'lucide-react'
 
 interface Props extends PropsWithChildren {
   disableEdit?: boolean
   disableDelete?: boolean
+  deleteLoading?: boolean
   editHandler?: () => void
   deleteHandler?: () => void
 }
 
-export function EditElement({disableEdit = false, disableDelete = false, children, editHandler, deleteHandler}: Props) {
+export function EditElement({disableEdit = false, disableDelete = false, children, editHandler, deleteHandler, deleteLoading}: Props) {
   return (
     <div className="relative">
       <div className="absolute top-4 right-2 flex gap-2 opacity-30 hover:opacity-100">
@@ -20,7 +21,7 @@ export function EditElement({disableEdit = false, disableDelete = false, childre
         )}
         {disableDelete || (
           <Button size='icon' onClick={deleteHandler}>
-            <Trash2Icon/>
+            {deleteLoading ? <Loader/> : <Trash2Icon/> }
           </Button>
         )}
       </div>

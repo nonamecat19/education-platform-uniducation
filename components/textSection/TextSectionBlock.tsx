@@ -13,7 +13,7 @@ interface Props {
 
 export function TextSectionBlock({ value, isEditable }: Props) {
   const router = useRouter()
-  const { mutate: deleteTextSection } = trpcCSR.textSection.deleteTextSection.useMutation({
+  const { mutate: deleteTextSection, isLoading: deleteIsLoading } = trpcCSR.textSection.deleteTextSection.useMutation({
     onSuccess: () => {
       router.refresh()
     }
@@ -45,7 +45,7 @@ export function TextSectionBlock({ value, isEditable }: Props) {
   }
 
   return (
-    <EditElement disableEdit deleteHandler={deleteHandler}>
+    <EditElement disableEdit deleteHandler={deleteHandler} deleteLoading={deleteIsLoading}>
       {content}
     </EditElement>
   )
