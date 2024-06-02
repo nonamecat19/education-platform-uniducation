@@ -41,13 +41,9 @@ export const updateStudent = async (
     const [s] = await db
       .update(students)
       .set({ ...newStudent, updatedAt: new Date() })
-      .where(
-        and(
-          eq(students.id, studentId!),
-          eq(students.userId, session?.user.id!),
-        ),
-      )
+      .where(eq(students.id, studentId!))
       .returning()
+    console.log({s})
     return { student: s }
   } catch (err) {
     const message = (err as Error).message ?? 'Error, please try again'
