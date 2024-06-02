@@ -50,7 +50,7 @@ export const getStudentCourses = async () => {
     .leftJoin(groupSubjects, eq(courses.groupSubjectId, groupSubjects.id))
     .leftJoin(teachers, eq(courses.teacherId, teachers.id))
     .leftJoin(subjects, eq(groupSubjects.subjectId, subjects.id))
-    .leftJoin(groups, eq(groupSubjects.groupId, subjects.id))
+    .leftJoin(groups, eq(groupSubjects.groupId, groups.id))
     .where(eq(groups.id, student?.groupId!))
 
   const c = rows.map((r) => ({
