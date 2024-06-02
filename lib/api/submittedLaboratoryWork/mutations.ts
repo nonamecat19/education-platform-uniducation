@@ -9,12 +9,42 @@ import {
   submittedLaboratoryWork,
   submittedLaboratoryWorkIdSchema
 } from "@/lib/db/schema";
+import { SubmittedLaboratoryWorkStatus } from '@/lib/eunms'
+import { getCurrentStudent } from '@/lib/api/students/queries'
 
-export const createSubmittedLaboratoryWork = async (submittedLaboratoryWork: NewSubmittedLaboratoryWorkParams) => {
-  const newSubmittedLaboratoryWork = insertSubmittedLaboratoryWorkSchema.parse(submittedLaboratoryWork);
+export const submitLaboratoryWork = async (value: any) => {
+  console.log({value})
+  const {student} = await getCurrentStudent()
+  const newSubmittedLaboratoryWork: NewSubmittedLaboratoryWorkParams = {
+    laboratoryWorkId: value.laboratoryWorkId,
+    mark: 0,
+    status: SubmittedLaboratoryWorkStatus.Submitted,
+    studentComment: value.studentComment,
+    teacherComment: '',
+    studentId: student.id
+  }
   try {
     // @ts-ignore
-    const [s] =  await db.insert(submittedLaboratoryWork).values(newSubmittedLaboratoryWork).returning();
+    const [s] =  await db
+      .insert(submittedLaboratoryWork)
+      .values(newSubmittedLaboratoryWork)
+      .returning();
+    return { submittedLaboratoryWork: s };
+  } catch (err) {
+    const message = (err as Error).message ?? "Error, please try again";
+    console.error(message);
+    throw { error: message };
+  }
+};
+
+export const createSubmittedLaboratoryWork = async (value: NewSubmittedLaboratoryWorkParams) => {
+  const newSubmittedLaboratoryWork = insertSubmittedLaboratoryWorkSchema.parse(value);
+  try {
+    const [s] =  await db
+    // @ts-ignore
+      .insert(submittedLaboratoryWork)
+      .values(newSubmittedLaboratoryWork)
+      .returning();
     return { submittedLaboratoryWork: s };
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again";

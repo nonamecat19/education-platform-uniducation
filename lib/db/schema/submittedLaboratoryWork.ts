@@ -54,6 +54,8 @@ export const updateSubmittedLaboratoryWorkParams = baseSchema.extend({
 })
 export const submittedLaboratoryWorkIdSchema = baseSchema.pick({ id: true });
 
+export const submitLaboratoryWorkSchema = baseSchema.pick({ laboratoryWorkId: true, studentComment: true });
+
 // Types for submittedLaboratoryWork - used to type API request params and within Components
 export type SubmittedLaboratoryWork = typeof submittedLaboratoryWork.$inferSelect;
 export type NewSubmittedLaboratoryWork = z.infer<typeof insertSubmittedLaboratoryWorkSchema>;
