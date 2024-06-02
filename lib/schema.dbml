@@ -1,0 +1,162 @@
+table account {
+  userId text [not null]
+  type text [not null]
+  provider text [not null]
+  providerAccountId text [not null]
+  refresh_token text
+  access_token text
+  expires_at integer
+  token_type text
+  scope text
+  id_token text
+  session_state text
+
+  indexes {
+    (provider, providerAccountId) [pk]
+  }
+}
+
+table courses {
+  id varchar(191) [pk, not null]
+  group_subject_id varchar(256) [not null]
+  teacher_id varchar(256) [not null]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table group_subjects {
+  id varchar(191) [pk, not null]
+  subject_id varchar(256) [not null]
+  group_id varchar(256) [not null]
+  hours integer
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table groups {
+  id varchar(191) [pk, not null]
+  name varchar(256) [not null]
+  course varchar(256) [not null]
+  teacher_id varchar(256) [not null]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+
+  indexes {
+    name [name: 'name_idx', unique]
+  }
+}
+
+table laboratory_works {
+  id varchar(191) [pk, not null]
+  unit_id varchar(256) [not null]
+  name varchar(256) [not null]
+  description varchar(256)
+  order integer
+  max_mark integer [not null]
+  max_bonus integer
+  penalty integer
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table session {
+  sessionToken text [pk, not null]
+  userId text [not null]
+  expires timestamp [not null]
+}
+
+table students {
+  id varchar(191) [pk, not null]
+  name varchar(256) [not null]
+  surname varchar(256) [not null]
+  patronymic varchar(256)
+  group_id varchar(256)
+  stuent_id varchar(256) [not null]
+  user_id varchar(256) [not null]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table subjects {
+  id varchar(191) [pk, not null]
+  name varchar(256) [not null]
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table submitted_laboratory_work {
+  id varchar(191) [pk, not null]
+  student_id varchar(256) [not null]
+  laboratory_work_id varchar(256) [not null]
+  status varchar(256) [not null]
+  mark integer
+  student_comment text
+  teacher_comment text
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table teachers {
+  id varchar(191) [pk, not null]
+  name varchar(256) [not null]
+  surname varchar(256) [not null]
+  patronymic varchar(256)
+  profession varchar(256)
+  user_id varchar(256) [not null]
+  created_at timestamp [not null, default: `now
+        ()`]
+  updated_at timestamp [not null, default: `now
+        ()`]
+}
+
+table text_section {
+  id varchar(191) [pk, not null]
+  unit_id varchar(256) [not null]
+  name varchar(256) [not null]
+  description varchar(256)
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table units {
+  id varchar(191) [pk, not null]
+  course_id varchar(256) [not null]
+  name varchar(256) [not null]
+  description varchar(256)
+  created_at timestamp [not null, default: `now()`]
+  updated_at timestamp [not null, default: `now()`]
+}
+
+table user {
+  id text [pk, not null]
+  name text
+  email text [not null]
+  emailVerified timestamp
+  image text
+  role text
+}
+
+table verificationToken {
+  identifier text [not null]
+  token text [not null]
+  expires timestamp [not null]
+
+  indexes {
+    (identifier, token) [pk]
+  }
+}
+
+Ref: account.userId > user.id
+Ref: courses.group_subject_id > group_subjects.id
+Ref: courses.teacher_id > teachers.id
+Ref: group_subjects.subject_id > subjects.id
+Ref: group_subjects.group_id > groups.id
+Ref: groups.teacher_id > teachers.id
+Ref: laboratory_works.unit_id > units.id
+Ref: students.group_id > groups.id
+Ref: students.user_id > user.id
+Ref: submitted_laboratory_work.student_id > students.id
+Ref: submitted_laboratory_work.laboratory_work_id > laboratory_works.id
+Ref: teachers.user_id > user.id
+Ref: text_section.unit_id > units.id
+Ref: units.course_id > courses.id

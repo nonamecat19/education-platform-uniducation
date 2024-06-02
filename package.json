@@ -51,6 +51,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
+    "drizzle-dbml-generator": "^0.6.1",
     "drizzle-kit": "^0.21.2",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
