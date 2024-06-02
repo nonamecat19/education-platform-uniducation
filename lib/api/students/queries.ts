@@ -1,5 +1,5 @@
 import { db } from '@/lib/db'
-import { and, eq } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { getUserAuth } from '@/lib/auth/utils'
 import { GroupId, groupIdSchema, groups, type StudentId, studentIdSchema, students } from '@/lib/db/schema'
 
@@ -13,14 +13,11 @@ export const getStudents = async () => {
 }
 
 export const getStudentById = async (id: StudentId) => {
-  const { session } = await getUserAuth()
   const { id: studentId } = studentIdSchema.parse({ id })
   const [row] = await db
     .select({ student: students, group: groups })
     .from(students)
-    .where(
-      and(eq(students.id, studentId), eq(students.userId, session?.user.id!)),
-    )
+    .where(eq(students.id, studentId))
     .leftJoin(groups, eq(students.groupId, groups.id))
   if (row === undefined) return {}
   const s = { ...row.student, group: row.group }
@@ -32,9 +29,7 @@ export const getCurrentStudent = async () => {
   const [row] = await db
     .select()
     .from(students)
-    .where(
-      eq(students.userId, session?.user.id!),
-    )
+    .where(eq(students.userId, session?.user.id!),)
   return { student: row }
 }
 

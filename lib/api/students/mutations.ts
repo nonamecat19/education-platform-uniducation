@@ -53,17 +53,11 @@ export const updateStudent = async (
 }
 
 export const deleteStudent = async (id: StudentId) => {
-  const { session } = await getUserAuth()
   const { id: studentId } = studentIdSchema.parse({ id })
   try {
     const [s] = await db
       .delete(students)
-      .where(
-        and(
-          eq(students.id, studentId!),
-          eq(students.userId, session?.user.id!),
-        ),
-      )
+      .where(eq(students.id, studentId!))
       .returning()
     return { student: s }
   } catch (err) {
