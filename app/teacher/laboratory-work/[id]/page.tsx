@@ -2,7 +2,6 @@ import { LaboratoryWorkId } from '@/lib/db/schema'
 import { trpcSSR } from '@/lib/trpc/ssr'
 import { NoItems } from '@/components/layout/NoItems'
 import { format } from 'date-fns'
-import { RenderJSON } from '@/components/utils/RenderJSON'
 import { SubmittedLaboratoryWorkStatus } from '@/lib/eunms'
 
 interface Props {
