@@ -26,7 +26,6 @@ export const getStudentById = async (id: StudentId) => {
 
 export const getCurrentStudent = async () => {
   const { user } = await getCurrentUser()
-  console.log({user})
   const [row] = await db
     .select()
     .from(students)

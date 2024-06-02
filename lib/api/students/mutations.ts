@@ -1,5 +1,5 @@
 import { db } from '@/lib/db'
-import { and, eq } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import {
   StudentId,
   NewStudentParams,
@@ -31,19 +31,14 @@ export const updateStudent = async (
   id: StudentId,
   student: UpdateStudentParams,
 ) => {
-  const { session } = await getUserAuth()
   const { id: studentId } = studentIdSchema.parse({ id })
-  const newStudent = updateStudentSchema.parse({
-    ...student,
-    userId: session?.user.id!,
-  })
+  const newStudent = updateStudentSchema.parse(student)
   try {
     const [s] = await db
       .update(students)
       .set({ ...newStudent, updatedAt: new Date() })
       .where(eq(students.id, studentId!))
       .returning()
-    console.log({s})
     return { student: s }
   } catch (err) {
     const message = (err as Error).message ?? 'Error, please try again'

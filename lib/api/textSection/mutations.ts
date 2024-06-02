@@ -11,7 +11,6 @@ import {
 } from '@/lib/db/schema'
 
 export const createTextSection = async (value: NewTextSectionParams) => {
-  console.log({value})
   const newTextSection = insertTextSectionSchema.parse(value)
   try {
     const [t] = await db
