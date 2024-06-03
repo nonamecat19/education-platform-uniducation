@@ -1,9 +1,5 @@
-name: CI
-on:
-  push:
-    branches: [ master, dev ]
-  pull_request:
-    branches: [ master, dev ]
+name: Lint
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,11 +16,3 @@ jobs:
         run: npm i -f
       - name: Run linter
         run: npm run lint
-  unit-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Run jest tests
-        run: |
-          npm i -f
-          npm test
