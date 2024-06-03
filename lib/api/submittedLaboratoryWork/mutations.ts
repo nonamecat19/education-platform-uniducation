@@ -84,4 +84,3 @@ export const deleteSubmittedLaboratoryWork = async (id: SubmittedLaboratoryWorkI
     throw { error: message };
   }
 };
-
