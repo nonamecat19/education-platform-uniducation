@@ -7,9 +7,14 @@ import { publicProcedure, router } from "@/lib/server/trpc";
 import {
   submittedLaboratoryWorkIdSchema,
   insertSubmittedLaboratoryWorkParams,
-  updateSubmittedLaboratoryWorkParams, unitIdSchema,
+  updateSubmittedLaboratoryWorkParams, unitIdSchema, submitLaboratoryWorkSchema,
 } from '@/lib/db/schema'
-import { createSubmittedLaboratoryWork, deleteSubmittedLaboratoryWork, updateSubmittedLaboratoryWork } from "@/lib/api/submittedLaboratoryWork/mutations";
+import {
+  createSubmittedLaboratoryWork,
+  deleteSubmittedLaboratoryWork,
+  submitLaboratoryWork,
+  updateSubmittedLaboratoryWork,
+} from '@/lib/api/submittedLaboratoryWork/mutations'
 
 export const submittedLaboratoryWorkRouter = router({
   getSubmittedLaboratoryWork: publicProcedure.query(async () => {
@@ -21,6 +26,11 @@ export const submittedLaboratoryWorkRouter = router({
   getSubmittedLaboratoryWorkByLaboratoryWorkId: publicProcedure.input(unitIdSchema).query(async ({ input }) => {
     return getSubmittedLaboratoryWorksByLaboratoryWorkId(input.id);
   }),
+  submitLaboratoryWork: publicProcedure
+    .input(submitLaboratoryWorkSchema)
+    .mutation(async ({ input }) => {
+      return submitLaboratoryWork(input as any);
+    }),
   createSubmittedLaboratoryWork: publicProcedure
     .input(insertSubmittedLaboratoryWorkParams)
     .mutation(async ({ input }) => {
