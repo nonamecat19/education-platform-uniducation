@@ -28,7 +28,6 @@ export default async function CourseIdPage({ params }: Params) {
         <UnitBlock key={unit.id} value={unit}>
           {unit.textSections.map((textSection) => (
             <TextSectionBlock
-              isEditable
               key={textSection.id}
               value={textSection}
             />
