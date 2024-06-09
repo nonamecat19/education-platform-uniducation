@@ -1,35 +1,20 @@
 'use client'
 
-import { Student, NewStudentParams, insertStudentParams } from '@/lib/db/schema'
+import { NewStudentParams, Student } from '@/lib/db/schema'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { trpcCSR } from '@/lib/trpc/client'
 import { Button } from '@/components/ui/button'
-import { z } from 'zod'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 const StudentForm = ({
-  student,
-  closeModal,
-}: {
+                       student,
+                       closeModal,
+                     }: {
   student?: Student
   closeModal?: () => void
 }) => {
@@ -48,7 +33,7 @@ const StudentForm = ({
       patronymic: '',
       groupId: '',
       stuentId: '',
-      userId: ''
+      userId: '',
     } as any,
   })
 
@@ -94,10 +79,10 @@ const StudentForm = ({
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-8'>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name='name'
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
@@ -111,7 +96,7 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          name='surname'
+          name="surname"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Surname</FormLabel>
@@ -125,7 +110,7 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          name='patronymic'
+          name="patronymic"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Patronymic</FormLabel>
@@ -140,7 +125,7 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          name='groupId'
+          name="groupId"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Group</FormLabel>
@@ -150,7 +135,7 @@ const StudentForm = ({
                   defaultValue={String(field.value)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder='Select a group' />
+                    <SelectValue placeholder="Select a group" />
                   </SelectTrigger>
                   <SelectContent>
                     {groups?.groups.map((group) => (
@@ -168,7 +153,7 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          name='stuentId'
+          name="stuentId"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Stuent Id</FormLabel>
@@ -182,7 +167,7 @@ const StudentForm = ({
         />
         <FormField
           control={form.control}
-          name='userId'
+          name="userId"
           render={({ field }) => (
             <FormItem>
               <FormLabel>User</FormLabel>
@@ -192,7 +177,7 @@ const StudentForm = ({
                   defaultValue={String(field.value)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder='Select a user' />
+                    <SelectValue placeholder="Select a user" />
                   </SelectTrigger>
                   <SelectContent>
                     {users?.users?.map((user) => (
@@ -209,8 +194,8 @@ const StudentForm = ({
           )}
         />
         <Button
-          type='submit'
-          className='mr-1'
+          type="submit"
+          className="mr-1"
           disabled={isCreating || isUpdating}
         >
           {editing
@@ -219,7 +204,7 @@ const StudentForm = ({
         </Button>
         {editing ? (
           <Button
-            type='button'
+            type="button"
             variant={'destructive'}
             onClick={() => deleteStudent({ id: student.id })}
           >

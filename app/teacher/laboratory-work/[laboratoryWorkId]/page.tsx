@@ -3,15 +3,17 @@ import { trpcSSR } from '@/lib/trpc/ssr'
 import { NoItems } from '@/components/layout/NoItems'
 import { format } from 'date-fns'
 import { SubmittedLaboratoryWorkStatus } from '@/lib/eunms'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   params: {
-    id: LaboratoryWorkId
+    laboratoryWorkId: LaboratoryWorkId
   }
 }
 
 export default async function LaboratoryWork({ params }: Props) {
-  const { laboratoryWork } = await trpcSSR.laboratoryWorks.getLaboratoryWorkById({ id: params?.id })
+  const { laboratoryWork } = await trpcSSR.laboratoryWorks.getLaboratoryWorkById({ id: params?.laboratoryWorkId })
 
   if (!laboratoryWork) {
     return (
@@ -54,21 +56,28 @@ export default async function LaboratoryWork({ params }: Props) {
             key={submittedLaboratoryWork.id}
             className="border border-muted p-4 rounded-lg"
           >
-            <div className="flex gap-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="rounded-lg size-14"
-                alt="user avatar"
-                src={user?.image!}
-              />
-              <div>
+            <div className="flex justify-between items-center">
+              <div className="flex gap-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="rounded-lg size-14"
+                  alt="user avatar"
+                  src={user?.image!}
+                />
                 <div>
-                  {student?.name} {student?.surname}
-                </div>
-                <div>
-                  {submittedLaboratoryWork?.status} - {submittedLaboratoryWork?.status === SubmittedLaboratoryWorkStatus.Graded && submittedLaboratoryWork?.mark}
+                  <div>
+                    {student?.name} {student?.surname}
+                  </div>
+                  <div>
+                    {submittedLaboratoryWork?.status} - {submittedLaboratoryWork?.status === SubmittedLaboratoryWorkStatus.Graded && submittedLaboratoryWork?.mark}
+                  </div>
                 </div>
               </div>
+              <Link href={`${laboratoryWork.id}/submit/${submittedLaboratoryWork.id}`}>
+                <Button>
+                  Go to submit
+                </Button>
+              </Link>
             </div>
           </div>
         ))}

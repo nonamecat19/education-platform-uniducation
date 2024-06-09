@@ -46,8 +46,8 @@ export const insertSubmittedLaboratoryWorkParams = baseSchema.extend({
   id: true
 });
 
-export const updateSubmittedLaboratoryWorkSchema = baseSchema;
-export const updateSubmittedLaboratoryWorkParams = baseSchema.extend({
+export const updateSubmittedLaboratoryWorkSchema = baseSchema.partial();
+export const updateSubmittedLaboratoryWorkParams = baseSchema.partial().extend({
   studentId: z.coerce.string().min(1),
   laboratoryWorkId: z.coerce.string().min(1),
   mark: z.coerce.number()

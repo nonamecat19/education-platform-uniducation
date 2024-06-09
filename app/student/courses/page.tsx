@@ -17,12 +17,12 @@ export default function CoursesPage() {
     router.push(`/student/courses/${id}`)
   }
 
-  const teacherClickHandler = (id: TeacherId | undefined) => {
-    if (!id) {
-      return
-    }
-    router.push(`/student/teachers/${id}`)
-  }
+  // const teacherClickHandler = (id: TeacherId | undefined) => {
+  //   if (!id) {
+  //     return
+  //   }
+  //   router.push(`/student/teachers/${id}`)
+  // }
 
   return (
     <PageGrid>
@@ -32,7 +32,7 @@ export default function CoursesPage() {
             <CourseCard
               value={course}
               onCardClick={() => courseClickHandler(course.id)}
-              onTeacherClick={() => teacherClickHandler(course?.teacher?.id)}
+              // onTeacherClick={() => teacherClickHandler(course?.teacher?.id)}
             />
           </div>
         )

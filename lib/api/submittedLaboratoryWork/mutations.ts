@@ -53,14 +53,18 @@ export const createSubmittedLaboratoryWork = async (value: NewSubmittedLaborator
   }
 };
 
-export const updateSubmittedLaboratoryWork = async (id: SubmittedLaboratoryWorkId, submittedLaboratoryWork: UpdateSubmittedLaboratoryWorkParams) => {
+export const updateSubmittedLaboratoryWork = async (id: SubmittedLaboratoryWorkId, value: UpdateSubmittedLaboratoryWorkParams) => {
   const { id: submittedLaboratoryWorkId } = submittedLaboratoryWorkIdSchema.parse({ id });
-  const newSubmittedLaboratoryWork = updateSubmittedLaboratoryWorkSchema.parse(submittedLaboratoryWork);
   try {
     const [s] =  await db
     // @ts-ignore
      .update(submittedLaboratoryWork)
-     .set({...newSubmittedLaboratoryWork, updatedAt: new Date() })
+     .set({
+       mark: +value.mark,
+       teacherComment: value.teacherComment,
+       status: SubmittedLaboratoryWorkStatus.Graded,
+       updatedAt: new Date()
+     })
     // @ts-ignore
      .where(eq(submittedLaboratoryWork.id, submittedLaboratoryWorkId!))
      .returning();

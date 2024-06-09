@@ -1,5 +1,5 @@
 import { db } from '@/lib/db'
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import {
   LaboratoryWorkId,
   laboratoryWorkIdSchema,
@@ -7,8 +7,10 @@ import {
   students,
   submittedLaboratoryWork,
   type SubmittedLaboratoryWorkId,
-  submittedLaboratoryWorkIdSchema, users,
+  submittedLaboratoryWorkIdSchema,
+  users,
 } from '@/lib/db/schema'
+import { getCurrentStudent } from '@/lib/api/students/queries'
 
 export const getSubmittedLaboratoryWorks = async () => {
   const rows = await db
@@ -43,6 +45,19 @@ export const getSubmittedLaboratoryWorkById = async (id: SubmittedLaboratoryWork
   }
 }
 
+export const getStudentSubmittedLaboratoryWorks = async (id: LaboratoryWorkId) => {
+  const { id: laboratoryWorkId } = laboratoryWorkIdSchema.parse({ id })
+  const { student } = await getCurrentStudent()
+  return db
+    .select({
+      submittedLaboratoryWork: submittedLaboratoryWork,
+    })
+    .from(submittedLaboratoryWork)
+    .where(and(
+      eq(submittedLaboratoryWork.laboratoryWorkId, laboratoryWorkId),
+      eq(submittedLaboratoryWork.studentId, student.id)),
+    )
+}
 
 export const getSubmittedLaboratoryWorksByLaboratoryWorkId = async (id: LaboratoryWorkId) => {
   const { id: laboratoryWorkId } = laboratoryWorkIdSchema.parse({ id })
@@ -50,7 +65,7 @@ export const getSubmittedLaboratoryWorksByLaboratoryWorkId = async (id: Laborato
     .select({
       submittedLaboratoryWork: submittedLaboratoryWork,
       student: students,
-      user: users
+      user: users,
     })
     .from(submittedLaboratoryWork)
     .where(eq(submittedLaboratoryWork.laboratoryWorkId, laboratoryWorkId))
